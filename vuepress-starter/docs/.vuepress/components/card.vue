@@ -1,0 +1,47 @@
+<template>
+  <div class="p-card" :style="cardStyle">
+    <div class="p-card-img" :style="imgStyle">
+      <img :src="imgSrc" alt="img" />
+    </div>
+    <div v-if="summary" class="p-card-summary">{{ summary }}</div>
+    <div v-else class="p-card-summary">
+      <slot></slot>
+    </div>
+    <slot name="footer"></slot>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { computed } from 'vue'
+
+const props = defineProps({
+  width: {
+    type: Number,
+    default: 0
+  },
+  imgSrc: {
+    type: String,
+    default: ''
+  },
+  imgHeight: {
+    type: Number,
+    default: 0
+  },
+  summary: {
+    type: String,
+    default: ''
+  }
+})
+
+const cardStyle = computed(() => {
+  return props.width ? { width: `${props.width}px` } : {}
+})
+
+const imgStyle = computed(() => {
+  return props.imgHeight ? { height: `${props.imgHeight}px` } : {}
+})
+</script>
+
+<style scoped lang="less">
+@import './card.less';
+</style>
