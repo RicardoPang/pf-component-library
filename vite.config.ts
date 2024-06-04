@@ -6,15 +6,27 @@ import glob from 'glob'
 import dts from 'vite-plugin-dts'
 import { viteStaticCopy } from 'vite-plugin-static-copy'
 
-// 动态生成入口文件列表
-async function makeList(dirPath) {
+// 常量
+const COMPONENTS_DIR = 'components'
+const TYPES_DIR = 'types'
+const LIB_DIR = 'components/lib'
+const FONTS_DIR = 'fonts'
+
+// 生成 TypeScript 文件列表
+async function generateTsFilesList(dirPath) {
   const tsFiles = glob.sync(`${dirPath}/**/*.ts`)
-  const lessFiles = glob.sync(`${dirPath}/**/*.less`)
   const list = {}
   for (const file of tsFiles) {
     const component = file.split(/[/.]/)[2]
     list[component] = `./${file}`
   }
+  return list
+}
+
+// 生成 LESS 文件列表
+async function generateLessFilesList(dirPath) {
+  const lessFiles = glob.sync(`${dirPath}/**/*.less`)
+  const list = {}
   for (const file of lessFiles) {
     const component = file.split(/[/.]/)[2]
     list[`${component}_style`] = `./${file}`
@@ -22,8 +34,19 @@ async function makeList(dirPath) {
   return list
 }
 
-const list = await makeList('components')
-console.log(list)
+// 动态生成入口文件列表
+async function makeList(dirPath) {
+  try {
+    const tsFilesList = await generateTsFilesList(dirPath)
+    const lessFilesList = await generateLessFilesList(dirPath)
+    return { ...tsFilesList, ...lessFilesList }
+  } catch (error) {
+    console.error('Error generating file lists:', error)
+    return {}
+  }
+}
+
+const list = await makeList(COMPONENTS_DIR)
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -31,32 +54,30 @@ export default defineConfig({
     vue(),
     svg(),
     dts({
-      entryRoot: 'components/lib',
-      outDir: 'types',
-      include: ['components/lib/**/*.ts', 'components/lib/**/*.vue'],
+      entryRoot: LIB_DIR,
+      outDir: TYPES_DIR,
+      include: [`${LIB_DIR}/**/*.ts`, `${LIB_DIR}/**/*.vue`],
       exclude: ['vite.config.ts', '**/*.spec.ts']
     }),
     viteStaticCopy({
-      // 使用命名导入的插件
       targets: [
         {
-          src: 'fonts/*',
-          dest: 'fonts'
+          src: `${FONTS_DIR}/*`,
+          dest: FONTS_DIR
         }
       ]
     })
-  ], // 使用插件
+  ],
   build: {
     rollupOptions: {
       input: list,
-      external: ['vue'], // 外部依赖, 不打包
+      external: ['vue'],
       output: [
         {
           format: 'es',
           dir: 'dist/es',
           entryFileNames: '[name].js',
-          preserveModules: true, // 保留原来目录结构
-          // explicitly specified when in monorepo
+          preserveModules: true,
           preserveModulesRoot: '.',
           assetFileNames: '[name][extname]'
         },
@@ -65,14 +86,13 @@ export default defineConfig({
           dir: 'dist/lib',
           entryFileNames: '[name].js',
           preserveModules: true,
-          // explicitly specified when in monorepo
           preserveModulesRoot: '.',
           assetFileNames: '[name][extname]'
         },
         {
           format: 'es',
           dir: 'dist',
-          entryFileNames: '[name].mjs', // 输出单文件
+          entryFileNames: '[name].mjs',
           assetFileNames: '[name][extname]'
         },
         {
@@ -84,13 +104,13 @@ export default defineConfig({
       ],
       preserveEntrySignatures: 'strict'
     },
-    sourcemap: true, // 生成源码映射, 便于调试
-    emptyOutDir: false, // 构件式不清空输出目录
-    cssCodeSplit: true // 开启 CSS 代码拆分
+    sourcemap: true,
+    emptyOutDir: false,
+    cssCodeSplit: true
   },
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./components', import.meta.url))
+      '@': fileURLToPath(new URL(`./${COMPONENTS_DIR}`, import.meta.url))
     }
   }
 })
