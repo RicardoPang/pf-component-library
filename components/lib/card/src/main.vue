@@ -3,11 +3,12 @@
     <div class="p-card-img" :style="imgStyle">
       <img :src="imgSrc" alt="img" />
     </div>
-    <div v-if="summary" class="p-card-summary">{{ summary }}</div>
-    <div v-else class="p-card-summary">
-      <slot></slot>
+    <div class="p-card-summary">
+      <slot>{{ summary }}</slot>
     </div>
-    <slot name="footer"></slot>
+    <div class="p-card-footer">
+      <slot name="footer"></slot>
+    </div>
   </div>
 </template>
 
