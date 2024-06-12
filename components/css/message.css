@@ -1,0 +1,58 @@
+.pf-message {
+  --pf-message-bg-color: var(--pf-color-info-light-9);
+  --pf-message-border-color: var(--pf-border-color-lighter);
+  --pf-message-padding: 15px 19px;
+  --pf-message-close-size: 16px;
+  --pf-message-close-icon-color: var(--pf-text-color-placeholder);
+  --pf-message-close-hover-color: var(--pf-text-color-secondary);
+}
+.pf-message {
+  width: fit-content;
+  max-width: calc(100% - 32px);
+  box-sizing: border-box;
+  border-radius: var(--pf-border-radius-base);
+  border-width: var(--pf-border-width);
+  border-style: var(--pf-border-style);
+  border-color: var(--pf-message-border-color);
+  position: fixed;
+  left: 50%;
+  top: 20px;
+  transform: translateX(-50%);
+  background-color: var(--pf-message-bg-color);
+  padding: var(--pf-message-padding);
+  display: flex;
+  align-items: center;
+  transition:
+    top var(--pf-transition-duration),
+    opacity var(--pf-transition-duration),
+    transform var(--pf-transition-duration);
+  .pf-message__content {
+    color: var(--pf-message-text-color);
+    overflow-wrap: anywhere;
+  }
+  &.is-close .pf-message__content {
+    padding-right: 30px;
+  }
+  .pf-message__close {
+    display: flex;
+    align-items: center;
+  }
+  .pf-message__close svg {
+    cursor: pointer;
+  }
+}
+@each $val in info, success, warning, danger {
+  .pf-message--$(val) {
+    --pf-message-bg-color: var(--pf-color-$(val)-light-9);
+    --pf-message-border-color: var(--pf-color-$(val)-light-8);
+    --pf-message-text-color: var(--pf-color-$(val));
+    .pf-message__close {
+      --pf-icon-color: var(--pf-color-$(val));
+    }
+  }
+}
+.pf-message.fade-up-enter-from,
+.pf-message.fade-up-leave-to {
+  opacity: 0;
+  transform: translate(-50%, -100%);
+}

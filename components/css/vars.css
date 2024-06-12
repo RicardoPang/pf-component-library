@@ -1,0 +1,75 @@
+:root {
+  /* colors */
+  --pf-color-white: #ffffff;
+  --pf-color-black: #000000;
+  --colors: (
+    primary: #409eff,
+    success: #67c23a,
+    warning: #e6a23c,
+    danger: #f56c6c,
+    info: #909399
+  );
+
+  @each $val, $color in var(--colors) {
+    --pf-color-$(val): $(color);
+    @for $i from 3 to 9 by 2 {
+      --pf-color-$(val)-light-$(i): mix(#fff, $(color), .$(i));
+    }
+    --pf-color-$(val)-light-8: mix(#fff, $(color), 0.8);
+    --pf-color-$(val)-dark-2: mix(#000, $(color), 0.2);
+  }
+
+  --pf-bg-color: #ffffff;
+  --pf-bg-color-page: #f2f3f5;
+  --pf-bg-color-overlay: #ffffff;
+  --pf-text-color-primary: #303133;
+  --pf-text-color-regular: #606266;
+  --pf-text-color-secondary: #909399;
+  --pf-text-color-placeholder: #a8abb2;
+  --pf-text-color-disabled: #c0c4cc;
+  --pf-border-color: #dcdfe6;
+  --pf-border-color-light: #e4e7ed;
+  --pf-border-color-lighter: #ebeef5;
+  --pf-border-color-extra-light: #f2f6fc;
+  --pf-border-color-dark: #d4d7de;
+  --pf-border-color-darker: #cdd0d6;
+  --pf-fill-color: #f0f2f5;
+  --pf-fill-color-light: #f5f7fa;
+  --pf-fill-color-lighter: #fafafa;
+  --pf-fill-color-extra-light: #fafcff;
+  --pf-fill-color-dark: #ebedf0;
+  --pf-fill-color-darker: #e6e8eb;
+  --pf-fill-color-blank: #ffffff;
+
+  /* border */
+  --pf-border-width: 1px;
+  --pf-border-style: solid;
+  --pf-border-color-hover: var(--pf-text-color-disabled);
+  --pf-border: var(--pf-border-width) var(--pf-border-style)
+    var(--pf-border-color);
+  --pf-border-radius-base: 4px;
+  --pf-border-radius-small: 2px;
+  --pf-border-radius-round: 20px;
+  --pf-border-radius-circle: 100%;
+
+  /*font*/
+  --pf-font-size-extra-large: 20px;
+  --pf-font-size-large: 18px;
+  --pf-font-size-medium: 16px;
+  --pf-font-size-base: 14px;
+  --pf-font-size-small: 13px;
+  --pf-font-size-extra-small: 12px;
+  --pf-font-family: 'Helvetica Neue', Helvetica, 'PingFang SC',
+    'Hiragino Sans GB', 'Microsoft YaHei', '\5fae\8f6f\96c5\9ed1', Arial,
+    sans-serif;
+  --pf-font-weight-primary: 500;
+
+  /*disabled*/
+  --pf-disabled-bg-color: var(--pf-fill-color-light);
+  --pf-disabled-text-color: var(--pf-text-color-placeholder);
+  --pf-disabled-border-color: var(--pf-border-color-light);
+
+  /*animation*/
+  --pf-transition-duration: 0.3s;
+  --pf-transition-duration-fast: 0.2s;
+}

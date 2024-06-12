@@ -1,30 +1,31 @@
 import { createApp } from 'vue'
-import 'normalize.css'
-import './assets/css/index.less'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fas } from '@fortawesome/free-solid-svg-icons'
 import App from './App.vue'
 
-// 字体图标
-// import '../components/css/fonts/iconfont.css'
+library.add(fas)
+import 'normalize.css'
+import '../components/css/index.css'
 
 // 全局
-// import '../components/css/index.less'
-// import Components from '../components/lib'
+import Components from '../components/lib'
 
 // 按需
-import '../components/css/demo.less'
-import '../components/css/card.less'
-import '../components/css/button.less'
-import { Demo, Card, Button, Icon } from '../components/lib'
+// import '../components/css/vars.css'
+// import '../components/css/reset.css'
+// import '../components/lib/button/src/style.css'
+// import '../components/lib/icon/src/style.css'
+// import '../components/lib/collapse/src/style.css'
+// import { Button, Icon, Collapse } from '../components/lib'
 
 const app = createApp(App)
 
-// 按需
-app.use(Demo)
-app.use(Card)
-app.use(Button)
-app.use(Icon)
-
 // 全局
-// app.use(Components)
+app.use(Components)
+
+// 按需
+// app.use(Button)
+// app.use(Icon)
+// app.use(Collapse)
 
 app.mount('#app')

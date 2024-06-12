@@ -1,105 +1,176 @@
 <template>
   <div class="app">
-    <h2>pf-component-library组件库</h2>
-    <PFDemo :width="300" />
-    <PFCard
-      imgSrc="house.jpeg"
-      summary="制定规范的目的在于保证质量、 方便业务方使用和增加组件库的可扩展性"
-    />
-    <br />
-    <PFCard
-      imgSrc="house.jpeg"
-      summary="制定规范的目的在于保证质量、 方便业务方使用和增加组件库的可扩展性"
+    <pf-button ref="buttonRef" @click="open">Test Button</pf-button>
+    <pf-button plain @click="close">Plain Button</pf-button>
+    <pf-button round>Round Button</pf-button>
+    <pf-button circle>黑</pf-button>
+    <pf-button disabled>Disabled Button</pf-button><br /><br />
+    <pf-button type="primary">Primary</pf-button>
+    <pf-button type="success">Success</pf-button>
+    <pf-button type="info">Info</pf-button>
+    <pf-button type="warning">Warning</pf-button>
+    <pf-button type="danger">Danger</pf-button><br /><br />
+    <pf-button type="primary" plain>Primary</pf-button>
+    <pf-button type="success" plain>Success</pf-button>
+    <pf-button type="info" plain>Info</pf-button>
+    <pf-button type="warning" plain>Warning</pf-button>
+    <pf-button type="danger" plain>Danger</pf-button><br /><br />
+    <pf-button size="large">Large</pf-button>
+    <pf-button size="small">Small</pf-button><br /><br />
+    <pf-button size="large" loading>Loading</pf-button>
+    <pf-button size="large" icon="arrow-up">Icon</pf-button><br /><br />
+    <pf-button type="primary" disabled>Primary</pf-button>
+    <pf-button type="success" disabled>Success</pf-button>
+    <pf-button type="primary" plain disabled>Primary</pf-button>
+    <pf-button type="success" plain disabled>Success</pf-button>
+
+    <br /><br />
+    <pf-collapse v-model="openedValue">
+      <pf-collapse-item name="a" title="Title A">
+        <h1>headline title</h1>
+        <div>this is content a aaa</div>
+      </pf-collapse-item>
+      <pf-collapse-item name="b" title="Title B">
+        <div>this is bbbbb test</div>
+      </pf-collapse-item>
+      <pf-collapse-item name="c" title="Disabled Title" disabled>
+        <div>this is cccc test</div>
+      </pf-collapse-item>
+    </pf-collapse>
+
+    <br /><br />
+    <pf-tooltip content="hello tooltip">
+      <pf-button> 激活 Tooltip </pf-button>
+    </pf-tooltip>
+    <br /><br />
+    <pf-tooltip content="hello tooltip" placement="top-start">
+      <pf-button> top-start </pf-button>
+    </pf-tooltip>
+
+    <pf-tooltip content="hello tooltip" placement="bottom-start">
+      <pf-button> bottom-start </pf-button>
+    </pf-tooltip>
+
+    <pf-tooltip content="hello tooltip" placement="left-start">
+      <pf-button> left-start </pf-button>
+    </pf-tooltip>
+
+    <pf-tooltip content="hello tooltip" placement="right-start">
+      <pf-button> right-start </pf-button>
+    </pf-tooltip>
+
+    <br /><br />
+    <pf-tooltip content="hello tooltip" trigger="click">
+      <pf-button> 点击激活 Tooltip </pf-button>
+    </pf-tooltip>
+
+    <br /><br />
+    <pf-tooltip trigger="click">
+      <pf-button> 复杂 HTML 结构的Tooltip </pf-button>
+      <template #content>
+        <h3>this is the title</h3>
+        <p>this is the content</p>
+      </template>
+    </pf-tooltip>
+
+    <br /><br />
+    <pf-tooltip content="hello tooltip" ref="tooltipRef" manual>
+      <pf-button> 手动容器 </pf-button>
+    </pf-tooltip>
+
+    <br /><br />
+    <pf-button type="primary" @click="open"> 点击手动触发显示 </pf-button>
+    <pf-button type="danger" @click="close"> 点击手动触发隐藏 </pf-button>
+
+    <br /><br />
+    <pf-dropdown placement="bottom" :menu-options="options">
+      <pf-button type="primary"> Hover 下拉菜单 </pf-button>
+    </pf-dropdown>
+
+    <br /><br />
+    <pf-dropdown placement="bottom" :menu-options="options" trigger="click">
+      <pf-button type="primary"> 点击触发下拉菜单 </pf-button>
+    </pf-dropdown>
+
+    <br /><br />
+    <pf-dropdown
+      placement="bottom"
+      :menu-options="options"
+      trigger="click"
+      manual
+      ref="tooltipRef"
     >
-      <template #footer>
-        <div class="footer">
-          <div class="level">高级 - 3层楼</div>
-          <div class="price">¥ 666.00</div>
-        </div>
-      </template>
-    </PFCard>
-    <br />
-    <PFCard imgSrc="https://p.ipic.vip/bvhtao.jpg" :width="370" :imgHeight="90">
-      制定规范的目的在于保证质量、 方便业务方使用和增加组件库的可扩展性
-      <template #footer>
-        <div class="footer-spring">
-          <div class="level">高级 - 3层楼</div>
-          <div class="level">666收藏</div>
-        </div>
-      </template>
-    </PFCard>
-    <br />
-    <div class="row-btns">
-      <PFButton>按钮</PFButton>
-      <PFButton type="primary">按钮</PFButton>
-      <PFButton type="success">按钮</PFButton>
-      <PFButton type="warning">按钮</PFButton>
-      <PFButton type="danger">按钮</PFButton>
-      <PFButton type="info">按钮</PFButton>
-    </div>
-    <br />
-    <div class="row-btns">
-      <PFButton plain>按钮</PFButton>
-      <PFButton type="primary" plain>按钮</PFButton>
-      <PFButton type="success" plain>按钮</PFButton>
-      <PFButton type="warning" plain>按钮</PFButton>
-      <PFButton type="danger" plain>按钮</PFButton>
-      <PFButton type="info" plain>按钮</PFButton>
-    </div>
-    <br />
-    <div class="row-btns">
-      <PFButton round icon="settings">按钮</PFButton>
-      <PFButton type="primary" round icon="bluetoothon">按钮</PFButton>
-      <PFButton type="success" round icon="cook">按钮</PFButton>
-      <PFButton type="warning" round icon="infopersonal">按钮</PFButton>
-      <PFButton type="danger" round icon="clock">按钮</PFButton>
-      <PFButton type="info" round icon="address">按钮</PFButton>
-    </div>
-    <br />
-    <div class="row-btns">
-      <PFButton plain circle icon="settings"></PFButton>
-      <PFButton plain type="primary" circle icon="bluetoothon"></PFButton>
-      <PFButton plain type="success" circle icon="cook"></PFButton>
-      <PFButton plain type="warning" circle icon="infopersonal"></PFButton>
-      <PFButton plain type="danger" circle icon="clock"></PFButton>
-      <PFButton plain type="info" circle icon="address"></PFButton>
-    </div>
-    <br />
-    <div class="row-btns">
-      <PFButton plain circle @click="handleClose">
-        <i class="one-icon-close"></i>
-      </PFButton>
+      <pf-button> 菜单容器 </pf-button>
+    </pf-dropdown>
+    <br /><br />
+    <pf-button type="primary" @click="open"> 点击手动触发显示 </pf-button>
+    <pf-button type="danger" @click="close"> 点击手动触发隐藏 </pf-button>
+
+    <br /><br />
+    <div class="basic block">
+      <pf-button type="primary" @click="openMsg"> 创建一条消息 </pf-button>
+      <pf-button @click="openMsg2"> 创建支持 VNode 的消息 </pf-button>
     </div>
 
-    <br />
-    <div class="row-btns">
-      <PFButton disabled>按钮</PFButton>
-      <PFButton type="primary" disabled>按钮</PFButton>
-      <PFButton type="success" disabled>按钮</PFButton>
-      <PFButton type="warning" disabled>按钮</PFButton>
-      <PFButton type="danger" disabled>按钮</PFButton>
-      <PFButton type="info" disabled>按钮</PFButton>
-    </div>
-    <br />
-    <div class="row-btns">
-      <PFButton plain disabled>按钮</PFButton>
-      <PFButton type="primary" plain disabled>按钮</PFButton>
-      <PFButton type="success" plain disabled>按钮</PFButton>
-      <PFButton type="warning" plain disabled>按钮</PFButton>
-      <PFButton type="danger" plain disabled>按钮</PFButton>
-      <PFButton type="info" plain disabled>按钮</PFButton>
-    </div>
+    <br /><br />
+    <pf-button @click="openMsg3('success')"> Success </pf-button>
+    <pf-button @click="openMsg3('info')"> Info </pf-button>
+    <pf-button @click="openMsg3('warning')"> warning </pf-button>
+    <pf-button @click="openMsg3('danger')"> Danger </pf-button>
 
-    <br />
-    <PFIcon :name="'bluray'"></PFIcon>
-    <PFIcon :name="'eye_protection'" size="48" color="#f00"></PFIcon>
-    <PFIcon :name="'address1'" :size="24" color="blue"></PFIcon>
+    <br /><br />
+    <pf-button @click="openMsg"> 创建三条消息 </pf-button>
+    <pf-button @click="closeAll"> 全部关闭 </pf-button>
   </div>
 </template>
 
 <script setup lang="ts">
-const handleClose = (e: MouseEvent) => {
-  console.log('close', e)
+import { onMounted, ref, h } from 'vue'
+import type { ButtonInstance } from '../components/lib/Button/src/types'
+import type { MenuOption } from '../components/lib/Dropdown/src/types'
+import { closeAll, createMessage } from '../components/lib/Message/src/method'
+import type { TooltipInstance } from '../components/lib/Tooltip/src/types'
+
+const buttonRef = ref<ButtonInstance | null>(null)
+const openedValue = ref(['collapse1'])
+const size = ref<any>('3x')
+
+const options: MenuOption[] = [
+  { key: 1, label: h('b', 'this is bold') },
+  { key: 2, label: 'item2', disabled: true },
+  { key: 3, label: 'item3', divided: true },
+  { key: 4, label: 'item4' }
+]
+
+onMounted(() => {
+  if (buttonRef.value) {
+    // ref也会自动解包
+    console.log('buttonRef', buttonRef.value.ref)
+  }
+  setTimeout(() => {
+    openedValue.value = ['collapse1', 'collapse2']
+    size.value = '2xl'
+  }, 2000)
+})
+
+const tooltipRef = ref<TooltipInstance | null>(null)
+console.log('🍌', tooltipRef)
+const open = () => {
+  tooltipRef.value?.show()
+}
+const close = () => {
+  tooltipRef.value?.hide()
+}
+
+const openMsg = () => {
+  createMessage({ message: 'Hello Message' })
+}
+const openMsg2 = () => {
+  createMessage({ message: h('hi', 'this is bold') })
+}
+
+const openMsg3 = (type) => {
+  createMessage({ message: 'hello Msg', type, showClose: true, duration: 3000 })
 }
 </script>
 
@@ -137,5 +208,9 @@ const handleClose = (e: MouseEvent) => {
 
 .p-button {
   margin-right: 10px;
+}
+
+.block {
+  margin-bottom: 20px;
 }
 </style>

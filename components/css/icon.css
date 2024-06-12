@@ -1,0 +1,16 @@
+.pf-icon {
+  --pf-icon-color: inherit;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  fill: currentColor;
+  color: var(--pf-icon-color);
+  font-size: inherit;
+}
+
+@each $val in primary, info, success, warning, danger {
+  .pf-icon--$(val) {
+    --pf-icon-color: var(--pf-color-$(val));
+  }
+}
