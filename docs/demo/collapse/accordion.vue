@@ -1,6 +1,6 @@
 <script setup>
-import PfCollapse from '@/lib/Collapse/src/Collapse.vue'
-import PfCollapseItem from '@/lib/Collapse/src/CollapseItem.vue'
+import PfCollapse from '@/components/lib/Collapse/src/Collapse.vue'
+import PfCollapseItem from '@/components/lib/Collapse/src/CollapseItem.vue'
 import { ref } from 'vue'
 
 const openedValue = ref(['1'])

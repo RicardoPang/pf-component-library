@@ -1,5 +1,5 @@
 <script setup>
-import PfButton from '@/lib/Button/src/Button.vue'
+import PfButton from '@/components/lib/Button/src/Button.vue'
 </script>
 <template>
   <div>

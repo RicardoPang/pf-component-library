@@ -1,5 +1,5 @@
 <script setup>
-import PfButton from '@/lib/Button/src/Button.vue'
+import PfButton from '@/components/lib/Button/src/Button.vue'
 </script>
 <template>
   <div class="mb-4">
@@ -29,7 +29,7 @@ import PfButton from '@/lib/Button/src/Button.vue'
     <pf-button type="danger" round>Danger</pf-button>
   </div>
 
-  <div>
+  <div class="mb-4">
     <pf-button icon="magnifying-glass" circle />
     <pf-button type="primary" icon="pen-to-square" circle />
     <pf-button type="success" icon="check" circle />

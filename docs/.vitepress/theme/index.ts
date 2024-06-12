@@ -4,7 +4,7 @@ import { fas } from '@fortawesome/free-solid-svg-icons'
 import { ElementPlusContainer } from '@vitepress-demo-preview/component'
 
 import '@vitepress-demo-preview/component/dist/style.css'
-import '@/css/index.css'
+import '@/components/css/index.css'
 import './custom.css'
 
 library.add(fas)

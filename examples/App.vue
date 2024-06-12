@@ -107,7 +107,7 @@
     <pf-button type="danger" @click="close"> 点击手动触发隐藏 </pf-button>
 
     <br /><br />
-    <div class="basic block">
+    <div class="mb-4">
       <pf-button type="primary" @click="openMsg"> 创建一条消息 </pf-button>
       <pf-button @click="openMsg2"> 创建支持 VNode 的消息 </pf-button>
     </div>

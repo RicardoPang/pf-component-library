@@ -15,7 +15,7 @@ export default defineConfig({
     plugins: [vueJsx()],
     resolve: {
       alias: {
-        '@': fileURLToPath(new URL('../../components', import.meta.url))
+        '@': fileURLToPath(new URL('../../', import.meta.url))
       }
     }
   },
@@ -43,12 +43,28 @@ export default defineConfig({
         text: '组件',
         items: [
           {
-            text: 'Button',
+            text: 'Button 按钮',
             link: '/components/button'
           },
           {
-            text: 'Collpase',
+            text: 'Collpase 折叠面板',
             link: '/components/collapse'
+          },
+          {
+            text: 'Dropdown 下拉菜单',
+            link: '/components/dropdown'
+          },
+          {
+            text: 'Icon 图标',
+            link: '/components/icon'
+          },
+          {
+            text: 'Message 消息提示',
+            link: '/components/message'
+          },
+          {
+            text: 'Tooltip 文字提示',
+            link: '/components/tooltip'
           }
         ]
       }
