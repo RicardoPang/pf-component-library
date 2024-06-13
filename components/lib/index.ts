@@ -5,6 +5,7 @@ import Dropdown from './Dropdown'
 import Icon from './Icon'
 import Message from './Message'
 import Tooltip from './Tooltip'
+import Input from './Input'
 
 // 安裝函式
 const installComponents = (
@@ -19,7 +20,15 @@ const installComponents = (
 
 // 安裝所有元件
 const install = (app: App): void => {
-  installComponents(app, { Button, Collapse, Dropdown, Icon, Message, Tooltip })
+  installComponents(app, {
+    Button,
+    Collapse,
+    Dropdown,
+    Icon,
+    Message,
+    Tooltip,
+    Input
+  })
 }
 
 export default {
@@ -32,6 +41,7 @@ export { default as Dropdown } from './Dropdown'
 export { default as Icon } from './Icon'
 export { default as Message } from './Message'
 export { default as Tooltip } from './Tooltip'
+export { default as Input } from './Input'
 
 export type * from './Button/src/types'
 export type * from './Collapse/src/types'
@@ -39,6 +49,7 @@ export type * from './Dropdown/src/types'
 export type * from './Icon/src/types'
 export type * from './Message/src/types'
 export type * from './Tooltip/src/types'
+export type * from './Input/src/types'
 
 export * from './hooks/useZIndex'
 export * from './hooks/useClickOutside'

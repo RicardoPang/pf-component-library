@@ -121,6 +121,43 @@
     <br /><br />
     <pf-button @click="openMsg"> 创建三条消息 </pf-button>
     <pf-button @click="closeAll"> 全部关闭 </pf-button>
+
+    <br /><br />
+    <pf-input v-model="test" placeholder="基础文本框，请输入" />
+    <span>{{ test }}</span>
+
+    <br /><br />
+    <pf-input v-model="test" disabled />
+
+    <br /><br />
+    <pf-input v-model="test" placeholder="prepend append">
+      <template #prepend>Https://</template>
+      <template #append>.com</template>
+    </pf-input>
+
+    <pf-input v-model="test" placeholder="prefix suffix">
+      <template #prefix>
+        <pf-icon icon="fa-user" />
+      </template>
+      <template #suffix>
+        <pf-icon icon="fa-user" />
+      </template>
+    </pf-input>
+
+    <br /><br />
+    <pf-input v-model="test" placeholder="大的 Input" size="large"> </pf-input>
+    <pf-input v-model="test" placeholder="普通的 Input"> </pf-input>
+    <pf-input v-model="test" placeholder="小的 Input" size="small"> </pf-input>
+
+    <br /><br />
+    <pf-input v-model="test" placeholder="可以是一个 Textarea" type="textarea">
+    </pf-input>
+
+    <br /><br />
+    <pf-input v-model="test" placeholder="密码文本框，可以切换" showPassword />
+
+    <br /><br />
+    <pf-input v-model="test" clearable placeholder="输入字符以后可以点击清空" />
   </div>
 </template>
 
@@ -134,6 +171,7 @@ import type { TooltipInstance } from '../components/lib/Tooltip/src/types'
 const buttonRef = ref<ButtonInstance | null>(null)
 const openedValue = ref(['collapse1'])
 const size = ref<any>('3x')
+const test = ref('')
 
 const options: MenuOption[] = [
   { key: 1, label: h('b', 'this is bold') },
@@ -154,7 +192,6 @@ onMounted(() => {
 })
 
 const tooltipRef = ref<TooltipInstance | null>(null)
-console.log('🍌', tooltipRef)
 const open = () => {
   tooltipRef.value?.show()
 }

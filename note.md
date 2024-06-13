@@ -132,3 +132,59 @@ const vnode = h(MessageConstructor, newProps)
 9. 添加有趣的动画 使用transformY以及fade做出一个fade-up效果
 
 10. 测试 函数式创建组件测试
+
+### Input 需求分析
+
+- 支持input/textarea
+- 支持不同大小
+- 支持一键清空
+- 支持切换是否密码显示
+- 支持自定义前缀/后缀
+- 支持复合型复合型输入框自定义前置或后置
+- 原生属性支持
+
+### Input 属性
+
+```js
+interface InputProps {
+  type?: 'text' | 'textarea' | 'password'
+  size?: 'large' | 'small'
+  clearable?: boolean
+  showPassword?: boolean
+  disabled?: boolean
+}
+```
+
+### Input Emits
+
+```js
+interface InputEmits {
+  (e: 'change', value: string): void
+  (e: 'input', value: string): void
+  (e: 'focus'): void
+  (e: 'blur'): void
+  (e: 'clear'): void
+}
+```
+
+### Input Slots
+
+```js
+prepend, append, prefix, suffix
+```
+
+### Input Expose
+
+```js
+export interface InputInstance {
+  ref: HTMLInputElement | HTMLTextAreaElement
+}
+```
+
+### 组件开发方法论
+
+- 根据需求初步去顶属性/事件/slots/expose
+- 组件的静态版本(html,classes,slots)
+- 行为功能做成开发计划列表
+- 根据列表完成功能
+- 样式/测试
