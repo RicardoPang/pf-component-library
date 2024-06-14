@@ -1,0 +1,86 @@
+.pf-select {
+  --pf-select-item-hover-bg-color: var(--pf-fill-color-light);
+  --pf-select-item-font-size: var(--pf-font-size-base);
+  --pf-select-item-font-color: var(--pf-text-color-regular);
+  --pf-select-item-selected-font-color: var(--pf-color-primary);
+  --pf-select-item-disabled-font-color: var(--pf-text-color-placeholder);
+  --pf-select-input-focus-border-color: var(--pf-color-primary);
+}
+
+.pf-select {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 32px;
+  .pf-tooltip .pf-tooltip__popper {
+    padding: 0;
+  }
+  .pf-input.is-focus .pf-input__wrapper {
+    box-shadow: 0 0 0 1px var(--pf-select-input-focus-border-color) inset !important;
+  }
+  .pf-input {
+    position: relative;
+
+    .header-angle {
+      transition: transform var(--pf-transition-duration);
+      &.is-active {
+        transform: rotate(180deg);
+      }
+    }
+    .pf-input__clear {
+      color: var(--vk-input-icon-color);
+      font-size: 14px;
+      cursor: pointer;
+      &:hover {
+        color: var(--vk-input-clear-hover-color);
+      }
+    }
+  }
+
+  .pf-input__inner {
+    cursor: pointer;
+  }
+
+  .pf-select__loading {
+    display: block;
+    margin: 10px auto;
+    text-align: center;
+  }
+
+  .pf-select__menu {
+    list-style: none;
+    margin: 6px 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  .pf-select__menu-item {
+    margin: 0;
+    font-size: var(--pf-select-item-font-size);
+    padding: 0 32px 0 20px;
+    position: relative;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--pf-select-item-font-color);
+    height: 34px;
+    line-height: 34px;
+    box-sizing: border-box;
+    cursor: pointer;
+    &:hover {
+      background-color: var(--pf-select-item-hover-bg-color);
+    }
+    &.is-selected {
+      color: var(--pf-select-item-selected-font-color);
+      font-weight: 700;
+    }
+    &.is-disabled {
+      color: var(--pf-select-item-disabled-font-color);
+      cursor: not-allowed;
+      &:hover {
+        background-color: transparent;
+      }
+    }
+    &.is-highlighted {
+      background-color: var(--pf-select-item-hover-bg-color);
+    }
+  }
+}

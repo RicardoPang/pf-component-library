@@ -158,6 +158,61 @@
 
     <br /><br />
     <pf-input v-model="test" clearable placeholder="输入字符以后可以点击清空" />
+
+    <br /><br />
+    <pf-switch v-model="isOn" />
+    <pf-switch v-model="isOn" disabled />
+    <pf-switch v-model="isOn" size="small" />
+    <pf-switch v-model="isOn" size="large" />
+    <pf-switch v-model="isOn" activeText="ON" inactiveText="OFF" />
+    <pf-switch v-model="isOn" size="large" activeText="ON" inactiveText="OFF" />
+
+    <br /><br />
+    <pf-switch v-model="test" activeValue="right" inactiveValue="wrong" />
+    <h4>model-value: {{ test }}</h4>
+
+    <br /><br />
+    <pf-select
+      v-model="test"
+      placeholder="基础选择器，请选择"
+      :options="options2"
+    />
+
+    <br /><br />
+    <pf-select
+      v-model="test"
+      placeholder="可清空选择器，请选择"
+      :options="options2"
+      clearable
+    />
+
+    <br /><br />
+    <pf-select
+      v-model="test"
+      placeholder="基础选择器，请选择"
+      :options="options2"
+      :renderLabel="customRender"
+      clearable
+    />
+
+    <br /><br />
+    <pf-select
+      v-model="test"
+      placeholder="可以过滤的选择器，请输入"
+      :options="options2"
+      filterable
+      clearable
+    />
+
+    <br /><br />
+    <pf-select
+      v-model="test"
+      placeholder="搜索远程结果"
+      filterable
+      clearable
+      remote
+      :remote-method="remoteFilter"
+    />
   </div>
 </template>
 
@@ -171,7 +226,14 @@ import type { TooltipInstance } from '../components/lib/Tooltip/src/types'
 const buttonRef = ref<ButtonInstance | null>(null)
 const openedValue = ref(['collapse1'])
 const size = ref<any>('3x')
-const test = ref('')
+const test = ref()
+const isOn = ref(false)
+const options2 = [
+  { label: 'hello', value: '1' },
+  { label: 'xyz', value: '2' },
+  { label: 'testing', value: '3' },
+  { label: 'check', value: '4', disabled: true }
+]
 
 const options: MenuOption[] = [
   { key: 1, label: h('b', 'this is bold') },
@@ -179,6 +241,85 @@ const options: MenuOption[] = [
   { key: 3, label: 'item3', divided: true },
   { key: 4, label: 'item4' }
 ]
+
+const states = [
+  'Alabama',
+  'Alaska',
+  'Arizona',
+  'Arkansas',
+  'California',
+  'Colorado',
+  'Connecticut',
+  'Delaware',
+  'Florida',
+  'Georgia',
+  'Hawaii',
+  'Idaho',
+  'Illinois',
+  'Indiana',
+  'Iowa',
+  'Kansas',
+  'Kentucky',
+  'Louisiana',
+  'Maine',
+  'Maryland',
+  'Massachusetts',
+  'Michigan',
+  'Minnesota',
+  'Mississippi',
+  'Missouri',
+  'Montana',
+  'Nebraska',
+  'Nevada',
+  'New Hampshire',
+  'New Jersey',
+  'New Mexico',
+  'New York',
+  'North Carolina',
+  'North Dakota',
+  'Ohio',
+  'Oklahoma',
+  'Oregon',
+  'Pennsylvania',
+  'Rhode Island',
+  'South Carolina',
+  'South Dakota',
+  'Tennessee',
+  'Texas',
+  'Utah',
+  'Vermont',
+  'Virginia',
+  'Washington',
+  'West Virginia',
+  'Wisconsin',
+  'Wyoming'
+]
+
+const remoteFilter = (query) => {
+  return new Promise((resolve) => {
+    if (query) {
+      setTimeout(() => {
+        const options = states
+          .filter((state) => {
+            return state.toLowerCase().indexOf(query.toLowerCase()) > -1
+          })
+          .map((label) => {
+            return { label, value: label }
+          })
+        resolve(options)
+      }, 500)
+    } else {
+      resolve([])
+    }
+  })
+}
+
+const customRender = (option) => {
+  return h('div', { className: 'xyz' }, [
+    h('b', option.label),
+    h('span', option.value)
+  ])
+}
 
 onMounted(() => {
   if (buttonRef.value) {
@@ -215,6 +356,7 @@ const openMsg3 = (type) => {
 .app {
   padding: 20px;
   color: #333;
+  margin-bottom: 300px;
 }
 
 .footer {
