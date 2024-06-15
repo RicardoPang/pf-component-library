@@ -95,9 +95,10 @@
 </template>
 
 <script setup lang="ts">
-import { computed, nextTick, ref, useAttrs, watch, type Ref } from 'vue'
+import { computed, nextTick, ref, useAttrs, watch, inject, type Ref } from 'vue'
 import type { InputEmits, InputProps } from './types'
 import PfIcon from '../../Icon/src/Icon.vue'
+import { formItemContextKey } from '../../Form/src/types'
 
 defineOptions({
   name: 'PfInput',
@@ -114,6 +115,11 @@ const innerValue = ref(props.modelValue) // 组件内部使用的值, 用于双�
 const isFocus = ref(false) // 是否获得焦点
 const passwordVisible = ref(false) // 是否显示密码
 const inputRef = ref() as Ref<HTMLInputElement> // 输入元素的引用
+const formItemContext = inject(formItemContextKey, null)
+
+const runValidation = (trigger?: string) => {
+  formItemContext?.validate(trigger).catch((err) => console.error(err.errors))
+}
 
 // 是否显示清楚按钮
 const showClear = computed(
@@ -138,10 +144,12 @@ const keepFocus = async () => {
 const handleInput = () => {
   emits('update:modelValue', innerValue.value)
   emits('input', innerValue.value)
+  runValidation('input')
 }
 // 修改值并且失去了焦点
 const handleChange = () => {
   emits('change', innerValue.value)
+  runValidation('change')
 }
 const handleFocus = (e: FocusEvent) => {
   isFocus.value = true
@@ -150,6 +158,7 @@ const handleFocus = (e: FocusEvent) => {
 const handleBlur = (e: FocusEvent) => {
   isFocus.value = false
   emits('blur', e)
+  runValidation('blur')
 }
 // 清楚输入框内容
 const clear = () => {

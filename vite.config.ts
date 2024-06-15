@@ -34,7 +34,7 @@ const makeList = (dirPath: string): FileList => {
 }
 
 const list = makeList(COMPONENTS_DIR)
-console.log(list)
+// console.log(list)
 
 // https://vitejs.dev/config/
 export default defineConfig({

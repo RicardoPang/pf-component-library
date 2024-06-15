@@ -94,7 +94,6 @@ defineOptions({
 const props = withDefaults(defineProps<SelectProps>(), {
   options: () => []
 })
-console.log(props.renderLabel)
 const emits = defineEmits<SelectEmits>()
 
 const tooltipRef = ref() as Ref<TooltipInstance>
