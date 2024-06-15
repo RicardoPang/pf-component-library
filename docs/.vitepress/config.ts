@@ -65,6 +65,22 @@ export default defineConfig({
           {
             text: 'Tooltip 文字提示',
             link: '/components/tooltip'
+          },
+          {
+            text: 'Input 文字输入',
+            link: '/components/input'
+          },
+          {
+            text: 'Switch 开关',
+            link: '/components/switch'
+          },
+          {
+            text: 'Select 选择器',
+            link: '/components/select'
+          },
+          {
+            text: 'Form 表单',
+            link: '/components/form'
           }
         ]
       }

@@ -20,7 +20,7 @@
         </slot>
       </div>
       <div class="pf-message__close" v-if="showClose">
-        <Icon @click.stop="visible = false" icon="xmark" />
+        <pf-icon @click.stop="visible = false" icon="xmark" />
       </div>
     </div>
   </Transition>
@@ -31,7 +31,7 @@ import { ref, onMounted, computed } from 'vue'
 import type { MessageProps } from './types'
 import { getLastBottomOffset } from './method'
 import RenderVnode from '../../Common/RenderVnode'
-import Icon from '../../Icon/src/Icon.vue'
+import PfIcon from '../../Icon/src/Icon.vue'
 import useEventListener from '../../hooks/useEventListener'
 
 // 定义组件的props并设置默认值

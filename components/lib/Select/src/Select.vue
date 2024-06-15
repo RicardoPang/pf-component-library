@@ -23,14 +23,14 @@
         @keydown="handleKeydown"
       >
         <template #suffix>
-          <Icon
+          <pf-icon
             icon="circle-xmark"
             v-if="showClearIcon"
             class="pf-input__clear"
             @mousedown.prevent="NOOP"
             @click.stop="onClear"
           />
-          <Icon
+          <pf-icon
             icon="angle-down"
             v-else
             class="header-angle"
@@ -75,7 +75,7 @@ import type {
 } from './types'
 import Tooltip from '../../Tooltip/src/Tooltip.vue'
 import Input from '../../Input/src/Input.vue'
-import Icon from '../../Icon/src/Icon.vue'
+import PfIcon from '../../Icon/src/Icon.vue'
 import RenderVnode from '../../Common/RenderVnode'
 import type { TooltipInstance } from '../../Tooltip/src/types'
 import type { InputInstance } from '../../Input/src/types'

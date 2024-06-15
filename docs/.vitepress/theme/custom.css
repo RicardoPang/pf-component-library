@@ -25,3 +25,7 @@ p {
 .mb-4 {
   margin-bottom: 16px;
 }
+
+.pf-switch {
+  margin-right: 10px;
+}

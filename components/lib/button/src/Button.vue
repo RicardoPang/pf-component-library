@@ -7,8 +7,8 @@
     :autofocus="autofocus"
     :type="nativeType"
   >
-    <Icon icon="spinner" spin v-if="loading" />
-    <Icon :icon="icon" v-if="icon" />
+    <pf-icon icon="spinner" spin v-if="loading" />
+    <pf-icon :icon="icon" v-if="icon" />
     <span><slot /></span>
   </button>
 </template>
@@ -16,7 +16,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import type { ButtonProps } from './types'
-import Icon from '../../Icon/src/Icon.vue'
+import PfIcon from '../../Icon/src/Icon.vue'
 
 // 定义组件名
 defineOptions({

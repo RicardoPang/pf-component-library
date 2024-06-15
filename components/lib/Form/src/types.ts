@@ -6,7 +6,7 @@ import type {
 } from 'async-validator'
 
 export interface FormItemProps {
-  label: string
+  label?: string
   prop?: string
 }
 
@@ -17,7 +17,7 @@ export type FormRules = Record<string, FormItemRule[]>
 
 export interface FormProps {
   model: Record<string, any>
-  rules: FormRules
+  rules?: FormRules
 }
 
 export interface FormContext extends FormProps {

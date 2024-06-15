@@ -284,7 +284,7 @@ const model = reactive({
   password: '',
   confirmPwd: '',
   agreement: false,
-  gender: ''
+  gender: 'secret'
 })
 const rules = {
   email: [{ type: 'email', required: true, trigger: 'blur' }],
@@ -320,8 +320,8 @@ const submit = async () => {
   }
 }
 const reset = () => {
-  formRef.value.clearValidate()
-  // formRef.value.resetFields()
+  // formRef.value.clearValidate()
+  formRef.value.resetFields()
 }
 
 const states = [
