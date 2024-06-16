@@ -281,10 +281,10 @@ const formRef = ref()
 
 const model = reactive({
   email: '126@qq.com',
-  password: '',
-  confirmPwd: '',
+  password: '123',
+  confirmPwd: '123',
   agreement: false,
-  gender: 'secret'
+  gender: 'female'
 })
 const rules = {
   email: [{ type: 'email', required: true, trigger: 'blur' }],

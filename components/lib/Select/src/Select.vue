@@ -167,9 +167,9 @@ const states = reactive<SelectStates>({
 watch(
   () => props.modelValue,
   (newValue) => {
-    if (initialOption) {
-      initialOption.value = newValue
-    }
+    const option = findOption(newValue)
+    states.inputValue = option ? option.label : ''
+    states.selectedOption = option
   }
 )
 
