@@ -1,4 +1,5 @@
 @import './vars.css';
+@import 'element-plus/dist/index.css';
 @import './reset.css';
 @import './button.css';
 @import './collapse.css';
@@ -10,3 +11,4 @@
 @import './switch.css';
 @import './select.css';
 @import './form.css';
+@import './menu.css';

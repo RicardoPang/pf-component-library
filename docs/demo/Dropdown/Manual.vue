@@ -25,11 +25,12 @@ const close = () => {
       manual
       ref="tooltipRef"
     >
-      <pf-button> 菜单 </pf-button>
+      <pf-button>菜单</pf-button>
     </pf-dropdown>
-    <br /><br />
-    <pf-button type="primary" @click="open"> 点击手动触发显示 </pf-button>
-    <pf-button type="danger" @click="close"> 点击手动触发隐藏 </pf-button>
+    <br />
+    <br />
+    <pf-button type="primary" @click="open">点击手动触发显示</pf-button>
+    <pf-button type="danger" @click="close">点击手动触发隐藏</pf-button>
   </div>
 </template>
 <style>

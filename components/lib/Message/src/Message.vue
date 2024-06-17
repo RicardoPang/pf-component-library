@@ -34,6 +34,10 @@ import RenderVnode from '../../Common/RenderVnode'
 import PfIcon from '../../Icon/src/Icon.vue'
 import useEventListener from '../../hooks/useEventListener'
 
+defineOptions({
+  name: 'PfMessage'
+})
+
 // 定义组件的props并设置默认值
 const props = withDefaults(defineProps<MessageProps>(), {
   type: 'info',

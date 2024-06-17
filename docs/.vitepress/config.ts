@@ -40,7 +40,7 @@ export default defineConfig({
 
     sidebar: [
       {
-        text: '组件',
+        text: 'Basic 基础组件',
         items: [
           {
             text: 'Button 按钮',

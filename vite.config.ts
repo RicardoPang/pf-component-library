@@ -1,9 +1,6 @@
-import { fileURLToPath, URL } from 'node:url'
-
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
-import eslint from 'vite-plugin-eslint'
 import glob from 'glob'
 
 const COMPONENTS_DIR = 'components'
@@ -17,6 +14,7 @@ const generateFilesList = (
 ): FileList => {
   const files = glob.sync(`${dirPath}/${pattern}`)
   return files.reduce<FileList>((list, file) => {
+    if (file.includes('.test.')) return list // 排除测试文件
     const componentName = file.split(/[/.]/)[2]
     const key = suffix ? `${componentName}_${suffix}` : componentName
     list[key] = `./${file}`
@@ -24,30 +22,42 @@ const generateFilesList = (
   }, {})
 }
 
-const makeList = (dirPath: string): FileList => {
+const makeList = (): FileList => {
+  const cssDir = `${COMPONENTS_DIR}/css`
+  const libDir = `${COMPONENTS_DIR}/lib`
+
   return {
-    ...generateFilesList(dirPath, '**/index.ts'),
-    ...generateFilesList(dirPath, '**/index.css', 'style'),
-    ...generateFilesList(dirPath, '**/style.css', 'style'),
-    ...generateFilesList(dirPath, '**/types.ts', 'types')
+    // 读取 css 目录下的 index.css
+    index_style: `./${cssDir}/index.css`,
+    // 读取 lib 目录下每个组件的 index.ts 文件
+    ...generateFilesList(libDir, '**/index.ts'),
+    // 读取 lib 目录下每个组件的 style.css 文件
+    ...generateFilesList(libDir, '**/style.css', 'style')
   }
 }
 
-const list = makeList(COMPONENTS_DIR)
+const list = makeList()
 // console.log(list)
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue(), vueJsx(), eslint()],
+  plugins: [vue(), vueJsx()],
   build: {
     rollupOptions: {
       input: list,
       external: [
         'vue',
-        '@popperjs/core',
         '@fortawesome/fontawesome-svg-core',
         '@fortawesome/free-solid-svg-icons',
-        '@fortawesome/vue-fontawesome'
+        '@fortawesome/vue-fontawesome',
+        '@element-plus/icons-vue',
+        '@popperjs/core',
+        'async-validator',
+        'axios',
+        'lodash-es',
+        'element-plus',
+        'normalize.css',
+        'vue-router'
       ],
       output: [
         {
@@ -55,7 +65,7 @@ export default defineConfig({
           dir: 'dist/es',
           entryFileNames: '[name].js',
           preserveModules: true, // 保留原来目录结构
-          preserveModulesRoot: '.',
+          preserveModulesRoot: `${COMPONENTS_DIR}/lib`,
           assetFileNames: '[name][extname]'
         },
         {
@@ -63,7 +73,7 @@ export default defineConfig({
           dir: 'dist/lib',
           entryFileNames: '[name].js',
           preserveModules: true,
-          preserveModulesRoot: '.',
+          preserveModulesRoot: `${COMPONENTS_DIR}/lib`,
           assetFileNames: '[name][extname]'
         },
         {
@@ -83,10 +93,5 @@ export default defineConfig({
     },
     sourcemap: true, // 对应到具体代码
     emptyOutDir: false
-  },
-  resolve: {
-    alias: {
-      '@': fileURLToPath(new URL('./components', import.meta.url))
-    }
   }
 })

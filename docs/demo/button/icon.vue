@@ -7,6 +7,6 @@ import PfButton from '@/components/lib/Button/src/Button.vue'
     <pf-button type="primary" icon="share-nodes" />
     <pf-button type="primary" icon="trash-can" />
     <pf-button type="primary" icon="magnifying-glass">Search</pf-button>
-    <pf-button type="primary" icon="arrow-up-from-bracket"> Upload </pf-button>
+    <pf-button type="primary" icon="arrow-up-from-bracket">Upload</pf-button>
   </div>
 </template>

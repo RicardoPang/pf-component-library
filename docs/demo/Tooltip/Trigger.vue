@@ -5,7 +5,7 @@ import PfButton from '@/components/lib/Button/src/Button.vue'
 <template>
   <div class="md-4">
     <pf-tooltip content="hello tooltip" trigger="click">
-      <pf-button> 点击激活 Tooltip </pf-button>
+      <pf-button>点击激活 Tooltip</pf-button>
     </pf-tooltip>
   </div>
 </template>

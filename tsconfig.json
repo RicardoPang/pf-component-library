@@ -7,5 +7,6 @@
     "moduleResolution": "Bundler",
     "types": ["vite/client"]
   },
-  "include": ["./components/**/*"]
+  "include": ["./components/**/*"],
+  "exclude": ["**/*.test.ts", "**/*.test.d.ts"]
 }

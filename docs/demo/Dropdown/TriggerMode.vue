@@ -12,7 +12,7 @@ const options = [
 <template>
   <div class="mb-4">
     <pf-dropdown placement="bottom" :menu-options="options" trigger="click">
-      <pf-button type="primary"> 点击触发下拉菜单 </pf-button>
+      <pf-button type="primary">点击触发下拉菜单</pf-button>
     </pf-dropdown>
   </div>
 </template>

@@ -1,31 +1,56 @@
 import { createApp } from 'vue'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { fas } from '@fortawesome/free-solid-svg-icons'
-import App from './App.vue'
-
-library.add(fas)
 import 'normalize.css'
-import '../components/css/index.css'
-
-// 全局
-import Components from '../components/lib'
-
-// 按需
-// import '../components/css/vars.css'
-// import '../components/css/reset.css'
-// import '../components/lib/button/src/style.css'
-// import '../components/lib/icon/src/style.css'
-// import '../components/lib/collapse/src/style.css'
-// import { Button, Icon, Collapse } from '../components/lib'
+import App from './App.vue'
+import router from './router'
+// import ElementPlus from 'element-plus'
+// import 'element-plus/dist/index.css'
+import icons from './global/register-icons'
 
 const app = createApp(App)
+app.use(icons) // 注册element-plus图标
+app.use(router) // 注册路由
+// app.use(ElementPlus) // 注册element-plus
 
-// 全局
-app.use(Components)
+// 全部引入
+import 'pf-component-library/dist/index_style.css'
+import PUI from 'pf-component-library'
+app.use(PUI)
 
-// 按需
+// 按需引入
+// import 'pf-component-library/dist/es/Button_style.css'
+// import 'pf-component-library/dist/es/Collapse_style.css'
+// import 'pf-component-library/dist/es/Dropdown_style.css'
+// import 'pf-component-library/dist/es/Icon_style.css'
+// import 'pf-component-library/dist/es/Message_style.css'
+// import 'pf-component-library/dist/es/Tooltip_style.css'
+// import 'pf-component-library/dist/es/Input_style.css'
+// import 'pf-component-library/dist/es/Select_style.css'
+// import 'pf-component-library/dist/es/Switch_style.css'
+// import 'pf-component-library/dist/es/Form_style.css'
+// import 'pf-component-library/dist/es/Menu_style.css'
+// import {
+//   Button,
+//   Collapse,
+//   Dropdown,
+//   Icon,
+//   Message,
+//   Tooltip,
+//   Input,
+//   Select,
+//   Switch,
+//   Form,
+//   Menu
+// } from 'pf-component-library'
 // app.use(Button)
-// app.use(Icon)
 // app.use(Collapse)
+// app.use(Dropdown)
+// app.use(Icon)
+// app.use(Message)
+// app.use(Tooltip)
+// app.use(Input)
+// app.use(Select)
+// app.use(Switch)
+// app.use(Form)
+// app.use(Menu)
 
 app.mount('#app')
