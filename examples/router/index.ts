@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
+import VirtualScroll from '../views/VirtualScroll.vue'
+import VirtualScrollDetail from '../views/VirtualScrollDetail.vue'
 import Container from '../components/Container/src/Container.vue'
 
 const data = [
@@ -7,6 +9,11 @@ const data = [
     icon: 'house',
     name: '首页(基础组件)',
     index: '/'
+  },
+  {
+    icon: 'scroll',
+    name: 'VirtualScroll虚拟滚动',
+    index: '/virtualScroll'
   },
   {
     icon: 'location-dot',
@@ -79,6 +86,16 @@ const router = createRouter({
           path: '/',
           name: 'home',
           component: Home
+        },
+        {
+          path: '/virtualScroll',
+          name: 'virtualScroll',
+          component: VirtualScroll
+        },
+        {
+          path: '/virtualScrollDetail',
+          name: 'virtualScrollDetail',
+          component: VirtualScrollDetail
         }
       ]
     }

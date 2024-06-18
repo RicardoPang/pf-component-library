@@ -11,6 +11,7 @@ import Switch from './Switch'
 import Select from './Select'
 import Form from './Form'
 import Menu from './Menu'
+import VirtualScroll from './VirtualScroll'
 
 // 安裝函式
 const installComponents = (
@@ -37,7 +38,8 @@ const install = (app: App): void => {
     Switch,
     Select,
     Form,
-    Menu
+    Menu,
+    VirtualScroll
   })
 }
 
@@ -56,6 +58,7 @@ export { default as Switch } from './Switch'
 export { default as Select } from './Select'
 export { default as Form } from './Form'
 export { default as Menu } from './Menu'
+export { default as VirtualScroll } from './VirtualScroll'
 
 export type * from './Button/src/types'
 export type * from './Collapse/src/types'
@@ -68,6 +71,7 @@ export type * from './Switch/src/types'
 export type * from './Select/src/types'
 export type * from './Form/src/types'
 export type * from './Menu/src/types'
+export type * from './VirtualScroll/src/types'
 
 export * from './hooks/useZIndex'
 export * from './hooks/useClickOutside'

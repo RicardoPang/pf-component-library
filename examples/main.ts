@@ -12,8 +12,10 @@ app.use(router) // 注册路由
 // app.use(ElementPlus) // 注册element-plus
 
 // 全部引入
-import 'pf-component-library/dist/index_style.css'
-import PUI from 'pf-component-library'
+// import 'pf-component-library/dist/index_style.css'
+// import PUI from 'pf-component-library'
+import '../components/css/index.css'
+import PUI from '../components/lib'
 app.use(PUI)
 
 // 按需引入

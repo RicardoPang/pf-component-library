@@ -1,4 +1,5 @@
 import { defineComponent, useAttrs } from 'vue'
+import { ElMenu, ElSubMenu, ElMenuItem } from 'element-plus'
 import Icon from '../../Icon/src/Icon.vue'
 import type { PropType } from 'vue'
 import type { MenuItem } from './types'
@@ -59,16 +60,16 @@ export default defineComponent({
         }
         if (item[props.children] && item[props.children].length > 0) {
           return (
-            <el-sub-menu index={item[props.index]} v-slots={slots}>
+            <ElSubMenu index={item[props.index]} v-slots={slots}>
               {renderMenu(item[props.children!])}
-            </el-sub-menu>
+            </ElSubMenu>
           )
         }
         return (
-          <el-menu-item index={item[props.index]}>
+          <ElMenuItem index={item[props.index]}>
             <Icon icon={item.i} />
             <span class="pf-menu-title">{item[props.name]}</span>
-          </el-menu-item>
+          </ElMenuItem>
         )
       })
     }
@@ -76,14 +77,14 @@ export default defineComponent({
     const attrs = useAttrs()
     return () => {
       return (
-        <el-menu
+        <ElMenu
           class="pf-menu-vertical-demo"
           {...attrs}
           default-active={props.defaultActive}
           router={props.router}
         >
           {renderMenu(props.data)}
-        </el-menu>
+        </ElMenu>
       )
     }
   }

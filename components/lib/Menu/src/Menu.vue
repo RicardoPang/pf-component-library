@@ -35,6 +35,7 @@
 </template>
 
 <script setup lang="ts">
+import { ElMenu, ElSubMenu, ElMenuItem } from 'element-plus'
 import PfIcon from '../../Icon/src/Icon.vue'
 import type { MenuProps } from './types'
 

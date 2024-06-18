@@ -1,0 +1,26 @@
+.pf-scroll-container {
+  width: 100%;
+  height: 100%;
+
+  .msg {
+    color: #696969;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 10px;
+  }
+}
+
+.pf-scroll--vertical {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.pf-scroll--horizontal {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.msg--horizontal {
+  text-align: left !important;
+  margin-top: 15px !important;
+}

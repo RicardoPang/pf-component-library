@@ -8,7 +8,11 @@
         <nav-header v-model:collapse="isCollapse"></nav-header>
       </el-header>
       <el-main>
-        <router-view></router-view>
+        <router-view v-slot="{ Component }">
+          <keep-alive>
+            <component :is="Component" />
+          </keep-alive>
+        </router-view>
       </el-main>
     </el-container>
   </el-container>
@@ -39,5 +43,9 @@ defineProps({
 .el-header {
   padding: 0;
   border-bottom: 1px solid #eee;
+}
+.el-main {
+  height: 80vh;
+  overflow: hidden;
 }
 </style>
