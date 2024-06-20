@@ -1,10 +1,7 @@
 <template>
   <div class="news-box">
     <!-- 垂直 -->
-    <pf-virtual-scroll
-      :requestUrl="'http://codercba.com:1888/airbnb/api/entire/list'"
-      #default="oneItem"
-    >
+    <pf-virtual-scroll #default="oneItem">
       <router-link class="one-new" to="/virtualScrollDetail">
         <div class="new-left">
           <h3>{{ oneItem.thisItem.name }}</h3>

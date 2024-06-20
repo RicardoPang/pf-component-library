@@ -55,6 +55,7 @@ const props = withDefaults(defineProps<VirtualScrollProps>(), {
   msg: '正在载入...',
   oneHeight: 100,
   oneWidth: 100,
+  requestUrl: 'http://codercba.com:1888/airbnb/api/entire/list',
   offset: 0,
   size: 20,
   scrollDirection: 'vertical'
@@ -78,7 +79,9 @@ const state = reactive({
   currentScrollLeft: 0
 })
 
+// 容器
 const scrollContainer = ref<HTMLElement | null>(null)
+// 分页偏移量
 let offset = ref(props.offset)
 
 // 获取数据列表
