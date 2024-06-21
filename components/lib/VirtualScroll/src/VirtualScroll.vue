@@ -57,11 +57,9 @@ const props = withDefaults(defineProps<VirtualScrollProps>(), {
   oneWidth: 100,
   requestUrl: 'http://codercba.com:1888/airbnb/api/entire/list',
   offset: 0,
-  size: 20,
+  size: 200,
   scrollDirection: 'vertical'
 })
-
-console.log(props.scrollDirection)
 
 // 定义状态
 const state = reactive({
@@ -121,10 +119,12 @@ const getContainerSize = () => {
 }
 
 // 节流限制执行setDataStartIndex频率
+const fps = 30
+const throttleInterval = 1000 / fps
 const throttledSetDataStartIndex = throttle(() => {
   // 使用requestAnimationFrame来确保滚动处理的性能
   window.requestAnimationFrame(setDataStartIndex)
-}, 1000 / 30)
+}, throttleInterval)
 
 const handleScroll = () => {
   throttledSetDataStartIndex()
