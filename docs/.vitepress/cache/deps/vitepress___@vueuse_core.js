@@ -33,7 +33,8 @@ import {
   version,
   watch,
   watchEffect
-} from "./chunk-RY5ODQAQ.js";
+} from "./chunk-BJ3OZQ3N.js";
+import "./chunk-PZ5AY32C.js";
 
 // node_modules/vitepress/lib/vue-demi.mjs
 var isVue2 = false;
@@ -55,7 +56,7 @@ function del(target, key) {
   delete target[key];
 }
 
-// node_modules/@vueuse/shared/index.mjs
+// node_modules/vitepress/node_modules/@vueuse/shared/index.mjs
 function computedEager(fn, options) {
   var _a;
   const result = shallowRef();
@@ -1552,7 +1553,7 @@ function whenever(source, cb, options) {
   return stop;
 }
 
-// node_modules/@vueuse/core/index.mjs
+// node_modules/vitepress/node_modules/@vueuse/core/index.mjs
 function computedAsync(evaluationCallback, initialState, optionsOrRef) {
   let options;
   if (isRef(optionsOrRef)) {
@@ -1822,8 +1823,9 @@ function onClickOutside(target, handler, options = {}) {
       setTimeout(() => {
         var _a;
         const el = unrefElement(target);
-        if (((_a = window2.document.activeElement) == null ? void 0 : _a.tagName) === "IFRAME" && !(el == null ? void 0 : el.contains(window2.document.activeElement)))
+        if (((_a = window2.document.activeElement) == null ? void 0 : _a.tagName) === "IFRAME" && !(el == null ? void 0 : el.contains(window2.document.activeElement))) {
           handler(event);
+        }
       }, 0);
     })
   ].filter(Boolean);
@@ -6453,8 +6455,9 @@ function useParallax(target, options = {}) {
     elementHeight: height
   } = useMouseInElement(target, { handleOutside: false, window: window2 });
   const source = computed(() => {
-    if (orientation.isSupported && (orientation.alpha != null && orientation.alpha !== 0 || orientation.gamma != null && orientation.gamma !== 0))
+    if (orientation.isSupported && (orientation.alpha != null && orientation.alpha !== 0 || orientation.gamma != null && orientation.gamma !== 0)) {
       return "deviceOrientation";
+    }
     return "mouse";
   });
   const roll = computed(() => {
@@ -6975,8 +6978,7 @@ function useScrollLock(element, initialState = false) {
     set(v) {
       if (v)
         lock();
-      else
-        unlock();
+      else unlock();
     }
   });
 }
@@ -7318,8 +7320,7 @@ function useStorageAsync(key, initialValue, storage, options = {}) {
           data.value = mergeDefaults(value, rawInit);
         else if (type === "object" && !Array.isArray(value))
           data.value = { ...rawInit, ...value };
-        else
-          data.value = value;
+        else data.value = value;
       } else {
         data.value = await serializer.read(rawValue);
       }
@@ -8074,8 +8075,7 @@ function useUserMedia(options = {}) {
     (v) => {
       if (v)
         _start();
-      else
-        _stop();
+      else _stop();
     },
     { immediate: true }
   );

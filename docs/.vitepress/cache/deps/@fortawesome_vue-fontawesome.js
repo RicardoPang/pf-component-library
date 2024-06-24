@@ -3,13 +3,14 @@ import {
   icon,
   parse$1,
   text
-} from "./chunk-RZDVYSLR.js";
+} from "./chunk-AAYWHMNN.js";
 import {
   computed,
   defineComponent,
   h,
   watch
-} from "./chunk-RY5ODQAQ.js";
+} from "./chunk-BJ3OZQ3N.js";
+import "./chunk-PZ5AY32C.js";
 
 // node_modules/@fortawesome/vue-fontawesome/index.es.js
 function ownKeys(e, r) {
@@ -34,13 +35,11 @@ function _objectSpread2(e) {
   return e;
 }
 function _toPrimitive(t, r) {
-  if ("object" != typeof t || !t)
-    return t;
+  if ("object" != typeof t || !t) return t;
   var e = t[Symbol.toPrimitive];
   if (void 0 !== e) {
     var i = e.call(t, r || "default");
-    if ("object" != typeof i)
-      return i;
+    if ("object" != typeof i) return i;
     throw new TypeError("@@toPrimitive must return a primitive value.");
   }
   return ("string" === r ? String : Number)(t);
@@ -72,31 +71,26 @@ function _defineProperty(obj, key, value) {
   return obj;
 }
 function _objectWithoutPropertiesLoose(source, excluded) {
-  if (source == null)
-    return {};
+  if (source == null) return {};
   var target = {};
   for (var key in source) {
     if (Object.prototype.hasOwnProperty.call(source, key)) {
-      if (excluded.indexOf(key) >= 0)
-        continue;
+      if (excluded.indexOf(key) >= 0) continue;
       target[key] = source[key];
     }
   }
   return target;
 }
 function _objectWithoutProperties(source, excluded) {
-  if (source == null)
-    return {};
+  if (source == null) return {};
   var target = _objectWithoutPropertiesLoose(source, excluded);
   var key, i;
   if (Object.getOwnPropertySymbols) {
     var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
     for (i = 0; i < sourceSymbolKeys.length; i++) {
       key = sourceSymbolKeys[i];
-      if (excluded.indexOf(key) >= 0)
-        continue;
-      if (!Object.prototype.propertyIsEnumerable.call(source, key))
-        continue;
+      if (excluded.indexOf(key) >= 0) continue;
+      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
       target[key] = source[key];
     }
   }
@@ -106,31 +100,22 @@ function _toConsumableArray(arr) {
   return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
 }
 function _arrayWithoutHoles(arr) {
-  if (Array.isArray(arr))
-    return _arrayLikeToArray(arr);
+  if (Array.isArray(arr)) return _arrayLikeToArray(arr);
 }
 function _iterableToArray(iter) {
-  if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null)
-    return Array.from(iter);
+  if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
 }
 function _unsupportedIterableToArray(o, minLen) {
-  if (!o)
-    return;
-  if (typeof o === "string")
-    return _arrayLikeToArray(o, minLen);
+  if (!o) return;
+  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
   var n = Object.prototype.toString.call(o).slice(8, -1);
-  if (n === "Object" && o.constructor)
-    n = o.constructor.name;
-  if (n === "Map" || n === "Set")
-    return Array.from(o);
-  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n))
-    return _arrayLikeToArray(o, minLen);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
 }
 function _arrayLikeToArray(arr, len) {
-  if (len == null || len > arr.length)
-    len = arr.length;
-  for (var i = 0, arr2 = new Array(len); i < len; i++)
-    arr2[i] = arr[i];
+  if (len == null || len > arr.length) len = arr.length;
+  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
   return arr2;
 }
 function _nonIterableSpread() {

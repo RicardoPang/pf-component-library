@@ -40,7 +40,7 @@ export default defineConfig({
 
     sidebar: [
       {
-        text: 'Basic 基础组件',
+        text: '基础组件',
         items: [
           {
             text: 'Button 按钮',
@@ -81,6 +81,15 @@ export default defineConfig({
           {
             text: 'Form 表单',
             link: '/components/form'
+          }
+        ]
+      },
+      {
+        text: '复杂组件',
+        items: [
+          {
+            text: 'VirtualScroll 虚拟滚动',
+            link: '/components/virtualScroll'
           }
         ]
       }

@@ -18,7 +18,8 @@ import {
   unref,
   watch,
   withCtx
-} from "./chunk-RY5ODQAQ.js";
+} from "./chunk-BJ3OZQ3N.js";
+import "./chunk-PZ5AY32C.js";
 
 // node_modules/@vitepress-demo-preview/component/dist/preview-component.js
 var Z = (t, n) => {

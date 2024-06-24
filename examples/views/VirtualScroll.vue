@@ -1,10 +1,18 @@
 <template>
   <div class="news-box">
     <!-- 垂直 -->
-    <pf-virtual-scroll #default="oneItem">
+    <pf-virtual-scroll
+      #default="oneItem"
+      :autoHeight="true"
+      :estimatedItemHeight="150"
+    >
       <router-link class="one-new" to="/virtualScrollDetail">
         <div class="new-left">
-          <h3>{{ oneItem.thisItem.name }}</h3>
+          <h3>
+            {{ oneItem.thisItem.name }}
+            {{ oneItem.thisItem.name }}
+            {{ oneItem.thisItem.name }}
+          </h3>
           <div>
             <p>
               <span class="read">{{ oneItem.thisItem.price_format }}/晚</span>
@@ -68,6 +76,13 @@
 
     .new-left h3 {
       font-size: 16px;
+
+      /* 固定高度专属: 超出部分省略 */
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
     }
 
     .new-left div {

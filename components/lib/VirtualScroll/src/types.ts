@@ -13,6 +13,8 @@ export interface VirtualScrollProps {
   size?: number
   // 滚动方向
   scrollDirection?: 'vertical' | 'horizontal'
-  // 是否自动计算高度
+  // 是否需要动态高度计算
   autoHeight?: boolean
+  // 动态高度估算值
+  estimatedItemHeight?: number
 }
