@@ -105,6 +105,10 @@ import {
   onUnmounted,
   nextTick
 } from 'vue'
+import PfInput from '../../Input/src/Input.vue'
+import PfIcon from '../../Icon/src/Icon.vue'
+import PfButton from '../../Button/src/Button.vue'
+import PfTreeNode from './TreeNode.vue'
 import type { TreeProps, BigData, TreeNode, TreeEmits } from './types'
 
 import {
@@ -154,6 +158,7 @@ const props = withDefaults(defineProps<TreeProps>(), {
   showLine: false,
   draggable: false
 })
+console.log(props.defaultCheckedKeys)
 
 const emits = defineEmits<TreeEmits>()
 const state = reactive({
@@ -188,16 +193,22 @@ const renderList = computed(() => {
   return unHiddenList.value?.slice(state.startIndex, state.endIndex) ?? []
 })
 
-watch(props.defaultCheckedKeys, (newValue, oldValue) => {
-  if (newValue !== oldValue) {
-    setCheckedKeys(newValue)
+watch(
+  () => props.defaultCheckedKeys,
+  (newValue, oldValue) => {
+    if (newValue !== oldValue) {
+      setCheckedKeys(newValue)
+    }
   }
-})
-watch(props.expandKeys, (newValue, oldValue) => {
-  if (newValue !== oldValue) {
-    setExpand(newValue)
+)
+watch(
+  () => props.expandKeys,
+  (newValue, oldValue) => {
+    if (newValue !== oldValue) {
+      setExpand(newValue)
+    }
   }
-})
+)
 
 // 拖拽事件处理函数
 const handleDragStart = (node: TreeNode, event: DragEvent) => {
@@ -436,9 +447,27 @@ const initExpand = () => {
 }
 
 // 设置复选框选中状态
-const setCheckedKeys = (keys: string[]) => {
+// const setCheckedKeys = (keys: string[]) => {
+//   if (!Array.isArray(keys)) {
+//     console.warn('defaultCheckedKeys 必须是数组')
+//     return
+//   }
+//   clearChecked()
+//   const nodes = keys.map((id) => big.value?.listMap[id])
+//   nodes.forEach((node, index) => {
+//     if (node && node.isLeaf) {
+//       node.checked = true
+//       if (!isBrother(node, nodes[index + 1])) {
+//         handleCheckedChange(node)
+//       }
+//     }
+//   })
+//   emitChecked()
+// }
+
+const setCheckedKeys = (keys: string[] = []) => {
   if (!Array.isArray(keys)) {
-    console.warn('defaultCheckedKeys 必须是数组')
+    console.warn('The argument to function setCheckedKeys must be an array')
     return
   }
   clearChecked()
@@ -446,9 +475,7 @@ const setCheckedKeys = (keys: string[]) => {
   nodes.forEach((node, index) => {
     if (node && node.isLeaf) {
       node.checked = true
-      if (!isBrother(node, nodes[index + 1])) {
-        handleCheckedChange(node)
-      }
+      if (!isBrother(node, nodes[index + 1])) handleCheckedChange(node)
     }
   })
   emitChecked()

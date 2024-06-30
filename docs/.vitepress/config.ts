@@ -17,6 +17,19 @@ export default defineConfig({
       alias: {
         '@': fileURLToPath(new URL('../../', import.meta.url))
       }
+    },
+    server: {
+      proxy: {
+        '/api': {
+          target: 'http://localhost:3050',
+          changeOrigin: true
+        },
+        '/static': {
+          target: 'http://localhost:3050',
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/static/, '')
+        }
+      }
     }
   },
   markdown: {
@@ -90,6 +103,10 @@ export default defineConfig({
           {
             text: 'VirtualScroll 虚拟滚动',
             link: '/components/virtualScroll'
+          },
+          {
+            text: 'Tree 树形控件',
+            link: '/components/tree'
           }
         ]
       }

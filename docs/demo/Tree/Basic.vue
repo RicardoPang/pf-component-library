@@ -1,5 +1,62 @@
+<script setup>
+import { ref, onMounted } from 'vue'
+import axios from 'axios'
+import PfTree from '@/components/lib/Tree/src/Tree.vue'
+import PfButton from '@/components/lib/Button/src/Button.vue'
+import PfSelect from '@/components/lib/Select/src/Select.vue'
+import PfIcon from '@/components/lib/Icon/src/Icon.vue'
+
+const checkedKeys = ref(['1-3'])
+const isLoading = ref(true)
+const isShowDialog = ref(false)
+const expandKeys = ref([])
+const treeRef = ref(null)
+const test = ref('')
+const options = [
+  { label: '北京', value: '1' },
+  { label: '上海', value: '2' },
+  { label: '天津', value: '3' },
+  { label: '重庆', value: '4', disabled: true }
+]
+
+onMounted(() => {
+  btnClick('tree-500')
+})
+
+const btnClick = async (count) => {
+  isShowDialog.value = true
+  axios.get(`/static/json/${count}.json`).then(({ data }) => {
+    expandKeys.value = ['8-1', '10-1']
+    treeRef.value?.setData(data)
+    checkedKeys.value = ['1-4']
+    isLoading.value = false
+  })
+}
+
+const onChange = (checkedKeys, checkedNodes) => {
+  console.log('onChange', checkedKeys, checkedNodes)
+}
+
+const onClickLabel = (node) => {
+  console.log('onClickLabel', node)
+}
+
+const onClickCheckbox = (node) => {
+  console.log('onClickCheckbox', node)
+}
+
+const onReload = () => {
+  window.location.reload()
+}
+
+const invokeRef = (name) => {
+  if (treeRef.value) {
+    treeRef.value[name]()
+  }
+}
+</script>
 <template>
-  <div class="pf-demo">
+  <div class="pf-tree-wrapper">
     <div class="btn-bar">
       <h3>点击按钮，展示tree</h3>
       <br />
@@ -17,13 +74,10 @@
       <br />
       <br />
       <pf-button @click="onReload">刷新</pf-button>
-      <pf-button @click="invokeRef('showCheckedOnly')">
-        showCheckedOnly
-      </pf-button>
-      <pf-button @click="invokeRef('restore')">restore</pf-button>
-      <pf-button @click="invokeRef('clear')">clear</pf-button>
+      <pf-button @click="invokeRef('showCheckedOnly')">只显示选中</pf-button>
+      <pf-button @click="invokeRef('restore')">恢复</pf-button>
+      <pf-button @click="invokeRef('clear')">清空</pf-button>
     </div>
-
     <div class="tree-wrap" v-show="isShowDialog">
       <pf-tree
         ref="treeRef"
@@ -58,78 +112,18 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import axios from 'axios'
-import type { TreeInstance } from '../../components/lib/Tree/src/types'
-
-const checkedKeys = ref(['1-3'])
-const isLoading = ref(true)
-const isShowDialog = ref(false)
-const expandKeys = ref<string[]>([])
-const treeRef = ref<TreeInstance | null>(null)
-const test = ref('')
-const options = [
-  { label: '北京', value: '1' },
-  { label: '上海', value: '2' },
-  { label: '天津', value: '3' },
-  { label: '重庆', value: '4', disabled: true }
-]
-
-onMounted(() => {
-  btnClick('tree-500')
-})
-
-const btnClick = async (count: string) => {
-  isShowDialog.value = true
-  axios.get(`/static/json/${count}.json`).then(({ data }) => {
-    expandKeys.value = ['8-1', '10-1']
-    treeRef.value?.setData(data)
-    checkedKeys.value = ['1-4', '1-5']
-    isLoading.value = false
-  })
-}
-
-const onChange = (checkedKeys: any, checkedNodes: any) => {
-  console.log('onChange', checkedKeys, checkedNodes)
-}
-
-const onClickLabel = (node: any) => {
-  console.log('onClickLabel', node)
-}
-
-const onClickCheckbox = (node: any) => {
-  console.log('onClickCheckbox', node)
-}
-
-const onReload = () => {
-  window.location.reload()
-}
-
-const invokeRef = (name: string) => {
-  if (treeRef.value) {
-    treeRef.value[name]()
-  }
-}
-</script>
-
 <style scoped>
-.pf-demo {
+.pf-tree-wrapper {
   text-align: center;
-
   .pre-input {
     max-width: 84px;
   }
-
   .pf-icon {
     vertical-align: -2px;
   }
-
   .btn-bar {
     padding: 10px;
   }
-
   .tree-wrap {
     margin: 0px auto;
     width: 400px;

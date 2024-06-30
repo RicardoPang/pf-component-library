@@ -161,12 +161,17 @@
 }
 
 .pf-check-box .box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
-  width: 10px;
-  height: 10px;
+  width: var(--pf-font-size-base);
+  height: var(--pf-font-size-base);
+  box-sizing: border-box;
   margin-right: 8px;
-  border: 1px solid #dcdfe6;
+  border: 1px solid var(--pf-border-color);
   cursor: pointer;
+  overflow: hidden;
 }
 
 .pf-check-box .box:hover {
@@ -175,16 +180,11 @@
 
 .pf-check-box .box::after {
   content: '\2713';
-  position: absolute;
-  left: 0px;
-  top: -2px;
   transform: scale(0);
 }
 
 .pf-check-box .box.is-part-checked::after {
   content: '-';
-  left: 2px;
-  top: -3px;
 }
 
 .pf-check-box .box.is-checked,
