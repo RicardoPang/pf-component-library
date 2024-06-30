@@ -26,7 +26,7 @@ import PfVirtualScroll from '@/components/lib/VirtualScroll/src/VirtualScroll.vu
     </pf-virtual-scroll>
   </div>
 </template>
-<style local>
+<style lang="css" scoped>
 .pf-vertical-container {
   height: 380px;
 

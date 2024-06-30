@@ -24,7 +24,7 @@ const options = [
   />
 </template>
 
-<style local>
+<style lang="css" scoped>
 .pf-select__menu-item,
 .xyz {
   display: flex;

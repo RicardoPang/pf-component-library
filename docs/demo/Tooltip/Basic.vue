@@ -113,7 +113,7 @@ import PfButton from '@/components/lib/Button/src/Button.vue'
   </div>
 </template>
 
-<style local>
+<style lang="css">
 .tooltip-base-box {
   width: 600px;
 }

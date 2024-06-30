@@ -1,15 +1,10 @@
 import { createApp } from 'vue'
 import 'normalize.css'
 import App from './App.vue'
-import router from './router'
-// import ElementPlus from 'element-plus'
-// import 'element-plus/dist/index.css'
-import icons from './global/register-icons'
+import router from './router/index.ts'
 
 const app = createApp(App)
-app.use(icons) // 注册element-plus图标
-app.use(router) // 注册路由
-// app.use(ElementPlus) // 注册element-plus
+app.use(router)
 
 // 全部引入
 // import 'pf-component-library/dist/index_style.css'

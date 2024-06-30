@@ -1,5 +1,4 @@
 import type { App, Plugin } from 'vue'
-import ElementPlus from 'element-plus'
 import Button from './Button'
 import Collapse from './Collapse'
 import Dropdown from './Dropdown'
@@ -10,15 +9,14 @@ import Input from './Input'
 import Switch from './Switch'
 import Select from './Select'
 import Form from './Form'
-import Menu from './Menu'
 import VirtualScroll from './VirtualScroll'
+import Tree from './Tree'
 
 // 安裝函式
 const installComponents = (
   app: App,
   components: Record<string, Plugin>
 ): void => {
-  app.use(ElementPlus)
   for (const key in components) {
     const component = components[key]
     app.use(component)
@@ -38,8 +36,8 @@ const install = (app: App): void => {
     Switch,
     Select,
     Form,
-    Menu,
-    VirtualScroll
+    VirtualScroll,
+    Tree
   })
 }
 
@@ -57,8 +55,8 @@ export { default as Input } from './Input'
 export { default as Switch } from './Switch'
 export { default as Select } from './Select'
 export { default as Form } from './Form'
-export { default as Menu } from './Menu'
 export { default as VirtualScroll } from './VirtualScroll'
+export { default as Tree } from './Tree'
 
 export type * from './Button/src/types'
 export type * from './Collapse/src/types'
@@ -70,8 +68,8 @@ export type * from './Input/src/types'
 export type * from './Switch/src/types'
 export type * from './Select/src/types'
 export type * from './Form/src/types'
-export type * from './Menu/src/types'
 export type * from './VirtualScroll/src/types'
+export type * from './Tree/src/types'
 
 export * from './hooks/useZIndex'
 export * from './hooks/useClickOutside'

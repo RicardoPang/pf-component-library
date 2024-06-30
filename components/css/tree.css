@@ -1,0 +1,209 @@
+/* tree */
+.pf-tree {
+  border: var(--pf-border);
+  padding: 10px 0;
+  min-height: 50px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.pf-tree .search-bar {
+  padding: 0 10px 10px 10px;
+  display: flex;
+}
+
+.pf-tree .search-bar .input {
+  flex: 1;
+  position: relative;
+}
+
+.pf-tree .search-bar .pf-input {
+  vertical-align: top;
+}
+
+.pf-tree .content-wrap {
+  position: relative;
+  overflow: auto;
+  padding: 0 10px;
+  flex: 1;
+}
+
+.pf-tree .content-wrap .tree-phantom {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  z-index: -1;
+}
+
+.pf-tree .content-wrap .tree-content {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+}
+
+.pf-tree .content-wrap .tree-content .item {
+  display: flex;
+  align-items: center;
+  padding: 2px 18px 2px 15px;
+}
+
+.pf-tree .content-wrap .tree-content .item:hover {
+  background-color: #f9fafc;
+}
+
+.pf-tree .content-wrap .tree-content .item.is-hidden {
+  display: none;
+}
+
+.pf-tree .content-wrap .tree-content .item .expand-node {
+  position: relative;
+  right: 4px;
+  width: 12px;
+  line-height: 12px;
+  transition: transform var(--pf-transition-duration) ease-in-out;
+  cursor: pointer;
+}
+
+.pf-tree .content-wrap .tree-content .item .expand-node:hover {
+  color: var(--colors-primary);
+  border-color: var(--colors-primary);
+  background-color: #f1f5f8;
+}
+
+.pf-tree .content-wrap .tree-content .item .expand-node.is-expand {
+  border-bottom-color: transparent;
+  .header-angle {
+    transform: rotate(90deg);
+  }
+}
+
+.pf-tree .content-wrap .tree-content .item .expand-node .header-angle {
+  transition: transform var(--pf-transition-duration);
+}
+
+.pf-tree .content-wrap .tree-content .item .label {
+  cursor: pointer;
+}
+
+.pf-tree .content-wrap .tree-content .item .label:hover {
+  color: var(--colors-primary);
+}
+
+.pf-tree .content-wrap .tree-content .item .label .count {
+  font-size: 12px;
+}
+
+.pf-tree .content-wrap .tree-content .item .is-disabled {
+  cursor: not-allowed;
+}
+
+.pf-tree .content-wrap .tree-content .item .is-disabled .label {
+  color: #aaaaaa;
+}
+
+.pf-tree .item {
+  position: relative;
+}
+
+.pf-tree .drag-over-above::before,
+.pf-tree .drag-over-below::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: #007bff;
+}
+
+.pf-tree .drag-over-above::before {
+  top: 0;
+}
+
+.pf-tree .drag-over-below::after {
+  bottom: 0;
+}
+
+.pf-tree .drag-over-inside {
+  border: 2px dashed #007bff;
+  background-color: #e9f7ff;
+}
+
+.pf-tree .line {
+  position: absolute;
+  top: 0;
+  left: 2px;
+  width: 1px;
+  height: 100%;
+  background-color: #d9d9d9;
+}
+
+.pf-tree .horizontal-line {
+  position: absolute;
+  top: 50%;
+  left: 2px;
+  width: 8px;
+  height: 1px;
+  background-color: #d9d9d9;
+}
+
+.pf-tree .no-data {
+  text-align: center;
+}
+
+/* treeNode */
+.pf-check-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pf-check-box .box {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  margin-right: 8px;
+  border: 1px solid #dcdfe6;
+  cursor: pointer;
+}
+
+.pf-check-box .box:hover {
+  border-color: var(--colors-primary);
+}
+
+.pf-check-box .box::after {
+  content: '\2713';
+  position: absolute;
+  left: 0px;
+  top: -2px;
+  transform: scale(0);
+}
+
+.pf-check-box .box.is-part-checked::after {
+  content: '-';
+  left: 2px;
+  top: -3px;
+}
+
+.pf-check-box .box.is-checked,
+.pf-check-box .box.is-part-checked {
+  border-color: var(--colors-primary);
+  color: var(--colors-primary);
+}
+
+.pf-check-box .box.is-checked::after,
+.pf-check-box .box.is-part-checked::after {
+  transform: scale(0.9);
+}
+
+.pf-check-box .box.is-disabled {
+  background: #f2f6fc;
+  color: #c0c4cc;
+  border-color: #c0c4cc;
+}
+
+.pf-check-box .box.is-disabled::after {
+  cursor: not-allowed;
+}

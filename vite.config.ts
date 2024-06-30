@@ -37,7 +37,6 @@ const makeList = (): FileList => {
 }
 
 const list = makeList()
-// console.log(list)
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -93,5 +92,18 @@ export default defineConfig({
     },
     sourcemap: true, // 对应到具体代码
     emptyOutDir: false
+  },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3050',
+        changeOrigin: true
+      },
+      '/static': {
+        target: 'http://localhost:3050',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/static/, '')
+      }
+    }
   }
 })

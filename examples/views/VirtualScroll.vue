@@ -1,11 +1,8 @@
 <template>
   <div class="news-box">
+    <h3>虚拟滚动列表组件</h3>
     <!-- 垂直 -->
-    <pf-virtual-scroll
-      #default="oneItem"
-      :autoHeight="true"
-      :estimatedItemHeight="150"
-    >
+    <pf-virtual-scroll #default="oneItem" :autoHeight="true">
       <router-link class="one-new" to="/virtualScrollDetail">
         <div class="new-left">
           <h3>
@@ -55,9 +52,9 @@
 
 <style scoped>
 .news-box {
-  width: 100%;
-  max-width: 800px;
-  height: 100%;
+  width: 40vw;
+  height: 60vh;
+  margin: 20px auto;
 
   .one-new {
     display: flex;
@@ -78,11 +75,11 @@
       font-size: 16px;
 
       /* 固定高度专属: 超出部分省略 */
-      overflow: hidden;
+      /* overflow: hidden;
       text-overflow: ellipsis;
       display: -webkit-box;
       -webkit-box-orient: vertical;
-      -webkit-line-clamp: 2;
+      -webkit-line-clamp: 2; */
     }
 
     .new-left div {

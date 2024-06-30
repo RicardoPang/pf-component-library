@@ -181,7 +181,7 @@ const getContainerSize = (isScroll = false) => {
 
 // 节流提高性能
 const fps = 30
-const throttleInterval = props.autoHeight ? 200 : 1000 / fps
+const throttleInterval = 1000 / fps // 每帧的时间间隔, 最多每 33.33 毫秒触发一次
 const throttledSetDataStartIndex = throttle(() => {
   // 使用requestAnimationFrame来确保滚动处理的性能
   window.requestAnimationFrame(setDataStartIndex)
@@ -246,11 +246,12 @@ const setDataStartIndex = async () => {
   }
 }
 
-// 结束索引
+// 结束索引: state.containSize * 2 乘以2的原因是为了确保在滚动时能够预加载足够多的元素，以提供更流畅的滚动体验
 const endIndex = computed(() => {
+  // 计算endIndex为当前startIndex加上两倍的containSize
   let endIndex = state.startIndex + state.containSize * 2
   if (!state.allDataList[endIndex]) {
-    // 如果最后一个元素不存在
+    // 如果endIndex超出allDataList的长度，则设置endIndex为allDataList的最后一个元素的索引
     endIndex = state.allDataList.length - 1
   }
   return endIndex
@@ -258,10 +259,14 @@ const endIndex = computed(() => {
 
 // 显示数据列表, state.startIndex - state.containSize超出一屏
 const showDataList = computed(() => {
+  // 确定startIndex的起始值
+  // 小于等于 state.containSize 确保最初内容完整显示
+  // 否则 确保在当前可视区域上方加载更多内容 平滑滚动
   const startIndex =
     state.startIndex <= state.containSize
       ? 0
       : state.startIndex - state.containSize
+  // 返回从startIndex到endIndex之间的元素
   return state.allDataList.slice(startIndex, endIndex.value)
 })
 
@@ -271,8 +276,21 @@ const calculatePaddingTop = (startIndex: number, containSize: number) => {
   const sliceHeight = itemHeights.slice(containSize + 1).slice(0, startIndex)
   return `${sliceHeight.reduce((acc, height) => acc + height, 0)}px`
 }
+const calculatePaddingBottom = (startIndex: number, containSize: number) => {
+  const itemHeights = getAllItemHeights()
+  const sliceHeight = itemHeights
+    .slice(containSize + 1)
+    .slice(0, state.allDataList.length - endIndex.value - 1)
+  console.log(
+    startIndex,
+    containSize,
+    state.allDataList.length - endIndex.value,
+    itemHeights
+  )
+  return `${sliceHeight.reduce((acc, height) => acc + height, 0)}px`
+}
 
-// 空白填充样式
+// 空白填充样式 确保滚动条反应列表完整高度或宽度 模拟未渲染部分
 const blankFillStyle = computed(() => {
   const startIndex = Math.max(0, state.startIndex - state.containSize)
   if (props.scrollDirection === 'vertical') {
@@ -282,6 +300,7 @@ const blankFillStyle = computed(() => {
       if (startIndex > 0) {
         paddingTop = calculatePaddingTop(startIndex, state.containSize)
       }
+      paddingBottom = calculatePaddingBottom(startIndex, state.containSize)
     } else {
       paddingTop = `${startIndex * props.oneHeight}px`
       paddingBottom = `${(state.allDataList.length - endIndex.value - 1) * props.oneHeight}px`

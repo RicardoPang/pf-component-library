@@ -20,6 +20,7 @@ export interface MessageContext {
   destory: () => void
 }
 
+// 创建类型, 排除MessageProps中除了onDestory\id\zIndex之外的新类型
 export type CreateMessageProps = Omit<
   MessageProps,
   'onDestory' | 'id' | 'zIndex'

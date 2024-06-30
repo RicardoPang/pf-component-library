@@ -69,7 +69,6 @@ const messageClasses = computed(() => ({
 }))
 
 let timer: any
-
 const startTimer = () => {
   if (props.duration !== 0) {
     timer = setTimeout(() => {
