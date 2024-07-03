@@ -3,7 +3,7 @@
     <h3>虚拟滚动列表组件</h3>
     <!-- 垂直 -->
     <!-- http://codercba.com:1888/airbnb/api/entire/list -->
-    <pf-virtual-scroll #default="oneItem" :autoHeight="true">
+    <!-- <pf-virtual-scroll #default="oneItem" :autoHeight="true">
       <router-link class="one-new" to="/virtualScrollDetail">
         <div class="new-left">
           <h3>
@@ -20,10 +20,10 @@
           <img :src="oneItem.thisItem.picture_url" alt="PIC" />
         </div>
       </router-link>
-    </pf-virtual-scroll>
+    </pf-virtual-scroll> -->
 
     <!-- 水平 -->
-    <!-- <pf-virtual-scroll
+    <pf-virtual-scroll
       :requestUrl="'http://codercba.com:1888/airbnb/api/entire/list'"
       :scrollDirection="'horizontal'"
       :oneWidth="250"
@@ -36,14 +36,14 @@
               <img :src="oneItem.thisItem.picture_url" alt="" />
             </div>
             <div class="desc">
-              {{ oneItem.thisItem.verify_info.messages.join('·') }}
+              {{ oneItem.thisItem.reviews_count }}
             </div>
             <div class="name">{{ oneItem.thisItem.name }}</div>
             <div class="price">均价 {{ oneItem.thisItem.price_format }}/晚</div>
           </div>
         </div>
       </router-link>
-    </pf-virtual-scroll> -->
+    </pf-virtual-scroll>
   </div>
 </template>
 

@@ -1,6 +1,6 @@
 {
   "name": "pf-component-library",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "autor": "",
   "description": "pf-component-library组件库",
   "main": "dist/index.es.js",

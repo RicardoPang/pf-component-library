@@ -20,7 +20,7 @@ import PfVirtualScroll from '@/components/lib/VirtualScroll/src/VirtualScroll.vu
               <p>
                 <span class="read">{{ oneItem.thisItem.price_format }}/晚</span>
                 <span>
-                  {{ oneItem.thisItem.verify_info.messages.join('·') }}
+                  {{ oneItem.thisItem.reviews_count }}
                 </span>
               </p>
             </div>

@@ -9,7 +9,7 @@ import {
   defineComponent,
   h,
   watch
-} from "./chunk-BJ3OZQ3N.js";
+} from "./chunk-AU3CLKKL.js";
 import "./chunk-PZ5AY32C.js";
 
 // node_modules/@fortawesome/vue-fontawesome/index.es.js
