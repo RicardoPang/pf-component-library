@@ -27,7 +27,7 @@ const customStyles = computed(() => {
   return props.color ? { color: props.color } : {}
 })
 
-// 计算类名
+// 计算类名, 存在type添加对应类型类名
 const computedClass = computed(() => {
   return ['pf-icon', props.type && `pf-icon--${props.type}`]
 })

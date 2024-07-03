@@ -9,6 +9,8 @@ const text = ref('')
     <template #prepend>https://</template>
     <template #append>.com</template>
   </pf-input>
+  <br />
+  <br />
   <pf-input v-model="text" placeholder="基础文本框，请输入">
     <template #prefix>
       <pf-icon icon="fa-user" />

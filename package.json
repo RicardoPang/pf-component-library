@@ -31,7 +31,6 @@
     "commit": "cz",
     "test": "vitest --run --passWithNoTests",
     "test:cov": "npm run test -- --coverage",
-    "test:e2e": "playwright test",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "deploy": "bash docs/deploy.sh"
@@ -51,7 +50,6 @@
   "devDependencies": {
     "@commitlint/cli": "^19.3.0",
     "@commitlint/config-conventional": "^19.2.2",
-    "@playwright/test": "^1.44.1",
     "@rushstack/eslint-patch": "^1.8.0",
     "@tsconfig/node20": "^20.1.4",
     "@types/glob": "^8.1.0",

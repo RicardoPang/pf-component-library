@@ -55,7 +55,7 @@ const formContext = inject(formContextKey) // 注入父表单组件上下文
 const innerValue = computed(() => {
   const model = formContext?.model
   if (model && props.prop && !isNil(model[props.prop])) {
-    return model[props.prop]
+    return model[props.prop] // 获取表单项的值
   } else {
     return null
   }
@@ -68,7 +68,7 @@ const validateStatus: ValidateStatusProp = reactive({
   loading: false
 })
 
-let initialValue: string | null = null
+let initialValue: string | null = null // 表单项的初始值
 
 // 获取表单项的校验规则
 const itemRules = computed(() => {
@@ -86,7 +86,7 @@ const getTriggeredRules = (trigger?: string) => {
   if (rules) {
     return rules.filter((rule) => {
       if (!rule.trigger || !trigger) return true
-      return rule.trigger && rule.trigger === trigger
+      return rule.trigger && rule.trigger === trigger // 返回触发校验规则
     })
   } else {
     return []
@@ -107,12 +107,12 @@ const validate = async (trigger?: string) => {
   }
   if (modelName) {
     const validator = new Schema({
-      [modelName]: triggerRules
+      [modelName]: triggerRules // 创建校验器
     })
     validateStatus.loading = true
     return validator
       .validate({
-        [modelName]: innerValue.value
+        [modelName]: innerValue.value // 执行校验
       })
       .then(() => {
         validateStatus.state = 'success'
@@ -121,11 +121,11 @@ const validate = async (trigger?: string) => {
         const { errors } = e
         validateStatus.state = 'error'
         validateStatus.errorMsg =
-          errors && errors.length > 0 ? errors[0].message || '' : ''
+          errors && errors.length > 0 ? errors[0].message || '' : '' // 更新错误信息
         return Promise.reject(e)
       })
       .finally(() => {
-        validateStatus.loading = false
+        validateStatus.loading = false // 更新加载状态
       })
   }
 }
@@ -142,7 +142,7 @@ const resetField = () => {
   clearValidate()
   const model = formContext?.model
   if (model && props.prop && !isNil(model[props.prop])) {
-    model[props.prop] = initialValue
+    model[props.prop] = initialValue // 重置表单项的值
   }
 }
 
@@ -153,7 +153,7 @@ const context: FormItemContext = {
   resetField,
   clearValidate
 }
-provide(formItemContextKey, context)
+provide(formItemContextKey, context) // 提供给子组件
 
 // 组件挂载时添加字段
 onMounted(() => {

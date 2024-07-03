@@ -46,10 +46,11 @@ export const createMessage = (props: CreateMessageProps) => {
 
   const vnode = h(MessageConstructor, newProps) // 创建messsage组件的虚拟DOM
   render(vnode, container) // 渲染虚拟DOM到容器
-  // 非空断言操作符
   document.body.appendChild(container.firstElementChild!) // 挂载到body
 
-  const vm = vnode.component! // 获取组件实例
+  // 获取组件实例
+  const vm = vnode.component!
+  // 消息实例
   const instance = {
     id,
     vnode,

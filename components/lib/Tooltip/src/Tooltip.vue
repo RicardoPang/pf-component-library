@@ -40,12 +40,12 @@ const props = withDefaults(defineProps<TooltipProps>(), {
 const emits = defineEmits<TooltipEmits>()
 
 // 定义状态和引用
-const isOpen = ref(false)
-const popperNode = ref<HTMLElement>()
-const triggerNode = ref<HTMLElement>()
-let popperInstance: null | Instance = null
-let events: Record<string, any> = reactive({})
-let outerEvents: Record<string, any> = reactive({})
+const isOpen = ref(false) // 是否打开状态
+const popperNode = ref<HTMLElement>() // 提示内容
+const triggerNode = ref<HTMLElement>() // 触发器
+let popperInstance: null | Instance = null // popper实例
+let events: Record<string, any> = reactive({}) // 事件对象
+let outerEvents: Record<string, any> = reactive({}) // 外部事件对象
 
 // 清除事件
 const clearEvents = () => {
@@ -107,7 +107,7 @@ const togglePopper = () => {
 // 使用自定义hooks处理点击外部关闭逻辑
 useClickOutside(popperNode, () => {
   if (props.trigger === 'click' && isOpen.value && !props.manual) {
-    closeFinal()
+    closeFinal() // 如果是点击触发且当前不是手动控制, 则关闭
   }
   if (isOpen.value) {
     emits('click-outside', true)

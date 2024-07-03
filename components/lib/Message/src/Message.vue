@@ -46,11 +46,11 @@ const props = withDefaults(defineProps<MessageProps>(), {
   transitionName: 'fade-up'
 })
 
-const visible = ref(false)
-const messageRef = ref<HTMLDivElement>()
-const height = ref(0)
+const visible = ref(false) // 是否显示
+const messageRef = ref<HTMLDivElement>() // 消息元素
+const height = ref(0) // 消息元素高度
 
-// 上一个实例最下面的坐标数字, 第一个是0
+// 上一个实例的底部偏移量
 const lastOffset = computed(() => getLastBottomOffset(props.id))
 // 元素最高端top值
 const topOffset = computed(() => height.value + lastOffset.value)

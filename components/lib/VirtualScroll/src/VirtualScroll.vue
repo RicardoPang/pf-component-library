@@ -54,7 +54,7 @@ import {
   onUnmounted
 } from 'vue'
 import axios from 'axios'
-import type { VirtualScrollProps } from './types'
+import type { VScroll, VirtualScrollProps } from './types'
 import { throttle } from 'lodash-es'
 
 defineOptions({
@@ -66,9 +66,9 @@ const props = withDefaults(defineProps<VirtualScrollProps>(), {
   msg: '正在载入...',
   oneHeight: 100,
   oneWidth: 100,
-  requestUrl: 'http://codercba.com:1888/airbnb/api/entire/list',
+  requestUrl: '/api/vscroll',
   offset: 0,
-  size: 20,
+  size: 200,
   scrollDirection: 'vertical',
   autoHeight: false,
   estimatedItemHeight: 100
@@ -124,27 +124,25 @@ const setItemRef = (el: HTMLElement | null, id: string) => {
 const getList = async (
   offset: number,
   size: number = props.size
-): Promise<any[] | false> => {
+): Promise<VScroll[] | undefined> => {
   state.isRequestStatus = true
-  try {
-    const res = await axios.get(
-      `${props.requestUrl}?offset=${offset}&size=${size}`
-    )
-    const list = res.data?.list || []
+  const { data } = await axios.get(
+    `${props.requestUrl}?offset=${offset}&size=${size}`
+  )
+  // debugger
+  if (data.code === 0) {
+    const { list } = data.data
     if (list.length > 0 && props.autoHeight) {
       list.forEach((item: any) => {
         // 设置预估高度
         allItemHeights.value.set(item.id, props.estimatedItemHeight)
       })
-    } else {
-      return list
     }
-    return res.data.list
-  } catch (err) {
-    console.log(err)
-    return false
-  } finally {
     state.isRequestStatus = false
+    return list
+  } else {
+    state.isRequestStatus = false
+    return undefined
   }
 }
 
@@ -233,6 +231,12 @@ const setDataStartIndex = async () => {
   state.startIndex = currentIndex
 
   // 检查是否需要加载更多数据
+  // debugger
+  console.log(
+    state.startIndex + state.containSize,
+    state.allDataList.length,
+    state.startIndex + state.containSize > state.allDataList.length - 1
+  )
   if (
     state.startIndex + state.containSize > state.allDataList.length - 1 &&
     !state.isRequestStatus
@@ -281,12 +285,6 @@ const calculatePaddingBottom = (startIndex: number, containSize: number) => {
   const sliceHeight = itemHeights
     .slice(containSize + 1)
     .slice(0, state.allDataList.length - endIndex.value - 1)
-  console.log(
-    startIndex,
-    containSize,
-    state.allDataList.length - endIndex.value,
-    itemHeights
-  )
   return `${sliceHeight.reduce((acc, height) => acc + height, 0)}px`
 }
 

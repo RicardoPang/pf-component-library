@@ -2,18 +2,17 @@
   <div class="news-box">
     <h3>虚拟滚动列表组件</h3>
     <!-- 垂直 -->
+    <!-- http://codercba.com:1888/airbnb/api/entire/list -->
     <pf-virtual-scroll #default="oneItem" :autoHeight="true">
       <router-link class="one-new" to="/virtualScrollDetail">
         <div class="new-left">
           <h3>
             {{ oneItem.thisItem.name }}
-            {{ oneItem.thisItem.name }}
-            {{ oneItem.thisItem.name }}
           </h3>
           <div>
             <p>
-              <span class="read">{{ oneItem.thisItem.price_format }}/晚</span>
-              <span>{{ oneItem.thisItem.verify_info.messages.join('·') }}</span>
+              <span class="read">¥{{ oneItem.thisItem.price }}/晚</span>
+              <span>{{ oneItem.thisItem.reviews_count }}</span>
             </p>
           </div>
         </div>
@@ -52,8 +51,8 @@
 
 <style scoped>
 .news-box {
-  width: 40vw;
-  height: 60vh;
+  width: 50vw;
+  height: 80vh;
   margin: 20px auto;
 
   .one-new {

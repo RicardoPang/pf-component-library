@@ -24,8 +24,8 @@ const router = createRouter({
       component: VirtualScroll
     },
     {
-      path: '/vscrollDetail',
-      name: 'vscrollDetail',
+      path: '/virtualScrollDetail',
+      name: 'virtualScrollDetail',
       component: VirtualScrollDetail
     },
     {

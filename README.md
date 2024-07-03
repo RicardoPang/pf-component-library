@@ -27,3 +27,10 @@ app.use(Demo)
 ### 组件文档
 
 [文档](https://ricardopang.github.io/)
+
+### 本地运行
+
+- git clone
+- npm install
+- npm run dev
+- 启动server服务, 再开一个窗口执行 cd server, npm install, npm run dev

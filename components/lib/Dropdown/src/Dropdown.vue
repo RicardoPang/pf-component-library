@@ -10,7 +10,9 @@
       @visible-change="visibleChange"
       ref="tooltipRef"
     >
+      <!-- 默认插槽 -->
       <slot />
+      <!-- 内容插槽, 放置下拉菜单 -->
       <template #content>
         <ul class="pf-dropdown__menu">
           <template v-for="item in menuOptions" :key="item.key">
@@ -66,7 +68,7 @@ const itemClick = (e: MenuOption) => {
   }
   emits('select', e)
   if (props.hideAfterClick) {
-    tooltipRef.value?.hide()
+    tooltipRef.value?.hide() // 点击后隐藏
   }
 }
 defineExpose<DropdownInstance>({

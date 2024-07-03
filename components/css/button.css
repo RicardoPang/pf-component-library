@@ -31,7 +31,6 @@
   font-weight: var(--pf-button-font-weight);
   user-select: none;
   vertical-align: middle;
-  -webkit-appearance: none;
   background-color: var(--pf-button-bg-color);
   border: var(--pf-border);
   border-color: var(--pf-button-border-color);
@@ -85,6 +84,7 @@
     margin-left: 6px;
   }
 }
+/* 根据按钮类型定义样式 */
 @each $val in primary, success, warning, info, danger {
   .pf-button--$(val) {
     --pf-button-text-color: var(--pf-color-white);

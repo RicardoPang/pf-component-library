@@ -15,10 +15,12 @@
     <!-- input -->
     <template v-if="type !== 'textarea'">
       <div v-if="$slots.prepend" class="pf-input__prepend">
+        <!-- 前置插槽 -->
         <slot name="prepend" />
       </div>
       <div class="pf-input__wrapper">
         <span v-if="$slots.prefix" class="pf-input__prefix">
+          <!-- 前缀插槽 -->
           <slot name="prefix" />
         </span>
         <input
@@ -43,6 +45,7 @@
           class="pf-input__suffix"
           @click="keepFocus"
         >
+          <!-- 后缀插槽 -->
           <slot name="suffix" />
           <pf-icon
             icon="circle-xmark"
@@ -109,7 +112,9 @@ const props = withDefaults(defineProps<InputProps>(), {
   type: 'text',
   autocomplete: 'off'
 })
+
 const emits = defineEmits<InputEmits>()
+
 const attrs = useAttrs() // 使用useAttrs获取非prop的attribute,绑定到输入元素上
 const innerValue = ref(props.modelValue) // 组件内部使用的值, 用于双向绑定
 const isFocus = ref(false) // 是否获得焦点
@@ -117,11 +122,12 @@ const passwordVisible = ref(false) // 是否显示密码
 const inputRef = ref() as Ref<HTMLInputElement> // 输入元素的引用
 const formItemContext = inject(formItemContextKey, null)
 
+// 表单验证
 const runValidation = (trigger?: string) => {
   formItemContext?.validate(trigger).catch((err) => console.error(err.errors))
 }
 
-// 是否显示清楚按钮
+// 是否显示清除按钮
 const showClear = computed(
   () =>
     props.clearable && !props.disabled && !!innerValue.value && isFocus.value
@@ -135,7 +141,9 @@ const showPasswordArea = computed(
 const togglePasswordVisible = () => {
   passwordVisible.value = !passwordVisible.value
 }
+// 空操作函数
 const NOOP = () => {}
+// 聚焦
 const keepFocus = async () => {
   await nextTick() // 等待下一个tick确保DOM更新
   inputRef.value.focus()
@@ -169,6 +177,7 @@ const clear = () => {
   emits('change', '')
 }
 
+// 监听modelValue的变化，更新组件内部的值
 watch(
   () => props.modelValue,
   (newValue) => {

@@ -38,8 +38,8 @@ const {
 
 // 计算属性构建按钮类名
 const buttonClasses = computed(() => ({
-  [`pf-button--${type}`]: type,
-  [`pf-button--${size}`]: size,
+  [`pf-button--${type}`]: type, // 根据类型添加类名
+  [`pf-button--${size}`]: size, // 根据尺寸添加类名
   'is-plain': plain,
   'is-round': round,
   'is-circle': circle,

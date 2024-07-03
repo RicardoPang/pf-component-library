@@ -7,7 +7,7 @@ import PfVirtualScroll from '@/components/lib/VirtualScroll/src/VirtualScroll.vu
       <pf-virtual-scroll
         #default="oneItem"
         :autoHeight="true"
-        :estimatedItemHeight="130"
+        :estimatedItemHeight="120"
       >
         <router-link class="one-new" to="/virtualScrollDetail">
           <div class="new-left">

@@ -30,7 +30,7 @@
             @mousedown.prevent="NOOP"
             @click.stop="onClear"
           />
-          <pf-icon
+          <Icon
             icon="angle-down"
             v-else
             class="header-angle"
@@ -54,6 +54,7 @@
               :id="`select-item-${item.value}`"
               @click.stop="itemSelect(item)"
             >
+              <!-- 渲染标签 -->
               <RenderVnode
                 :vNode="renderLabel ? renderLabel(item) : item.label"
               />
@@ -75,7 +76,7 @@ import type {
 } from './types'
 import Tooltip from '../../Tooltip/src/Tooltip.vue'
 import Input from '../../Input/src/Input.vue'
-import PfIcon from '../../Icon/src/Icon.vue'
+import Icon from '../../Icon/src/Icon.vue'
 import RenderVnode from '../../Common/RenderVnode'
 import type { TooltipInstance } from '../../Tooltip/src/types'
 import type { InputInstance } from '../../Input/src/types'
@@ -95,7 +96,6 @@ const props = withDefaults(defineProps<SelectProps>(), {
   options: () => []
 })
 const emits = defineEmits<SelectEmits>()
-
 const tooltipRef = ref() as Ref<TooltipInstance>
 const inputRef = ref() as Ref<InputInstance>
 const isDropdownShow = ref(false)
@@ -119,12 +119,47 @@ const popperOptions: any = {
   ]
 }
 const filteredOptions = ref(props.options)
+const initialOption = findOption(props.modelValue)
+const states = reactive<SelectStates>({
+  inputValue: initialOption?.label ?? '',
+  selectedOption: initialOption,
+  mouseHover: false,
+  loading: false,
+  highlightIndex: -1
+})
+
+const showClearIcon = computed(() => {
+  // 鼠标悬停、清除开启、有选中值
+  return (
+    props.clearable &&
+    states.mouseHover &&
+    states.selectedOption &&
+    states.inputValue.trim() !== ''
+  )
+})
+const filteredPlaceholder = computed(() => {
+  return props.filterable && states.selectedOption && isDropdownShow.value
+    ? states.selectedOption.label
+    : props.placeholder
+})
+
 watch(
   () => props.options,
   (newOptions) => {
     filteredOptions.value = newOptions
   }
 )
+// 当将props的值作为初始值传入给一个响应式对象时, 一定要watch原始值的修改, 然后更新本地的响应式对象
+watch(
+  () => props.modelValue,
+  (newValue) => {
+    const option = findOption(newValue)
+    states.inputValue = option ? option.label : ''
+    states.selectedOption = option
+  }
+)
+
+// 根据输入值过滤选项
 const generateFilterOptions = async (searchValue: string) => {
   if (!props.filterable) return
   if (props.filterMethod && isFunction(props.filterMethod)) {
@@ -150,38 +185,18 @@ const generateFilterOptions = async (searchValue: string) => {
   }
   states.highlightIndex = -1
 }
-// 函数节流
+
+// 函数节流, 避免频繁调用过滤函数
 const throttledGenerateFilterOptions = throttle(generateFilterOptions, 300)
+// 过滤输入
 const onFilter = () => {
   throttledGenerateFilterOptions(states.inputValue)
 }
-const initialOption = findOption(props.modelValue)
-const states = reactive<SelectStates>({
-  inputValue: initialOption?.label ?? '',
-  selectedOption: initialOption,
-  mouseHover: false,
-  loading: false,
-  highlightIndex: -1
-})
-// 当将props的值作为初始值传入给一个响应式对象时,一定要watch原始值的修改,然后更新本地的响应式对象
-watch(
-  () => props.modelValue,
-  (newValue) => {
-    const option = findOption(newValue)
-    states.inputValue = option ? option.label : ''
-    states.selectedOption = option
-  }
-)
 
-const filteredPlaceholder = computed(() => {
-  return props.filterable && states.selectedOption && isDropdownShow.value
-    ? states.selectedOption.label
-    : props.placeholder
-})
-
+// 控制下拉框是否显示
 const controlDropdown = (show: boolean) => {
   if (show) {
-    // filter模式, 之前有选择过值
+    // 如果是过滤模式且已有选中值，将输入框置空
     if (props.filterable && states.selectedOption) {
       states.inputValue = ''
     }
@@ -191,7 +206,7 @@ const controlDropdown = (show: boolean) => {
     tooltipRef.value.show()
   } else {
     tooltipRef.value.hide()
-    // blur 将之前的值回填到input中
+    // 在失去焦点时, 将之前的值回填到输入框
     if (props.filterable) {
       states.inputValue = states.selectedOption
         ? states.selectedOption.label
@@ -203,6 +218,7 @@ const controlDropdown = (show: boolean) => {
   emits('visible-change', show)
 }
 
+// 处理键盘事件
 const handleKeydown = (e: KeyboardEvent) => {
   switch (e.key) {
     case 'Enter':
@@ -233,7 +249,7 @@ const handleKeydown = (e: KeyboardEvent) => {
         ) {
           states.highlightIndex = 0
         } else {
-          // move down
+          // move down 向下移动高亮
           states.highlightIndex++
         }
       }
@@ -244,7 +260,7 @@ const handleKeydown = (e: KeyboardEvent) => {
         if (states.highlightIndex === -1 || states.highlightIndex === 0) {
           states.highlightIndex = filteredOptions.value.length - 1
         } else {
-          // move up
+          // move up 向上移动高亮
           states.highlightIndex--
         }
       }
@@ -253,16 +269,6 @@ const handleKeydown = (e: KeyboardEvent) => {
       break
   }
 }
-
-const showClearIcon = computed(() => {
-  // hover, props.clearable为true, 必须要有选择过选项, Input值不为空
-  return (
-    props.clearable &&
-    states.mouseHover &&
-    states.selectedOption &&
-    states.inputValue.trim() !== ''
-  )
-})
 
 const onClear = () => {
   states.selectedOption = null
@@ -274,6 +280,7 @@ const onClear = () => {
 
 const NOOP = () => {}
 
+// 切换下拉框
 const toggleDropdown = () => {
   if (props.disabled) return
   if (isDropdownShow.value) {
@@ -283,6 +290,7 @@ const toggleDropdown = () => {
   }
 }
 
+// 点击选项
 const itemSelect = (e: SelectOption) => {
   if (e.disabled) return
   states.inputValue = e.label

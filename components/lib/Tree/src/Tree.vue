@@ -23,6 +23,7 @@
       class="content-wrap"
       @scroll.passive="handleScroll"
     >
+      <!-- 根节点分为tree-phantom和tree-content 绝对定位, 为了在滚动时避免数据的更改回头触发滚动事件 -->
       <div class="tree-phantom" :style="`height: ${phantomHeight}px`"></div>
       <div
         class="tree-content"
@@ -125,7 +126,12 @@ import {
 } from './utils'
 import { debounce, throttle } from 'lodash-es'
 
-// 定义一个用于存储树形数据的类
+const ITEMS_TO_ADD = 40
+const MIN_START_INDEX = 20
+const THROTTLE_DELAY = 80
+const DEBOUNCE_DELAY = 300
+
+// 定义一个用于存储树形数据的类, 存储大量数据的结构，包括原始树数据、扁平化的树数据、根据关键词过滤后的数据、选中的节点
 class PFBigData {
   _data = [] // 原始树tree数据
   list = [] // 扁平化的tree数据
@@ -165,9 +171,9 @@ const state = reactive({
   count: 1, // 用于视图更新
   keyword: '', // 关键词
   isSearching: false, // 搜索中
-  itemHeigth: 27, // 每一项的高度
+  itemHeigth: 30, // 每一项的高度
   startIndex: 0, // 渲染的开始区间
-  endIndex: 70, // 渲染的结束区间
+  endIndex: 64, // 渲染的结束区间
   throttleSrcoll: () => {}, // 节流
   debounceInput: () => {},
   isOnlyInCheckedSearch: false, // 是否只在选中的节点里进行筛选
@@ -184,7 +190,7 @@ const unHiddenList = computed(() => {
     ? big.value?.filterList.filter((node) => !node.isHidden)
     : []
 })
-// 虚拟高度, 与隐藏的数量有关
+// 虚拟高度，等于所有可见和不可见节点的总高度。可以在滚动时只渲染当前可见的节点，从而提高性能。
 const phantomHeight = computed(() => {
   return (unHiddenList.value?.length ?? 0) * state.itemHeigth
 })
@@ -447,24 +453,6 @@ const initExpand = () => {
 }
 
 // 设置复选框选中状态
-// const setCheckedKeys = (keys: string[]) => {
-//   if (!Array.isArray(keys)) {
-//     console.warn('defaultCheckedKeys 必须是数组')
-//     return
-//   }
-//   clearChecked()
-//   const nodes = keys.map((id) => big.value?.listMap[id])
-//   nodes.forEach((node, index) => {
-//     if (node && node.isLeaf) {
-//       node.checked = true
-//       if (!isBrother(node, nodes[index + 1])) {
-//         handleCheckedChange(node)
-//       }
-//     }
-//   })
-//   emitChecked()
-// }
-
 const setCheckedKeys = (keys: string[] = []) => {
   if (!Array.isArray(keys)) {
     console.warn('The argument to function setCheckedKeys must be an array')
@@ -592,16 +580,19 @@ const setCount = () => {
   state.count = state.count + 1
 }
 
-// 设置可见区间
+// 设置可见区间: 公共滚动条的位置计算应该取哪些数据
 const setRenderRange = () => {
   if (contentWrapRef.value) {
-    const count =
-      Math.ceil(contentWrapRef.value.offsetHeight / state.itemHeigth) + 40 // 可见项
+    const visibleCount =
+      Math.ceil(contentWrapRef.value.offsetHeight / state.itemHeigth) +
+      ITEMS_TO_ADD // 取得可见区域的可见列表项数量
     const startIndex = Math.floor(
       contentWrapRef.value.scrollTop / state.itemHeigth
-    )
-    state.startIndex = startIndex > 20 ? startIndex - 20 : 0
-    state.endIndex = state.startIndex + count
+    ) // 取得可见区域起始数据索引
+    state.startIndex =
+      startIndex > MIN_START_INDEX ? startIndex - MIN_START_INDEX : 0
+    state.endIndex = state.startIndex + visibleCount * 2 // 取得可见区域结束数据数据索引
+
     setCount()
   }
 }
@@ -652,7 +643,7 @@ const clear = () => {
   state.keyword = '' // 关键词
   state.isSearching = false // 是否正在搜索
   state.startIndex = 0 // 渲染的开始区间
-  state.endIndex = 70 // 渲染的结束区间
+  state.endIndex = 64 // 渲染的结束区间
   state.isOnlyInCheckedSearch = false
   if (big.value?.list) {
     clearAll(big.value.list as unknown as Record<string, unknown>)
@@ -694,8 +685,8 @@ const restore = () => {
 onMounted(() => {
   big.value = new PFBigData()
   big.value.checkedKeys = JSON.parse(JSON.stringify(props.defaultCheckedKeys))
-  state.throttleSrcoll = throttle(setRenderRange, 80)
-  state.debounceInput = debounce(init, 300)
+  state.throttleSrcoll = throttle(setRenderRange, THROTTLE_DELAY)
+  state.debounceInput = debounce(init, DEBOUNCE_DELAY)
 })
 
 onUnmounted(() => {

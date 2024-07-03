@@ -272,13 +272,14 @@
     <br />
     <br />
     <pf-select
-      v-model="test"
+      v-model="remteoValue"
       placeholder="搜索远程结果"
       filterable
       clearable
       remote
       :remote-method="remoteFilter"
     />
+    <h4>remote: {{ remteoValue }}</h4>
 
     <br />
     <br />
@@ -330,6 +331,7 @@ const buttonRef = ref<ButtonInstance | null>(null)
 const openedValue = ref(['collapse1'])
 const size = ref<any>('3x')
 const test = ref('1')
+const remteoValue = ref('')
 const isOn = ref(false)
 const options2 = [
   { label: 'hello', value: '1' },
@@ -393,56 +395,38 @@ const reset = () => {
 }
 
 const states = [
-  'Alabama',
-  'Alaska',
-  'Arizona',
-  'Arkansas',
-  'California',
-  'Colorado',
-  'Connecticut',
-  'Delaware',
-  'Florida',
-  'Georgia',
-  'Hawaii',
-  'Idaho',
-  'Illinois',
-  'Indiana',
-  'Iowa',
-  'Kansas',
-  'Kentucky',
-  'Louisiana',
-  'Maine',
-  'Maryland',
-  'Massachusetts',
-  'Michigan',
-  'Minnesota',
-  'Mississippi',
-  'Missouri',
-  'Montana',
-  'Nebraska',
-  'Nevada',
-  'New Hampshire',
-  'New Jersey',
-  'New Mexico',
-  'New York',
-  'North Carolina',
-  'North Dakota',
-  'Ohio',
-  'Oklahoma',
-  'Oregon',
-  'Pennsylvania',
-  'Rhode Island',
-  'South Carolina',
-  'South Dakota',
-  'Tennessee',
-  'Texas',
-  'Utah',
-  'Vermont',
-  'Virginia',
-  'Washington',
-  'West Virginia',
-  'Wisconsin',
-  'Wyoming'
+  '北京',
+  '上海',
+  '天津',
+  '重庆',
+  '河北',
+  '河南',
+  '云南',
+  '辽宁',
+  '黑龙江',
+  '湖南',
+  '安徽',
+  '山东',
+  '新疆',
+  '江苏',
+  '浙江',
+  '江西',
+  '湖北',
+  '广西',
+  '甘肃',
+  '山西',
+  '内蒙古',
+  '陕西',
+  '吉林',
+  '福建',
+  '贵州',
+  '广东',
+  '青海',
+  '西藏',
+  '四川',
+  '宁夏',
+  '海南',
+  '台湾'
 ]
 
 const remoteFilter = (query) => {

@@ -3,10 +3,11 @@ import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import glob from 'glob'
 
+// 组件目录
 const COMPONENTS_DIR = 'components'
-
+// 文件列表
 type FileList = Record<string, string>
-
+// 生成文件列表
 const generateFilesList = (
   dirPath: string,
   pattern: string,
@@ -21,11 +22,9 @@ const generateFilesList = (
     return list
   }, {})
 }
-
 const makeList = (): FileList => {
   const cssDir = `${COMPONENTS_DIR}/css`
   const libDir = `${COMPONENTS_DIR}/lib`
-
   return {
     // 读取 css 目录下的 index.css
     index_style: `./${cssDir}/index.css`,
@@ -35,7 +34,6 @@ const makeList = (): FileList => {
     ...generateFilesList(libDir, '**/style.css', 'style')
   }
 }
-
 const list = makeList()
 
 // https://vitejs.dev/config/
@@ -43,24 +41,22 @@ export default defineConfig({
   plugins: [vue(), vueJsx()],
   build: {
     rollupOptions: {
-      input: list,
+      input: list, // 入口文件
       external: [
-        'vue',
         '@fortawesome/fontawesome-svg-core',
         '@fortawesome/free-solid-svg-icons',
         '@fortawesome/vue-fontawesome',
-        '@element-plus/icons-vue',
         '@popperjs/core',
         'async-validator',
         'axios',
         'lodash-es',
-        'element-plus',
         'normalize.css',
+        'vue',
         'vue-router'
       ],
       output: [
         {
-          format: 'es',
+          format: 'es', // 输出格式为 ES 模块
           dir: 'dist/es',
           entryFileNames: '[name].js',
           preserveModules: true, // 保留原来目录结构
@@ -68,7 +64,7 @@ export default defineConfig({
           assetFileNames: '[name][extname]'
         },
         {
-          format: 'commonjs',
+          format: 'commonjs', // 输出格式为 CommonJS 模块
           dir: 'dist/lib',
           entryFileNames: '[name].js',
           preserveModules: true,
@@ -88,21 +84,17 @@ export default defineConfig({
           assetFileNames: '[name][extname]'
         }
       ],
-      preserveEntrySignatures: 'strict'
+      preserveEntrySignatures: 'strict' // 保留入口签名
     },
-    sourcemap: true, // 对应到具体代码
+    sourcemap: true, // 生成 source map，对应到具体代码
     emptyOutDir: false
   },
   server: {
     proxy: {
+      // 服务代理
       '/api': {
-        target: 'http://localhost:3050',
+        target: 'http://localhost:3000',
         changeOrigin: true
-      },
-      '/static': {
-        target: 'http://localhost:3050',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/static/, '')
       }
     }
   }

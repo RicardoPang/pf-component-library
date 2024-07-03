@@ -1,186 +1,3 @@
-# 组件库开发
-
-1. 搭建vue项目 -> vite
-2. 实现单个组件 -> less
-3. 打包
-4. 发布Npm, 测试
-5. 组件文档 vuepress, 部署 github.io
-
-6. 打包构建
-
-- 与Vue相关的Vite插件
-- Vite配置文件
-- dev与build命令, 验证产物
-- packge.josn 关键字段
-
-2. TypeScript支持
-
-- vue-tsc使用
-- tsconfig配置文件
-- dev与build命令, 验证产物 --- npm-run-all解决多开终端
-
-3. VuePress文档展示
-
-- 脚手架
-- 引入组件库,调试组件
-
-4. 测试覆盖
-
-- Playwright脚手架
-- E2E测试
-
-5. 自动化规范
-
-- ESLint
-
-6. 复杂组件开发
-
-- 设计
-- TS泛型
-- 复杂功能
-- 复杂功能单元测试
-- 列出开发计划
-  - 添加手动删除
-  - 添加ZIndex
-  - 添加键盘关闭(esc关闭message)
-  - hover到Message上不会自动关闭
-  - 添加动画和样式
-
-### 开发组件常规流程
-
-1. 为什么选择这个组件
-
-- 静态展示
-- 简单交互
-- 多种方案
-
-2. 功能
-
-- 展示多个Item, 有标题和内容两部分
-- 点击标题可以关闭和展开内容
-- 特有模式
-
-3. 确定展示方案(数组?slot?其他?)
-4. 确定属性
-5. 确定事件
-6. 思路分析
-7. 复杂组件
-
-- 需求分析
-- 设立开发计划
-
-### 图标库
-
-1. fortawesome结合Vue3
-   - [图标库](https://fontawesome.com/search?o=r&m=free)
-   - iconfont
-
-![image-20240609105140603](https://p.ipic.vip/oewcwj.png)
-
-### Message
-
-1. 使用render函数挂载在特定节点
-
-```js
-const container = document.createElement('div')
-const vnode = h(MessageConstructor, props)
-render(vnode, contianer)
-document.body.appendChild(container.firstElementChild!)
-```
-
-2. 销毁组件实例
-
-```js
-render(null, container)
-```
-
-3. 组件动态构造并且传入属性
-
-```js
-const newProps = {
-  ...props,
-  onDestory: destory
-}
-const vnode = h(MessageConstructor, newProps)
-```
-
-4. 使用一个数组保存组件实例等信息, 并且添加对应的函数对数组进行处理
-
-5. 计算偏移量
-
-   ![image-20240610123434187](https://p.ipic.vip/niaje4.png)
-
-   - top: lastBottomOffset(上一个实例留下的底部偏移) + offset
-   - 为下一个实例预留bottomOffset: top + height
-   - messageRef.value!.getBoundingClientRect().height
-   - 使用defineExpose暴露
-
-6. 在函数中获取这个偏移量
-
-   - top: latBottomOffset(上一个实例留下的底部偏移) + offset
-   - 为下一个实例预留bottomOffset: top + height
-   - messageRef.value!.getBoundingClientRect().height
-   - 使用defineExpose暴露
-
-7. 将instances数组改为响应式: shallowReactive([])
-
-8. 添加两个通用钩子函数
-
-   - useZindex()
-   - useEventListener()
-
-9. 添加有趣的动画 使用transformY以及fade做出一个fade-up效果
-
-10. 测试 函数式创建组件测试
-
-### Input 需求分析
-
-- 支持input/textarea
-- 支持不同大小
-- 支持一键清空
-- 支持切换是否密码显示
-- 支持自定义前缀/后缀
-- 支持复合型复合型输入框自定义前置或后置
-- 原生属性支持
-
-### Input 属性
-
-```js
-interface InputProps {
-  type?: 'text' | 'textarea' | 'password'
-  size?: 'large' | 'small'
-  clearable?: boolean
-  showPassword?: boolean
-  disabled?: boolean
-}
-```
-
-### Input Emits
-
-```js
-interface InputEmits {
-  (e: 'change', value: string): void
-  (e: 'input', value: string): void
-  (e: 'focus'): void
-  (e: 'blur'): void
-  (e: 'clear'): void
-}
-```
-
-### Input Slots
-
-```js
-prepend, append, prefix, suffix
-```
-
-### Input Expose
-
-```js
-export interface InputInstance {
-  ref: HTMLInputElement | HTMLTextAreaElement
-}
-```
-
 ### 组件开发方法论
 
 - 根据需求初步去定属性/事件/slots/expose
@@ -189,17 +6,91 @@ export interface InputInstance {
 - 根据列表完成功能
 - 样式/测试
 
-### Tree组件
+### Button
 
-1. 树结构 递归 点击 展开收起
-2. 中间件方式新增拖拽\连线
-3. 百万级数据 虚拟滚动 每个层级分页加载
-4. 实现: 递归组件转换成扁平数组实现
+- 按钮组件, 支持多种类型、大小和样式, 可以显示图标、加载状态并可以配置为不同HTML原生按钮类型
+- TypeScript定义类型和接口,响应式数据,依赖注入使用defineExpose公共组件实例方法和属性
+- CSS: 使用变量定制, 响应式类名
 
-- 更改 DOM 结构成平级结构，点击节点以及节点的视觉样式通过操作总的 list 数据去实现
-- 然后使用虚拟长列表来控制 vue 子组件实例创建的数量。
+### Icon
 
-5. 功能
+- 图标组件, 基于FontAwesome, 雨荨通过多种属性自定一图标的外观和行为
+- 集成 FontAwesome 图标库，实现丰富的图标展示功能
+- 使用 omit 函数过滤不需要的属性，简化属性传递
 
-- tree数据和DOM结构扁平化
-- 虚拟长列表控制 DOM 渲染数量
+### Collapse
+
+- 可折叠面板组件, 支持手风琴模式和多选模式
+- 依赖注入: provide和inject实现组件间的上下文共享
+- 响应式数据: ref和computed创建
+- 动画过度: Transition组件实现折叠动画
+- TypeScript: 定义类型和接口
+
+### Tooltip
+
+- 提示组件, 基于Popper.j实现弹出位置精确控制, 允许用户通过多种触发方式显示和隐藏
+- 使用Popper.js实现弹出位置的精确控制
+- 使用debounce函数处理打开和关闭的延迟
+- 使用自定义Hook useClickOutside处理点击外部关闭逻辑
+
+### Dropdown
+
+- 下拉菜单, 基于Tooltip构建, 允许通过点击或悬停触发菜单, 并在菜单中选择选项
+- 使用defineExpose公共组件实例方法和属性
+- Popper.js 实现弹出位置的精确控制
+- 使用RenderVnode动态渲染菜单项内容
+
+### Select
+
+- 下拉组件, 允许用户从预定义选项列表选择, 支持过滤、远程搜索、清除选项等
+- 使用Popper.js实现弹出位置的精确控制
+- 使用throttle函数处理输入过滤的节流
+- 使用自定义Hook useClickOutside处理点击外部关闭逻辑
+
+### Switch
+
+- 开关组件, 允许在两种状态切换, 支持显示不同文本
+
+### Input
+
+- 输入框支持多种类型输入, 包括文本和文本区域, 提供多种功能清除按钮、占位符、密码切换登
+- 通过插槽机制，支持自定义前缀、后缀、前置和后置内容
+- 通过inject获取表单上下文，实现输入框的表单验证功能
+
+### Message
+
+- 消息提示用于显示临时通知或提示信息, 支持多种类型(成功、信息、警告、错误),并可以自动关闭或手动关闭
+- 使用render和h动态创建和渲染消息组件实例
+- 使用自定义Hook useEventListener处理键盘事件监听
+
+### Form
+
+- 表单和表单项用于构建和验证表单, 支持多种验证规则和触发方式, 并可以动态增加和移除表单项
+- 使用async-validator实现表单验证功能
+  -provide和inject实现组件间的上下文共享
+
+### VirtualScroll
+
+- 虚拟滚动组件, 仅渲染当前视口内的项目, 提高大列表渲染性能, 减少DOM节点数量, 支持垂直和水平滚动, 并支持动态计算每个项目的高度
+- 节流监听滚动事件
+- 动态设置上下空白占位解决滚动抖动问题
+- 设置上下缓冲区域消除快速滚动白屏
+- 路由切换时保持滚动位置
+- 滚动自动加载数据
+- 横屏滚动实现虚拟滚动
+- 计算当前滚动位置和容器尺寸, 仅渲染可见范围内的项目
+- ResizeObserver观察每个项目的尺寸变化并记录高度
+- 监听窗口大小和设备方向的变化, 动态调整容器和项目的尺寸
+
+### Tree
+
+- 高效、可扩展的树形数据结构展示, 支持大佬数据的展示和操作, 包括节点的选中、拖拽、展开/折叠等功能, 同时还支持关键词搜索和过滤
+- 点击节点以及节点的视觉样式通过树操作实现(优化: 通过更改DOM结构为平级结构, 点击节点以及节点的视觉样式通过操作list数据实现?)
+- 使用虚拟长列表仅渲染可见范围内的项目
+- ts设计数据结构 TreeNode BigData
+- 虚拟滚动 renderList
+- 关键词搜索和过滤 filter
+- 节点展开/折叠 expand
+- 节点选中状态管理 checked
+- 节点拖拽操作 drag drop
+- 数据初始化和更新 init setData

@@ -20,16 +20,20 @@ const options = [
 ]
 
 onMounted(() => {
-  btnClick('tree-500')
+  btnClick('500')
 })
 
 const btnClick = async (count) => {
   isShowDialog.value = true
-  axios.get(`/static/json/${count}.json`).then(({ data }) => {
-    expandKeys.value = ['8-1', '10-1']
-    treeRef.value?.setData(data)
-    checkedKeys.value = ['1-4']
-    isLoading.value = false
+  axios.get(`/api/tree?count=${count}`).then(({ data }) => {
+    if (data.code === 0) {
+      console.log(data, data.data.tree)
+      const { tree } = data.data
+      expandKeys.value = ['8-1', '10-1']
+      treeRef.value?.setData(tree)
+      checkedKeys.value = ['1-4', '1-5']
+      isLoading.value = false
+    }
   })
 }
 
@@ -61,16 +65,12 @@ const invokeRef = (name) => {
       <h3>点击按钮，展示tree</h3>
       <br />
       <br />
-      <pf-button type="primary" @click="btnClick('tree-500')">500条</pf-button>
-      <pf-button type="primary" @click="btnClick('tree-10000')">
-        1w 条
-      </pf-button>
-      <pf-button type="primary" @click="btnClick('tree-30000-multi-disabled')">
+      <pf-button type="primary" @click="btnClick('500')">500条</pf-button>
+      <pf-button type="primary" @click="btnClick('10000')">1w 条</pf-button>
+      <pf-button type="primary" @click="btnClick('30000')">
         3w 条(含有大量 disabled)
       </pf-button>
-      <pf-button type="primary" @click="btnClick('tree-100000')">
-        10w 条
-      </pf-button>
+      <pf-button type="primary" @click="btnClick('100000')">10w 条</pf-button>
       <br />
       <br />
       <pf-button @click="onReload">刷新</pf-button>
