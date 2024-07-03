@@ -8,6 +8,7 @@ import PfVirtualScroll from '@/components/lib/VirtualScroll/src/VirtualScroll.vu
         #default="oneItem"
         :autoHeight="true"
         :estimatedItemHeight="120"
+        :requestUrl="'http://localhost:3000/api/vscroll'"
       >
         <router-link class="one-new" to="/virtualScrollDetail">
           <div class="new-left">

@@ -7,6 +7,7 @@ import PfVirtualScroll from '@/components/lib/VirtualScroll/src/VirtualScroll.vu
       :scrollDirection="'horizontal'"
       :oneWidth="250"
       #default="oneItem"
+      :requestUrl="'http://localhost:3000/api/vscroll'"
     >
       <router-link class="one-house" to="/virtualScrollDetail">
         <div class="house-item">

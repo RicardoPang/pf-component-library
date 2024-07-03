@@ -4,7 +4,11 @@ import PfVirtualScroll from '@/components/lib/VirtualScroll/src/VirtualScroll.vu
 <template>
   <div class="pf-basic-container">
     <div class="news-box">
-      <pf-virtual-scroll #default="oneItem" :oneHeight="115">
+      <pf-virtual-scroll
+        #default="oneItem"
+        :oneHeight="115"
+        :requestUrl="'http://localhost:3000/api/vscroll'"
+      >
         <router-link class="one-new" to="/virtualScrollDetail">
           <div class="new-left">
             <h3>

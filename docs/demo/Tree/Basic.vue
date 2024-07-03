@@ -25,16 +25,18 @@ onMounted(() => {
 
 const btnClick = async (count) => {
   isShowDialog.value = true
-  axios.get(`/api/tree?count=${count}`).then(({ data }) => {
-    if (data.code === 0) {
-      console.log(data, data.data.tree)
-      const { tree } = data.data
-      expandKeys.value = ['8-1', '10-1']
-      treeRef.value?.setData(tree)
-      checkedKeys.value = ['1-4', '1-5']
-      isLoading.value = false
-    }
-  })
+  axios
+    .get(`http://localhost:3000/api/tree?count=${count}`)
+    .then(({ data }) => {
+      if (data.code === 0) {
+        console.log(data, data.data.tree)
+        const { tree } = data.data
+        expandKeys.value = ['8-1', '10-1']
+        treeRef.value?.setData(tree)
+        checkedKeys.value = ['1-4', '1-5']
+        isLoading.value = false
+      }
+    })
 }
 
 const onChange = (checkedKeys, checkedNodes) => {
