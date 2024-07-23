@@ -16,7 +16,7 @@
           </template>
         </pf-input>
       </div>
-      <pf-button type="primary" @click="init">搜索</pf-button>
+      <pf-button type="primary" @click="() => init">搜索</pf-button>
     </section>
     <section
       ref="contentWrapRef"
