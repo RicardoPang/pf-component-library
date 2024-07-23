@@ -17,7 +17,9 @@ dist-ssr
 types
 .cache
 docs/.vitepress/cache/
+docs/.vitepress/cache/deps
 .temp
+tsDocs
 
 # Test, coverage report
 coverage

@@ -1,5 +1,3 @@
-import "./chunk-PZ5AY32C.js";
-
 // node_modules/@vue/devtools-shared/dist/index.js
 var __create = Object.create;
 var __defProp = Object.defineProperty;
@@ -30,7 +28,7 @@ var __toESM = (mod, isNodeMode, target2) => (target2 = mod != null ? __create(__
   mod
 ));
 var init_esm_shims = __esm({
-  "../../node_modules/.pnpm/tsup@8.1.0_@microsoft+api-extractor@7.43.0_@types+node@20.14.9__@swc+core@1.5.29_postcss@8.4.38_typescript@5.5.2/node_modules/tsup/assets/esm_shims.js"() {
+  "../../node_modules/.pnpm/tsup@8.1.0_@microsoft+api-extractor@7.43.0_@types+node@20.14.10__@swc+core@1.5.29_postcss@8.4.39_typescript@5.5.3/node_modules/tsup/assets/esm_shims.js"() {
     "use strict";
   }
 });
@@ -552,7 +550,7 @@ var __toESM2 = (mod, isNodeMode, target21) => (target21 = mod != null ? __create
   mod
 ));
 var init_esm_shims2 = __esm2({
-  "../../node_modules/.pnpm/tsup@8.1.0_@microsoft+api-extractor@7.43.0_@types+node@20.14.9__@swc+core@1.5.29_postcss@8.4.38_typescript@5.5.2/node_modules/tsup/assets/esm_shims.js"() {
+  "../../node_modules/.pnpm/tsup@8.1.0_@microsoft+api-extractor@7.43.0_@types+node@20.14.10__@swc+core@1.5.29_postcss@8.4.39_typescript@5.5.3/node_modules/tsup/assets/esm_shims.js"() {
     "use strict";
   }
 });

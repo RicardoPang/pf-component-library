@@ -20,6 +20,10 @@ const list = ref([
     text: '基础组件'
   },
   {
+    path: '/form',
+    text: 'Form组件'
+  },
+  {
     path: '/vscroll',
     text: '虚拟滚动列表组件'
   },

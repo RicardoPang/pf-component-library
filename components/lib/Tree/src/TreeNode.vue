@@ -28,7 +28,19 @@ defineOptions({
   name: 'PfTreeNode'
 })
 
-// 定义并初始化props
+/**
+ * 组件的 props
+ * @typedef {Object} TreeNodeProps
+ * @property {boolean} checked - 是否选中
+ * @property {boolean} indeterminate - 是否部分选中
+ * @property {boolean} disabled - 是否禁用
+ * @property {string} checkedAction - 选中操作方式
+ * @property {boolean} showCheckbox - 是否显示复选框
+ * @property {boolean} isLeaf - 是否是叶子结点
+ * @property {boolean} showCheckboxLeafOnly - 是否只在叶子结点显示复选框
+ * @property {boolean} checkStriclty - 是否严格遵循父子不互相关联模式
+ * @property {boolean} draggable - 是否可拖动
+ */
 const props = withDefaults(defineProps<TreeNodeProps>(), {
   checked: true,
   indeterminate: false,
@@ -45,10 +57,16 @@ const emits = defineEmits<TreeNodeEmits>()
 // 内部值引用 props.modelValue
 const innerValue = ref(props.modelValue)
 
-// 是否被选中
+/**
+ * 计算是否被选中
+ * @returns {boolean} 是否选中
+ */
 const checked = computed(() => innerValue.value === props.checked)
 
-// 是否显示复选框
+/**
+ * 计算是否显示复选框
+ * @returns {boolean} 是否显示复选框
+ */
 const showBox = computed(() => {
   if (props.showCheckbox) {
     if (props.showCheckboxLeafOnly) {
@@ -68,7 +86,9 @@ watch(
   }
 )
 
-// 复选框点击
+/**
+ * 复选框点击事件处理函数
+ */
 const onChecked = () => {
   if (props.disabled) return
   // 获取新的选中状态
@@ -78,21 +98,34 @@ const onChecked = () => {
   emits('on-checked')
 }
 
-// 标签点击
+/**
+ * 标签点击事件处理函数
+ */
 const labelClick = () => {
   emits('on-click-label')
 }
 
+/**
+ * 单击事件处理函数
+ */
 const onSingleChecked = () => {
   if (props.checkedAction === 'click' && showBox.value) onChecked()
   labelClick()
 }
 
+/**
+ * 双击事件处理函数
+ */
 const onDBLChecked = () => {
   if (props.checkedAction === 'dblclick' && showBox.value) onChecked()
   labelClick()
 }
 
+/**
+ * 获取新的选中状态
+ * @param {boolean} oldChecked - 旧的选中状态
+ * @returns {boolean} 新的选中状态
+ */
 const getNewChecked = (oldChecked: boolean): boolean => {
   if (props.node) {
     if (props.node.isLeaf || props.checkStriclty) {

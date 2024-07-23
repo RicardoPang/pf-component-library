@@ -6,7 +6,7 @@
 
 <script setup lang="ts">
 import { provide, ref, watch } from 'vue'
-import type { NameType, CollapseProps, CollaseEmits } from './types'
+import type { NameType, CollapseProps, CollapseEmits } from './types'
 import { collapseContextKey } from './types'
 
 // 定义组件名
@@ -16,12 +16,17 @@ defineOptions({
 
 // 接收组件属性和事件
 const props = defineProps<CollapseProps>()
-const emits = defineEmits<CollaseEmits>()
+const emits = defineEmits<CollapseEmits>()
 
-// 存储当前激活折叠项的名字
-const activeNames = ref<NameType[]>(props.modelValue)
+/**
+ * 当前激活的折叠项名称数组
+ * @type {Ref<NameType[]>}
+ */
+const activeNames = ref<NameType[]>(props.modelValue || [])
 
-// 监听modelValue变化并更新activeNames
+/**
+ * 监听 props.modelValue 的变化，并根据是否启用手风琴模式，调整 activeNames
+ */
 watch(
   () => props.modelValue,
   (newValue) => {
@@ -33,7 +38,10 @@ watch(
   }
 )
 
-// 定义处理折叠项点击
+/**
+ * 处理折叠项的点击事件
+ * @param {NameType} item - 被点击的折叠项的名称
+ */
 const handleItemClick = (item: NameType) => {
   if (props.accordion) {
     activeNames.value = [activeNames.value[0] === item ? '' : item]
@@ -54,7 +62,10 @@ const handleItemClick = (item: NameType) => {
   emits('change', activeNames.value)
 }
 
-// 提供给子组件使用的上下文, 包括当前激活项和处理函数
+/**
+ * 提供给子组件使用的上下文对象
+ * @type {CollapseContext}
+ */
 provide(collapseContextKey, {
   activeNames,
   handleItemClick

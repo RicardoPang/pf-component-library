@@ -3,17 +3,23 @@ import type { CreateMessageProps, MessageContext } from './types'
 import MessageConstructor from './Message.vue'
 import useZIndex from '../../hooks/useZIndex'
 
-// 定义id和实例数组
+// 定义 id 和实例数组
 let seed = 1
 const instances: MessageContext[] = shallowReactive([])
 
-// 创建实例函数
+/**
+ * 创建一个新的消息实例
+ * @param props - 消息组件的属性
+ * @returns 消息实例，包括 id、虚拟 DOM、组件实例和销毁函数
+ */
 export const createMessage = (props: CreateMessageProps) => {
   const { nextZIndex } = useZIndex()
   const id = `message_${seed++}`
   const container = document.createElement('div')
 
-  // 销毁函数
+  /**
+   * 销毁当前消息实例
+   */
   const destory = () => {
     // 删除数组中的实例
     const idx = instances.findIndex((instance) => instance.id === id)
@@ -27,8 +33,9 @@ export const createMessage = (props: CreateMessageProps) => {
     }
   }
 
-  // 手动调用删除, 其实就是手动调整组件中visible的值
-  // visible通过expose传出来的
+  /**
+   * 手动销毁实例，通过设置组件的 visible 为 false
+   */
   const manualDestory = () => {
     const instance = instances.find((instance) => instance.id === id)
     if (instance) {
@@ -63,19 +70,28 @@ export const createMessage = (props: CreateMessageProps) => {
   return instance
 }
 
-// 获取最后一个实例
+/**
+ * 获取最后一个消息实例
+ * @returns 最后一个消息实例
+ */
 export const getLastInstance = () => {
   return instances.at(-1)
 }
 
-// 获取上一个实例的底部偏移量
+/**
+ * 获取上一个实例的底部偏移量
+ * @param id - 消息实例的 ID
+ * @returns 上一个实例的底部偏移量，如果没有上一个实例则返回 0
+ */
 export const getLastBottomOffset = (id: string) => {
   const idx = instances.findIndex((instance) => instance.id === id)
   if (idx <= 0) return 0
   return instances[idx - 1].vm.exposed!.bottomOffset.value
 }
 
-// 关闭所有实例
+/**
+ * 关闭所有消息实例
+ */
 export const closeAll = () => {
   instances.forEach((instance) => instance.destory())
 }

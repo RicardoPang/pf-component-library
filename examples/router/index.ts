@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Basic from '../views/Basic.vue'
+import Form from '../views/Form.vue'
 import VirtualScroll from '../views/VirtualScroll.vue'
 import VirtualScrollDetail from '../views/VirtualScrollDetail.vue'
 import Tree from '../views/Tree.vue'
@@ -17,6 +18,11 @@ const router = createRouter({
       path: '/basic',
       name: 'basic',
       component: Basic
+    },
+    {
+      path: '/form',
+      name: 'form',
+      component: Form
     },
     {
       path: '/vscroll',

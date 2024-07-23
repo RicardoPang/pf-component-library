@@ -1,5 +1,6 @@
 <template>
   <button
+    @click="handleClick"
     ref="buttonRef"
     class="pf-button"
     :class="buttonClasses"
@@ -15,7 +16,7 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import type { ButtonProps } from './types'
+import type { ButtonEmits, ButtonProps } from './types'
 import PfIcon from '../../Icon/src/Icon.vue'
 
 // 定义组件名
@@ -33,10 +34,17 @@ const {
   disabled,
   nativeType = 'button',
   autofocus,
-  loading
+  loading,
+  href,
+  target = '_self'
 } = defineProps<ButtonProps>()
 
-// 计算属性构建按钮类名
+const emits = defineEmits<ButtonEmits>()
+
+/**
+ * 计算按钮的类名
+ * @returns {object} 按钮的类名对象
+ */
 const buttonClasses = computed(() => ({
   [`pf-button--${type}`]: type, // 根据类型添加类名
   [`pf-button--${size}`]: size, // 根据尺寸添加类名
@@ -47,11 +55,29 @@ const buttonClasses = computed(() => ({
   'is-loading': loading
 }))
 
-// 创建按钮元素引用
+/**
+ * 按钮元素的引用
+ * @type {Ref<HTMLButtonElement>}
+ */
 const buttonRef = ref<HTMLButtonElement>()
+
+const handleClick = (e: MouseEvent) => {
+  if (loading || disabled) {
+    return
+  }
+  if (href) {
+    window.open(href, target)
+    return
+  }
+  emits('click', e)
+}
 
 // 公共组件实例的属性和方法
 defineExpose({
+  /**
+   * 按钮元素的引用
+   * @type {Ref<HTMLButtonElement>}
+   */
   ref: buttonRef
 })
 </script>

@@ -3,7 +3,7 @@ import { mount } from '@vue/test-utils'
 import Collapse from './Collapse.vue'
 import CollapseItem from './CollapseItem.vue'
 
-describe('Collapse.vue', () => {
+describe('CollapseItem.vue', () => {
   test('basic collapse', async () => {
     const wrapper = mount(Collapse, {
       props: {

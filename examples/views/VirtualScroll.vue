@@ -22,9 +22,8 @@
       </router-link>
     </pf-virtual-scroll> -->
 
-    <!-- 水平 -->
+    <!-- 水平 http://codercba.com:1888/airbnb/api/entire/list -->
     <pf-virtual-scroll
-      :requestUrl="'http://codercba.com:1888/airbnb/api/entire/list'"
       :scrollDirection="'horizontal'"
       :oneWidth="250"
       #default="oneItem"

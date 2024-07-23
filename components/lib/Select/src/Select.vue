@@ -82,6 +82,11 @@ import type { TooltipInstance } from '../../Tooltip/src/types'
 import type { InputInstance } from '../../Input/src/types'
 import { isFunction, throttle } from 'lodash-es'
 
+/**
+ * 查找选项
+ * @param value - 选项的值
+ * @returns 找到的选项或 null
+ */
 const findOption = (value: string) => {
   const option = props.options.find((item) => item.value === value)
   return option ? option : null
@@ -159,7 +164,10 @@ watch(
   }
 )
 
-// 根据输入值过滤选项
+/**
+ * 根据输入值过滤选项
+ * @param searchValue - 输入的搜索值
+ */
 const generateFilterOptions = async (searchValue: string) => {
   if (!props.filterable) return
   if (props.filterMethod && isFunction(props.filterMethod)) {
@@ -193,7 +201,10 @@ const onFilter = () => {
   throttledGenerateFilterOptions(states.inputValue)
 }
 
-// 控制下拉框是否显示
+/**
+ * 控制下拉框显示或隐藏
+ * @param show - 是否显示下拉框
+ */
 const controlDropdown = (show: boolean) => {
   if (show) {
     // 如果是过滤模式且已有选中值，将输入框置空
@@ -218,7 +229,10 @@ const controlDropdown = (show: boolean) => {
   emits('visible-change', show)
 }
 
-// 处理键盘事件
+/**
+ * 处理键盘事件
+ * @param e - 键盘事件
+ */
 const handleKeydown = (e: KeyboardEvent) => {
   switch (e.key) {
     case 'Enter':
@@ -270,6 +284,9 @@ const handleKeydown = (e: KeyboardEvent) => {
   }
 }
 
+/**
+ * 清除选中值
+ */
 const onClear = () => {
   states.selectedOption = null
   states.inputValue = ''
@@ -280,7 +297,9 @@ const onClear = () => {
 
 const NOOP = () => {}
 
-// 切换下拉框
+/**
+ * 切换下拉框显示或隐藏
+ */
 const toggleDropdown = () => {
   if (props.disabled) return
   if (isDropdownShow.value) {
@@ -290,7 +309,10 @@ const toggleDropdown = () => {
   }
 }
 
-// 点击选项
+/**
+ * 点击选项
+ * @param e - 选中的选项
+ */
 const itemSelect = (e: SelectOption) => {
   if (e.disabled) return
   states.inputValue = e.label

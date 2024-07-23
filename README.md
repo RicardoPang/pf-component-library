@@ -34,3 +34,4 @@ app.use(Demo)
 - npm install
 - npm run dev
 - 启动server服务, 再开一个窗口执行 cd server, npm install, npm run dev
+- 补充: npm run build 打包组件库 npm link pf-component-library 本地安装组件库

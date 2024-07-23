@@ -42,7 +42,7 @@ describe('Tooltip.vue', () => {
 
     // 触发点击按钮，检查工具提示是否出现
     triggerArea.trigger('click')
-    await vi.runAllTimers()
+    await vi.runAllTimers() // 让所有timer运行完毕
     expect(wrapper.find('.pf-tooltip__popper').exists()).toBeTruthy()
     expect(wrapper.get('.pf-tooltip__popper').text()).toBe('hello tooltip')
     expect(onVisibleChange).toHaveBeenCalledWith(true)

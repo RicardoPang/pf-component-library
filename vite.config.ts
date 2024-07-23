@@ -43,16 +43,16 @@ export default defineConfig({
     rollupOptions: {
       input: list, // 入口文件
       external: [
+        'vue',
+        'vue-router',
+        'normalize.css',
         '@fortawesome/fontawesome-svg-core',
         '@fortawesome/free-solid-svg-icons',
         '@fortawesome/vue-fontawesome',
         '@popperjs/core',
         'async-validator',
         'axios',
-        'lodash-es',
-        'normalize.css',
-        'vue',
-        'vue-router'
+        'lodash-es'
       ],
       output: [
         {
@@ -61,7 +61,12 @@ export default defineConfig({
           entryFileNames: '[name].js',
           preserveModules: true, // 保留原来目录结构
           preserveModulesRoot: `${COMPONENTS_DIR}/lib`,
-          assetFileNames: '[name][extname]'
+          assetFileNames: '[name][extname]',
+          globals: {
+            vue: 'Vue',
+            'vue-router': 'VueRouter',
+            'normalize.css': 'normalizeCss'
+          }
         },
         {
           format: 'commonjs', // 输出格式为 CommonJS 模块
@@ -69,19 +74,34 @@ export default defineConfig({
           entryFileNames: '[name].js',
           preserveModules: true,
           preserveModulesRoot: `${COMPONENTS_DIR}/lib`,
-          assetFileNames: '[name][extname]'
+          assetFileNames: '[name][extname]',
+          globals: {
+            vue: 'Vue',
+            'vue-router': 'VueRouter',
+            'normalize.css': 'normalizeCss'
+          }
         },
         {
           format: 'es',
           dir: 'dist',
           entryFileNames: '[name].mjs', // 输出单文件
-          assetFileNames: '[name][extname]'
+          assetFileNames: '[name][extname]',
+          globals: {
+            vue: 'Vue',
+            'vue-router': 'VueRouter',
+            'normalize.css': 'normalizeCss'
+          }
         },
         {
           format: 'commonjs',
           dir: 'dist',
           entryFileNames: '[name].js',
-          assetFileNames: '[name][extname]'
+          assetFileNames: '[name][extname]',
+          globals: {
+            vue: 'Vue',
+            'vue-router': 'VueRouter',
+            'normalize.css': 'normalizeCss'
+          }
         }
       ],
       preserveEntrySignatures: 'strict' // 保留入口签名

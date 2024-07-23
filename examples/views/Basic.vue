@@ -2,6 +2,16 @@
 <template>
   <div class="home">
     <h3>Button 按钮</h3>
+    <pf-button icon="download" :loading="loading" @click="handleClick">
+      {{ loading ? '下载中' : '下载' }}
+    </pf-button>
+    <pf-button type="link" disabled href="http://www.baidu.com" target="_blank">
+      Link Button
+    </pf-button>
+    <pf-button type="link" href="http://www.baidu.com" target="_blank" block>
+      Link Button
+    </pf-button>
+
     <pf-button ref="buttonRef" @click="open">Test Button</pf-button>
     <pf-button plain @click="close">Plain Button</pf-button>
     <pf-button round>Round Button</pf-button>
@@ -280,52 +290,26 @@
       :remote-method="remoteFilter"
     />
     <h4>remote: {{ remteoValue }}</h4>
-
-    <br />
-    <br />
-    <h3>Form 表单</h3>
-    <pf-form :model="model" :rules="rules" ref="formRef">
-      <pf-form-item label="email" prop="email">
-        <pf-input v-model="model.email" placeholder="请输入邮箱" />
-      </pf-form-item>
-      <pf-form-item label="password" prop="password">
-        <pf-input
-          v-model="model.password"
-          type="password"
-          placeholder="请输入密码"
-        />
-      </pf-form-item>
-      <pf-form-item label="confirmPwd" prop="confirmPwd">
-        <pf-input
-          v-model="model.confirmPwd"
-          type="password"
-          placeholder="请输入邮箱"
-        />
-      </pf-form-item>
-      <pf-formItem prop="agreement" label="agreement">
-        <pf-switch v-model="model.agreement" />
-      </pf-formItem>
-      <pf-formItem prop="gender" label="gender">
-        <pf-select v-model="model.gender" :options="genderOptions" />
-      </pf-formItem>
-      <div>
-        <pf-button @click.prevent="submit">Submit</pf-button>
-        <pf-button @click.prevent="reset">Reset</pf-button>
-      </div>
-    </pf-form>
-    <h4>
-      form value:
-      <pre>{{ model }}</pre>
-    </h4>
   </div>
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, h, reactive } from 'vue'
-import type { ButtonInstance } from 'pf-component-library'
-import type { MenuOption } from 'pf-component-library'
-import { closeAll, createMessage } from 'pf-component-library'
-import type { TooltipInstance } from 'pf-component-library'
+import { onMounted, ref, h } from 'vue'
+import type { ButtonInstance } from '../../components/lib/Button/src/types'
+import type { MenuOption } from '../../components/lib/Dropdown/src/types'
+import {
+  closeAll,
+  createMessage
+} from '../../components/lib/Message/src/method'
+import type { TooltipInstance } from '../../components/lib/Tooltip/src/types'
+
+const loading = ref(false)
+const handleClick = () => {
+  loading.value = true
+  setTimeout(() => {
+    loading.value = false
+  }, 2000)
+}
 
 const buttonRef = ref<ButtonInstance | null>(null)
 const openedValue = ref(['collapse1'])
@@ -344,55 +328,9 @@ const options: MenuOption[] = [
   { key: 1, label: h('b', 'this is bold') },
   { key: 2, label: 'item2', disabled: true },
   { key: 3, label: 'item3', divided: true },
+  { key: 3, label: 'item33', divided: true },
   { key: 4, label: 'item4' }
 ]
-
-const formRef = ref()
-
-const model = reactive({
-  email: '126@qq.com',
-  password: '123',
-  confirmPwd: '123',
-  agreement: false,
-  gender: 'female'
-})
-const rules = {
-  email: [{ type: 'email', required: true, trigger: 'blur' }],
-  password: [
-    { type: 'string', required: true, trigger: 'blur', min: 3, max: 5 }
-  ],
-  confirmPwd: [
-    { type: 'string', required: true, trigger: 'blur' },
-    {
-      validator: (rule, value) => value === model.password,
-      message: '两次输入密码不一致',
-      trigger: 'blur'
-    }
-  ],
-  agreement: [
-    { type: 'enum', required: true, enum: [true], message: '请同意协议' }
-  ],
-  gender: [{ type: 'string', required: true, trigger: 'change' }]
-}
-
-const genderOptions = [
-  { label: '男', value: 'male' },
-  { label: '女', value: 'female' },
-  { label: '保密', value: 'secret' }
-]
-
-const submit = async () => {
-  try {
-    await formRef.value.validate()
-    console.log('pass')
-  } catch (error) {
-    console.log(error)
-  }
-}
-const reset = () => {
-  // formRef.value.clearValidate()
-  formRef.value.resetFields()
-}
 
 const states = [
   '北京',

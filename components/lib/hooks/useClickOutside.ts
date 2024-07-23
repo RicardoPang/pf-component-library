@@ -2,7 +2,8 @@ import { onMounted, onUnmounted, type Ref } from 'vue'
 
 const useClickOutside = (
   elementRef: Ref<HTMLElement | undefined>,
-  callback: (e: MouseEvent) => void
+  callback: (e: MouseEvent) => void,
+  preventDefault: boolean = false
 ) => {
   // 定义点击事件处理函数
   const handler = (e: MouseEvent) => {
@@ -10,6 +11,10 @@ const useClickOutside = (
       const target = e.target as HTMLElement
       // 检查点击模板是否在引用的元素之外
       if (!elementRef.value.contains(target)) {
+        // preventDefault 阻止事件的默认动作(这里只是关闭弹出菜单, 个人认为没有必要)
+        if (preventDefault) {
+          e.preventDefault()
+        }
         callback(e)
       }
     }

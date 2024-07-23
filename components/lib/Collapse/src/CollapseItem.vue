@@ -37,17 +37,36 @@ defineOptions({
 
 // 接收组件属性
 const props = defineProps<CollapseItemProps>()
-// 获取上下文
+
+/**
+ * 注入的折叠上下文，用于获取折叠面板的状态和操作函数
+ * @type {CollapseContext | undefined}
+ */
 const collapseContext = inject(collapseContextKey)
 
+/**
+ * 计算折叠项标题的唯一 ID
+ * @type {ComputedRef<string>}
+ */
 const headerId = computed(() => `item-header-${props.name}`)
-const contentId = computed(() => `item-header-${props.name}`)
-// 当前折叠项是否激活
+
+/**
+ * 计算折叠项内容的唯一 ID
+ * @type {ComputedRef<string>}
+ */
+const contentId = computed(() => `item-content-${props.name}`)
+
+/**
+ * 计算当前折叠项是否激活
+ * @type {ComputedRef<boolean>}
+ */
 const isActive = computed(() =>
   collapseContext?.activeNames.value?.includes(props.name)
 )
 
-// 定义点击折叠项
+/**
+ * 处理折叠项的点击事件
+ */
 const handleClick = () => {
   if (props.disabled) {
     return
@@ -55,7 +74,10 @@ const handleClick = () => {
   collapseContext?.handleItemClick(props.name)
 }
 
-// 折叠项过度动画
+/**
+ * 折叠项的过渡动画事件
+ * @type {Record<string, (el: HTMLElement) => void>}
+ */
 const transitionEvents: Record<string, (el: HTMLElement) => void> = {
   beforeEnter(el: HTMLElement) {
     el.style.height = '0px'

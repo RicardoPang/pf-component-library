@@ -57,18 +57,29 @@ const topOffset = computed(() => height.value + lastOffset.value)
 // 元素最低端bottom值
 const bottomOffset = computed(() => height.value + topOffset.value)
 
-// 计算css样式
+/**
+ * 计算css样式
+ * @returns 元素的 CSS 样式
+ */
 const cssStyle = computed(() => ({
   top: topOffset.value + 'px',
   zIndex: props.zIndex
 }))
-// 计算类名
+
+/**
+ * 计算类名
+ * @returns 元素的类名
+ */
 const messageClasses = computed(() => ({
   [`pf-message--${props.type}`]: props.type,
   'is-close': props.showClose
 }))
 
 let timer: any
+
+/**
+ * 开始计时器
+ */
 const startTimer = () => {
   if (props.duration !== 0) {
     timer = setTimeout(() => {
@@ -77,6 +88,9 @@ const startTimer = () => {
   }
 }
 
+/**
+ * 清除计时器
+ */
 const clearTimer = () => {
   if (timer) {
     clearTimeout(timer)
@@ -88,7 +102,10 @@ onMounted(async () => {
   startTimer()
 })
 
-// 监听键盘ESC事件
+/**
+ * 监听键盘 ESC 事件
+ * @param e - 键盘事件
+ */
 const keydown = (e: Event) => {
   const event = e as KeyboardEvent
   if (event.code === 'Escape') {
@@ -98,11 +115,16 @@ const keydown = (e: Event) => {
 
 useEventListener(document, 'keydown', keydown) // 使用事件监听钩子
 
+/**
+ * 销毁组件
+ */
 const destroyComponent = () => {
   props.onDestory()
 }
 
-// 更新高度
+/**
+ * 更新高度
+ */
 const updateHeight = () => {
   height.value = messageRef.value?.getBoundingClientRect().height || 0
 }

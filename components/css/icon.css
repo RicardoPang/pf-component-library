@@ -9,6 +9,8 @@
   font-size: inherit;
 }
 
+/* CSS方案使用了postcss 没有使用sass或less https://postcss.org */
+/* Vite 默认支持 PostCSS 支持变量 提供配置文件 postcss.config.js 循环 modules等 插件postcss-fo postcss-color-mix postcss-each-variables等 */
 @each $val in primary, info, success, warning, danger {
   .pf-icon--$(val) {
     --pf-icon-color: var(--pf-color-$(val));

@@ -1,5 +1,5 @@
 <template>
-  <form
+  <div
     class="pf-form-item"
     :class="{
       'is-error': validateStatus.state === 'error',
@@ -8,7 +8,7 @@
       'is-required': isRequired
     }"
   >
-    <label class="pf-form-item__label">
+    <label class="pf-form-item__label" :style="labelStyle">
       <slot name="label" :label="label">
         {{ label }}
       </slot>
@@ -22,7 +22,7 @@
         {{ validateStatus.errorMsg }}
       </div>
     </div>
-  </form>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -52,6 +52,8 @@ defineOptions({
 const props = defineProps<FormItemProps>()
 
 const formContext = inject(formContextKey) // 注入父表单组件上下文
+
+console.log(formContext?.labelPosition)
 const innerValue = computed(() => {
   const model = formContext?.model
   if (model && props.prop && !isNil(model[props.prop])) {
@@ -59,6 +61,18 @@ const innerValue = computed(() => {
   } else {
     return null
   }
+})
+
+const labelStyle = computed(() => {
+  const style: Record<string, string> = {}
+  if (formContext?.labelWidth) {
+    style.width = `${formContext.labelWidth}px`
+  }
+  if (props.labelWidth) {
+    style.width = `${props.labelWidth}px`
+  }
+  style.textAlign = formContext?.labelPosition || 'right'
+  return style
 })
 
 // 校验状态
