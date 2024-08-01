@@ -3,7 +3,7 @@
     <h3>虚拟滚动列表组件</h3>
     <!-- 垂直 -->
     <!-- http://codercba.com:1888/airbnb/api/entire/list -->
-    <!-- <pf-virtual-scroll #default="oneItem" :autoHeight="true">
+    <pf-virtual-scroll #default="oneItem" :autoHeight="false">
       <router-link class="one-new" to="/virtualScrollDetail">
         <div class="new-left">
           <h3>
@@ -20,10 +20,10 @@
           <img :src="oneItem.thisItem.picture_url" alt="PIC" />
         </div>
       </router-link>
-    </pf-virtual-scroll> -->
+    </pf-virtual-scroll>
 
     <!-- 水平 http://codercba.com:1888/airbnb/api/entire/list -->
-    <pf-virtual-scroll
+    <!-- <pf-virtual-scroll
       :scrollDirection="'horizontal'"
       :oneWidth="250"
       #default="oneItem"
@@ -42,7 +42,7 @@
           </div>
         </div>
       </router-link>
-    </pf-virtual-scroll>
+    </pf-virtual-scroll> -->
   </div>
 </template>
 
@@ -73,11 +73,11 @@
       font-size: 16px;
 
       /* 固定高度专属: 超出部分省略 */
-      /* overflow: hidden;
+      overflow: hidden;
       text-overflow: ellipsis;
       display: -webkit-box;
       -webkit-box-orient: vertical;
-      -webkit-line-clamp: 2; */
+      -webkit-line-clamp: 2;
     }
 
     .new-left div {

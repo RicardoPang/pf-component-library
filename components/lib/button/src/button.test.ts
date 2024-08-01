@@ -19,9 +19,12 @@ describe('Button.vue', () => {
       }
     })
     console.log(wrapper.html())
+
+    // slot
     expect(wrapper.classes()).toContain('pf-button--primary')
     expect(wrapper.get('button').text()).toBe('button')
 
+    // events, 测试原生click事件
     wrapper.get('button').trigger('click')
     console.log(wrapper.emitted())
     expect(wrapper.emitted()).toHaveProperty('click')
@@ -69,7 +72,7 @@ describe('Button.vue', () => {
         default: 'loading'
       },
       global: {
-        stubs: ['Icon']
+        stubs: ['PfIcon']
       }
     })
     console.log(wrapper.html())

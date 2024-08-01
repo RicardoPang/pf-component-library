@@ -39,9 +39,9 @@ export function isCheckedOrIndeterminate(
   node: TreeNode,
   list: TreeNode[]
 ): boolean {
-  // 检查当前节点是否选中或部分旋转
-  const is = node.checked || node.indeterminate
-  if (is) {
+  // 检查当前节点是否选中或部分选中
+  const isCheck = node.checked || node.indeterminate
+  if (isCheck) {
     return true
   }
   // 如果不是叶子节点, 递归检查子节点
@@ -278,7 +278,7 @@ export function findNode(
  * @param {TreeNode[]} node1
  * @param {TreeNode[]} node2
  */
-export function isBrother(node1: TreeNode, node2: TreeNode) {
+export function isBrother(node1: TreeNode, node2: TreeNode): boolean {
   if (!node1 || !node2) return false
   const p1 = String(node1.path?.slice(0, -1))
   const p2 = String(node2.path?.slice(0, -1))

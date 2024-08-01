@@ -25,7 +25,7 @@ describe('CollapseItem.vue', () => {
         )
       },
       global: {
-        stubs: ['Icon']
+        stubs: ['PfIcon']
       },
       attachTo: document.body
     })
@@ -58,6 +58,8 @@ describe('CollapseItem.vue', () => {
     expect(wrapper.emitted()).toHaveProperty('change')
     const changeEvent = wrapper.emitted('change') as any[]
     expect(changeEvent).toHaveLength(2)
+    console.table(changeEvent)
+    expect(changeEvent[0]).toEqual([[]])
     expect(changeEvent[1]).toEqual([['b']])
 
     // 测试禁用状态内容

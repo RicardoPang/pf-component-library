@@ -1,18 +1,15 @@
-// 按钮类型
 /**
  * 按钮的类型
  * @typedef {'primary' | 'success' | 'warning' | 'danger' | 'info'} ButtonType
  */
 export type ButtonType = 'primary' | 'success' | 'warning' | 'danger' | 'info'
 
-// 按钮尺寸
 /**
  * 按钮的尺寸
  * @typedef {'large' | 'small'} ButtonSize
  */
 export type ButtonSize = 'large' | 'small'
 
-// 原生按钮类型
 /**
  * 元素按钮的原生类型
  * @typedef {'button' | 'submit' | 'reset'} NativeType

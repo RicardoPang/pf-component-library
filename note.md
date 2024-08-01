@@ -22,21 +22,31 @@
 
 ### 样式
 
-- postcss https://postcss/org 变量, 嵌套, 循环, mixin
+- postcss 轻量级/插件化/vite原生支持 https://postcss/org 变量, 嵌套, 循环, mixin
 - css自定义变量 var(--xxx)
 - postcss 插件
-  - postcss each https://github.com/madyankin/postcss-each
+  - postcss-nested nesting 嵌套
+  - postcss each 循环 https://github.com/madyankin/postcss-each
   - postss for https://github.com/antyakushev/postcss-for
-  - postcss mixin https://github.com/iamstarkov/postcss-color-mix
+  - postcss mixin 混入 https://github.com/iamstarkov/postcss-color-mix
   - post each variables https://github.com/awcross/postcss-each-variables
 - 设计 https://ant.design/docs/spec/colors-cn
 
 ### 测试 Vitest + Vue-test-utils2
 
-- 基于Vite而生, 兼容Jest语法
-- ESM TS JSX 原生支持
+- 基于Vite而生, 兼容Jest语法，HMR, ESM、TS、JSX原生支持
 - 功能
-  - 断言
+  - 断言 expect
+  - 测试回调/监控对象：vi.fn() vi.spyOn
+  - 模拟特定模块：vi.mock('axios')
+  - Vue测试框架Vue-test-utils 
+    - 挂载mount 修改vitest配置支持dom
+    - query find() get() findAll() findComponent()
+    - 内容/属性 text() html() classes() attributes()
+  - stub 模拟子组件
+  - render function写组件（h函数）、JSX语法糖
+  - 触发事件 await xxx.trigger('click')
+  - vitest钩子 beforeEach beforeAll test.skip test.only
   - 内置chai 兼容jest expect
   - mock https://cn.vitest.dev/guide/mocking
   - 代码覆盖率
@@ -48,10 +58,16 @@
 - TypeScript定义类型和接口,响应式数据,依赖注入使用defineExpose公共组件实例方法和属性
 - CSS: 使用变量定制, 响应式类名
 - 本质就是class名称的组合
+- 开发
+  1. 需求: 确定props属性, 确定组件展示, 事件
+  2. 编码: TS定义props, 原生属性, defineExpose导出实例, 原生事件Click透传(https://cn.vuejs.org/guide/components/attrs.html#nested-component-inheritance)
+  3. 样式: postcss预处理, css变量, 动态生成主题颜色
+
+![结构](https://p.ipic.vip/b1sn67.png)
 
 ### Icon
 
-- 图标组件, 基于FontAwesome, 雨荨通过多种属性自定一图标的外观和行为
+- 图标组件, 基于FontAwesome, 通过多种属性自定一图标的外观和行为
 - 集成 FontAwesome 图标库，实现丰富的图标展示功能
 - 使用 omit 函数过滤不需要的属性，简化属性传递
 - inline svg 对比 fonticon
@@ -61,23 +77,27 @@
 
 ### Collapse
 
-- 可折叠面板组件, 支持手风琴模式和多选模式
-- 依赖注入: provide和inject实现组件间的上下文共享
+- item包含标题和内容，点击展开或关闭，支持手风琴
+
+- 语义化展示，通过slot实现复杂结构
+
+- 数据状态和处理在父组件，使用provide和inject传递子组件
 - 响应式数据: ref和computed创建
 - 动画过度: Transition组件实现折叠动画
-- TypeScript: 定义类型和接口
-- 实现
-  - 维护可变响应式数组items 代表打开的item ref(['a'])
-  - 点击item 对数组的项进行添加或删除
-  - 在item内部判断当前的name是否存在数组中 判断是否打开或关闭
-  - 难点: 使用provide/inject将对应的父组件Collapse属性传递给Item(slot不好传递)
-  - 支持v-model
-  - 支持动画
+- 开发
+  1. 属性props：v-model双向绑定，accordion手风琴
+  2. 事件：change，update:modelValue
+  3. 维护一个可变化的响应式数组，表示打开的items
+  4. 点击item，看数组是否存在进行添加或删除
+  5. item内部判断当前name是否存在数组，判断打开或关闭
+  6. 难点: 使用provide/inject将对应的父组件Collapse属性传递给Item（slot不好传递）
+  7. 支持v-model：属性modelValue，事件update:modelValue 的语法糖（属性赋值内部响应式对象使用watch进行更新）
+  8. 支持动画：transition配合v-show v-if等实现，提供classes标示整个动画过程，也能监听钩子函数实现动画效果（beforeEnter、enter、afterEnter、beforeLeave、leave、afterLeave）
 
 ### Tooltip
 
 - 提示组件, 基于Popper.j实现弹出位置精确控制, 允许用户通过多种触发方式显示和隐藏
-- 使用Popper.js实现弹出位置的精确控制
+-  使用Popper.js实现弹出位置的精确控制
 - 使用debounce函数处理打开和关闭的延迟
 - 使用自定义Hook useClickOutside处理点击外部关闭逻辑
 - 不同位置弹出, 兼容视窗边界
@@ -140,6 +160,8 @@
 - 计算当前滚动位置和容器尺寸, 仅渲染可见范围内的项目
 - ResizeObserver观察每个项目的尺寸变化并记录高度
 - 监听窗口大小和设备方向的变化, 动态调整容器和项目的尺寸
+
+![虚拟列表模型](https://p.ipic.vip/8oiag9.png)
 
 ### Tree
 

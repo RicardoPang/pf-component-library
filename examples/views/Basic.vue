@@ -56,7 +56,7 @@
     <pf-icon icon="magnifying-glass" size="xl" type="success" rotation="90" />
     <pf-icon
       icon="arrow-up-from-bracket"
-      size="2x"
+      :size="size"
       type="danger"
       title="Upload"
     />
@@ -65,18 +65,19 @@
     <br />
     <br />
     <h3>Collapse 折叠</h3>
-    <pf-collapse v-model="openedValue">
-      <pf-collapse-item name="a" title="Title A">
+    <pf-collapse v-model="openedValue" accordion>
+      <pf-collapse-item name="collapse1" title="Title A">
         <h1>headline title</h1>
         <div>this is content a aaa</div>
       </pf-collapse-item>
-      <pf-collapse-item name="b" title="Title B">
+      <pf-collapse-item name="collapse2" title="Title B">
         <div>this is bbbbb test</div>
       </pf-collapse-item>
-      <pf-collapse-item name="c" title="Disabled Title" disabled>
+      <pf-collapse-item name="collapse3" title="Disabled Title" disabled>
         <div>this is cccc test</div>
       </pf-collapse-item>
     </pf-collapse>
+    <h3>{{ openedValue }}</h3>
 
     <br />
     <br />
@@ -468,5 +469,9 @@ const openMsg3 = (type) => {
 /* 在全局样式中设置 */
 .el-icon {
   font-size: 18px; /* 设置为你需要的尺寸 */
+}
+
+.pf-icon {
+  margin-right: 20px;
 }
 </style>

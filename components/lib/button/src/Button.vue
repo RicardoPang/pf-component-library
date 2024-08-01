@@ -16,6 +16,7 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
+// 导入组件类型 type 只是导入类型
 import type { ButtonEmits, ButtonProps } from './types'
 import PfIcon from '../../Icon/src/Icon.vue'
 

@@ -10,10 +10,10 @@ import { omit } from 'lodash-es'
 import type { IconProps } from './types'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-// 设置组件选项, 名称和不继续属性, 使用$attrs给外层组件赋值
+// 设置组件选项, 名称和不继续属性, 使用$attrs给外层组件赋值 $attrs(除props和emits之外, 解决不继承属性后一些默认属性失效的问题)
 defineOptions({
   name: 'PfIcon',
-  inheritAttrs: false
+  inheritAttrs: false // 不继承属性
 })
 
 // 组件属性

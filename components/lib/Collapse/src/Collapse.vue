@@ -20,6 +20,7 @@ const emits = defineEmits<CollapseEmits>()
 
 /**
  * 当前激活的折叠项名称数组
+ * props传递给本地ref 需要watch更新数据
  * @type {Ref<NameType[]>}
  */
 const activeNames = ref<NameType[]>(props.modelValue || [])
@@ -43,23 +44,24 @@ watch(
  * @param {NameType} item - 被点击的折叠项的名称
  */
 const handleItemClick = (item: NameType) => {
+  // 将响应式对象activeNames.value 转换为真正的数组 (防止数据联动)
+  let _activeNames = [...activeNames.value]
   if (props.accordion) {
-    activeNames.value = [activeNames.value[0] === item ? '' : item]
+    _activeNames = [activeNames.value[0] === item ? '' : item]
+    activeNames.value = _activeNames
   } else {
-    const index = activeNames.value?.indexOf(item)
+    const index = _activeNames.indexOf(item)
     if (index > -1) {
-      activeNames.value.splice(index, 1) // 存在则删除数组对应的一项
+      // 存在，删除数组对应的一项
+      _activeNames.splice(index, 1)
     } else {
-      if (activeNames.value) {
-        activeNames.value.push(item) // 存在则添加
-      } else {
-        activeNames.value = [item]
-      }
+      // 不存在，插入对应的name
+      _activeNames.push(item)
     }
+    activeNames.value = _activeNames
   }
-  // 触发组件事件
-  emits('update:modelValue', activeNames.value)
-  emits('change', activeNames.value)
+  emits('update:modelValue', _activeNames)
+  emits('change', _activeNames)
 }
 
 /**

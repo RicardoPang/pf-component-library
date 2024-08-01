@@ -488,8 +488,15 @@ const handleCheckedChange = (node: TreeNode) => {
   doChildrenChecked(node)
   doParentChecked(node.parentId ?? '')
   big.value?.disabledList.forEach((node, index) => {
-    if (!isBrother(node, big.value?.disabledList[index + 1] ?? {}))
+    const nextNode = big.value?.disabledList[index + 1] ?? {
+      checked: false,
+      isLeaf: true,
+      parentId: '',
+      path: []
+    }
+    if (!isBrother(node as TreeNode, nextNode as TreeNode)) {
       doParentChecked(node.parentId ?? '')
+    }
   })
 }
 
@@ -512,7 +519,7 @@ const doParentChecked = (parentId: string) => {
   const childrenAllChecked = allDirectChildren?.every((i) => i.checked)
   if (!parentNode) return
   checkParentIndeterminate(parentNode, allDirectChildren ?? [])
-  parentNode.checked = childrenAllChecked
+  parentNode.checked = childrenAllChecked ? true : false
   if (childrenAllChecked) parentNode.indeterminate = false
   if (parentNode?.parentId !== null) doParentChecked(parentNode?.parentId ?? '')
 }

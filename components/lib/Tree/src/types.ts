@@ -20,7 +20,7 @@ export interface TreeNode {
   path?: (string | number)[]
 
   /** 节点是否被选中。 */
-  checked?: boolean
+  checked: boolean
 
   /** 节点是否处于不确定状态（即部分子节点被选中）。 */
   indeterminate?: boolean
