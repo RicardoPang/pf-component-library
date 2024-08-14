@@ -43,6 +43,10 @@ export default defineConfig({
       {
         text: '组件',
         link: '/components/button'
+      },
+      {
+        text: '文章',
+        link: '/components/git'
       }
     ],
 
@@ -102,6 +106,71 @@ export default defineConfig({
           {
             text: 'Tree 树形控件',
             link: '/components/tree'
+          }
+        ]
+      },
+      {
+        text: '我的文章',
+        items: [
+          {
+            text: 'Git指令整理',
+            link: '/components/git'
+          },
+          {
+            text: 'Git 代码回滚',
+            link: '/components/gitRollback'
+          },
+          {
+            text: '使用-.gitignore-忽略-git-仓库中的文件',
+            link: '/components/gitignore'
+          },
+          {
+            text: '前端工程化',
+            link: '/components/engineering'
+          },
+          {
+            text: '前端网络请求-TypeScrpt封装Axios',
+            link: '/components/network'
+          },
+          {
+            text: '大文件上传',
+            link: '/components/bigFile'
+          },
+          {
+            text: '深入浅出：理解浏览器与 Node.js 的 Event Loop',
+            link: '/components/eventLoop'
+          },
+          {
+            text: '前端性能优化',
+            link: '/components/performance'
+          },
+          {
+            text: '前端监控与埋点',
+            link: '/components/monitor'
+          },
+          {
+            text: '前端脚手架',
+            link: '/components/cli'
+          },
+          {
+            text: 'Node Library依赖分析',
+            link: '/components/library'
+          },
+          {
+            text: '前端组件库',
+            link: '/components/ui'
+          },
+          {
+            text: '深入理解Webpack',
+            link: '/components/webpack'
+          },
+          {
+            text: '深入理解Vue',
+            link: '/components/vue'
+          },
+          {
+            text: '微信小程序',
+            link: '/components/program'
           }
         ]
       }
