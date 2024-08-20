@@ -165,12 +165,60 @@ export default defineConfig({
             link: '/components/webpack'
           },
           {
+            text: '从零开始实现一个简化版 Webpack 打包器',
+            link: '/components/miniWebpack'
+          },
+          {
             text: '深入理解Vue',
             link: '/components/vue'
           },
           {
             text: '微信小程序',
             link: '/components/program'
+          },
+          {
+            text: '从零开始，手写完整的Promise原理',
+            link: '/components/promise'
+          },
+          {
+            text: '前端必备技术栈',
+            link: '/components/basicAbility'
+          },
+          {
+            text: '前端缓存',
+            link: '/components/cache'
+          },
+          {
+            text: '掌握设计模式，构建高效代码',
+            link: '/components/design'
+          },
+          {
+            text: 'Node文件处理',
+            link: '/components/fs'
+          },
+          {
+            text: '深入解析V8引擎：JavaScript对象存储与性能优化',
+            link: '/components/googlev8'
+          },
+          {
+            text: 'HTTP',
+            link: '/components/http'
+          },
+          {
+            text: 'web开发',
+            link: '/components/koa'
+          },
+          {
+            text: '从零开始实现一个简化版 Webpack 打包器',
+            link: '/components/miniWebpack'
+          },
+          {
+            text: '移动端适配',
+            link: '/components/mobile'
+          },
+          {
+            text: 'Typescript 安全编码的秘密武器',
+            link: '/components/typescript'
           }
         ]
       }

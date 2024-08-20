@@ -5,7 +5,7 @@ description: Eslint+Prettier+husky+commitlint+lint+staged规范前端工程代�
 
 > 记录自己的前端工作流，总结一份自己的前端工作流搭建流程，方便以后使用，创建一个简单的模板。
 
-### Vue3 项目框架搭建
+## Vue3 项目框架搭建
 
 #### 1. 使用`Vite`脚手架初始化项目
 
@@ -72,7 +72,7 @@ https://cn.vitejs.dev/guide/env-and-mode.html#modes
 - 安装：https://element-plus.org/zh-CN/guide/installation.html
 - 导入：https://element-plus.org/zh-CN/guide/quickstart.html
 
-### 集成 editorconfig 配置
+## 集成 editorconfig 配置
 
 > EditorConfig 为不同编辑器上处理同一个项目的多个开发人员维护一致的编码风格
 
@@ -100,7 +100,7 @@ VSCode 安装一个插件：EditorConfig for VS Code
 
 ![image-20240403170119374](https://p.ipic.vip/10aza2.png)
 
-### 二. 使用 prettier 工具
+## 使用 prettier 工具
 
 > Prettier 代码格式化工具，支持 JavaScript、TypeScript、CSS、SCSS、Less、JSX、Vue 等语言。
 
@@ -168,7 +168,7 @@ https://www.prettier.cn/
      "prettier": "prettier --write ."
      ```
 
-### 使用 ESLint 检测
+## 使用 ESLint 检测
 
 > `eslint`运行代码前就可以发现一些语法错误和潜在的 bug，目标是保证团队代码的一致 性和避免错误
 
@@ -185,10 +185,10 @@ https://zh-hans.eslint.org/docs/latest/use/getting-started
      ```shell
      # 在package.json，配置script脚本，项目安装eslint配置
      "lint:create": "eslint --init"
-
+  
      #执行
      npm run lint:create
-
+  
      # 会自动创建一个.eslintrc.cjs文件
      ```
 
@@ -232,7 +232,7 @@ https://zh-hans.eslint.org/docs/latest/use/getting-started
    },
    ```
 
-### git Husky 和 eslint
+## git Husky 和 eslint
 
 > 问题：虽然项目使用 eslint 了，但是不能保证组员提交代码之前都将 eslint 问题解决掉了
 
@@ -267,7 +267,7 @@ https://zh-hans.eslint.org/docs/latest/use/getting-started
 
      ![image-20240403215146797](https://p.ipic.vip/svrnx8.png)
 
-### git commit 规范
+## git commit 规范
 
 1. 代码提交风格
 
@@ -500,7 +500,7 @@ plugins: [... stylelitPlugin()],
     }
     ```
 
-### 补充：
+## 补充：
 
 #### 1. 技术栈参考
 
@@ -585,7 +585,7 @@ plugins: [... stylelitPlugin()],
        mkdir /root/mall_cms
        cd /root/mall_cms
        touch index.html
-
+       
        vi index.html
        ```
 
@@ -614,14 +614,14 @@ plugins: [... stylelitPlugin()],
    ```js
    userMenus => 动态展示菜单
    系统总览/核心技术/用户管理、角色管理/...
-
+   
    // 登录接口请求的三个内容
    // 1. token
    // 2. 用户信息：角色信息（role对象）
    // 3. 菜单信息
    ```
 
-### 总结
+## 总结
 
 1. 项目搭建
 2. 项目打包和自动化部署

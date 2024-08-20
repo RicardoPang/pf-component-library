@@ -7,7 +7,7 @@ description: 浏览器渲染流程简介
 >
 > 在实际工作中，如何量化性能优化也是相当重要的一环。
 
-### 一. 背景
+## 一. 背景
 
 1. 前端性能优化：以用户为导向的策略
    在当今的技术环境中，前端性能优化已经成为一个重要的议题。随着用户对于网页加载速度和交互反应时间的期望日益提高，只有具备优秀性能的网站才能在竞争中脱颖而出。性能优化就是寻找改进网站性能的方法和策略，而这篇文章的目的就是为你提供一些实用的建议。
@@ -22,9 +22,9 @@ description: 浏览器渲染流程简介
 
 > **综上所述，前端性能优化是一个复杂但必要的过程。理解用户，调查性能，以及合理使用优化规则，都是提升你网站性能的关键步骤。通过实施这些策略，你将能够创建一个既快速又用户友好的网站。**
 
-### 二. 渲染流程
+## 二. 渲染流程
 
-![](http://zhufengpeixun.com/jg-vue/assets/img/timg.5bac37a6.jpg)
+![image-20240820003142270](https://p.ipic.vip/sewvjv.png)
 
 - 浏览器将HTML转换成DOM树（document）
 - 浏览器将CSS解析成styleSheets、CSSOM（document.styleSheets）
@@ -43,9 +43,9 @@ description: 浏览器渲染流程简介
 >
 > **Repaint (重绘)**: 重绘指的是当元素的外观发生变化，但不影响布局时，浏览器重新绘制这些元素的过程。比如，改变元素的颜色、背景等属性时会触发重绘。
 
-### 三. 关键渲染路径
+## 三. 关键渲染路径
 
-![](http://zhufengpeixun.com/jg-vue/assets/img/rerender.da317d33.png)
+![image-20240820003118619](https://p.ipic.vip/60h1gx.png)
 
 - 重排：添加元素、删除元素、修改大小、移动元素位置、获取位置
 - 重绘：改变元素样式不影响它在文档流中的位置
@@ -95,7 +95,7 @@ description: 浏览器渲染流程简介
    - 使用css3动画
    - will-change
 
-### 四. 如何量化性能优化
+## 四. 如何量化性能优化
 
 1. 用户体验指标（性能指标）
 
@@ -113,11 +113,10 @@ description: 浏览器渲染流程简介
 
 ```javascript
 <div style="background:red;height:100px;width:100px"></div>
-<h1 elementtiming="meaningful">珠峰架构</h1>
 <script>
   window.onload = function () {
   let ele = document.createElement('h1');
-  ele.innerHTML = 'zf';
+  ele.innerHTML = 'pf';
   document.body.appendChild(ele)
 }
 setTimeout(() => {
@@ -232,7 +231,7 @@ new PerformanceObserver((entryList, observer) => {
 
    - 通过安装 [Lighthouse](https://chromewebstore.google.com/detail/lighthouse/blipmdconlkpinefehnmjammfjpmpbjk)插件来获取性能指标
 
-### 五. 如何根据指标进行优化
+## 五. 如何根据指标进行优化
 
 1. 加载时优化
    - 减少http请求，多个小文件合并为一个大文件
@@ -271,7 +270,7 @@ new PerformanceObserver((entryList, observer) => {
    - flexbox布局代替定位或浮动
    - 使用 transform 和 opacity 属性更改来实现动画（合成器处理）
 
-### 总结
+## 总结
 
 **LCP（Largest Contentful Paint）：**
 
