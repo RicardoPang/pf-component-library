@@ -145,7 +145,7 @@ export default defineConfig({
             link: '/components/performance'
           },
           {
-            text: '前端监控与埋点',
+            text: '前端监控平台',
             link: '/components/monitor'
           },
           {
@@ -207,10 +207,6 @@ export default defineConfig({
           {
             text: 'web开发',
             link: '/components/koa'
-          },
-          {
-            text: '从零开始实现一个简化版 Webpack 打包器',
-            link: '/components/miniWebpack'
           },
           {
             text: '移动端适配',
