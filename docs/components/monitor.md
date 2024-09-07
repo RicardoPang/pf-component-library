@@ -76,6 +76,23 @@ description: 开发SDK
 #### 4.1 开通日志服务
 
 - [日志服务(Log Service,简称 SLS)](https://sls.console.aliyun.com/lognext/profile)是针对日志类数据一站式服务，用户无需开发就能快捷完成数据采集、消费、投递以及查询分析等功能，帮助提升运维、运营效率，建立 DT 时代海量日志处理能力
+
+  ![iShot_2024-08-31_10.41.20](https://p.ipic.vip/wiwxn0.png)
+
+  ![iShot_2024-08-31_10.42.48](https://p.ipic.vip/rwu5jc.png)
+
+  ![iShot_2024-08-31_10.43.05](https://p.ipic.vip/2m0cer.png)
+
+  ![iShot_2024-08-31_10.43.49](https://p.ipic.vip/673djj.png)
+
+  ![iShot_2024-08-31_10.44.15](https://p.ipic.vip/swu9v1.png)
+
+  ![iShot_2024-08-31_10.44.31](https://p.ipic.vip/h3zj2b.png)
+
+  ![iShot_2024-08-31_10.44.44](https://p.ipic.vip/h0llz3.png)
+
+  ![image-20240907090138190](https://p.ipic.vip/a12c31.png)
+
 - [日志服务帮助文档](https://help.aliyun.com/product/28958.html)
 
 #### 4.2 监控错误
@@ -1437,3 +1454,5 @@ description: 开发SDK
      - 表格
 
 - 参考：[源码](https://github.com/RicardoPang/pf-monitor)
+
+- 链家开源（工业级）：[源码](https://github.com/RicardoPang/pf-front-monitor)
