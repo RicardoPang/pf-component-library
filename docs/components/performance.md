@@ -13,10 +13,8 @@ description: 浏览器渲染流程简介
    在当今的技术环境中，前端性能优化已经成为一个重要的议题。随着用户对于网页加载速度和交互反应时间的期望日益提高，只有具备优秀性能的网站才能在竞争中脱颖而出。性能优化就是寻找改进网站性能的方法和策略，而这篇文章的目的就是为你提供一些实用的建议。
 2. 理解你的用户
    首先，理解你的用户是至关重要的。每个用户群体的需求和期望都可能大相径庭，所以我们需要根据他们的特性和行为来进行针对性的优化。这样做不仅能节省我们的优化精力，还能更有效地提升用户体验。
-
 3. 调查加载和运行性能
    在开始优化工作之前，必须首先了解网站的加载性能和运行性能。没有了解问题的来源，就无法有效地解决问题。你可以使用各种工具，如Chrome的开发者工具，来检查和理解网站的性能瓶颈。一旦找到了问题，就可以开始制定解决方案。
-
 4. 合理使用优化规则
    最后，我们需要明智地使用优化规则。虽然我们所有人都希望网站有最佳的性能，但是我们也必须避免过度优化。过度优化可能会导致代码难以理解和维护，甚至在某些情况下，可能会对性能产生负面影响。因此，我们应该始终确保我们的优化策略是在考虑到代码质量和可维护性的同时进行的。
 
@@ -213,9 +211,8 @@ new PerformanceObserver((entryList, observer) => {
 
      ```javascript
      <script>
-       new Date() - performance.timing.navigationStart // 通过 domLoading 和
-       navigationStart 也可以 performance.timing.domLoading -
-       performance.timing.navigationStart
+       new Date() - performance.timing.navigationStart // 通过 domLoading 和 navigationStart 也可以 
+       performance.timing.domLoading - performance.timing.navigationStart
      </script>
      ```
 
