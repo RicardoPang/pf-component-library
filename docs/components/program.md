@@ -82,19 +82,19 @@ description: 小程序开发和原理
 
 - 两个线程之间有Native层进行统一处理。无论是线程之间的通讯、数据的传递、网路请求都由Native层做转发。
 
--  渲染层存在多个webview，更加接近原生应用APP的用户体验。
+- 渲染层存在多个webview，更加接近原生应用APP的用户体验。
 
 ## 小程序的渲染引擎与编译器
 
-### 1.WXSS  编译-加载
+### 1.WXSS 编译-加载
 
 WXSS文件编译后成 wxss.js 文件，index.wxss文件会先通过 WCSC 可执行程序文件编译成 js 文件。并不是直接编译成css文件。
 
-在渲染层的一个 <script> 标签中, 编译后的代码是通过 eval 方法注入执行的。
+在渲染层的一个 script 标签中, 编译后的代码是通过 eval 方法注入执行的。
 
 ![image-20241020230320925](https://p.ipic.vip/uilw3j.png)
 
-### 2. WXML - -  VirtualDOM 渲染流程
+### 2. WXML - - VirtualDOM 渲染流程
 
 ![image.png](https://p.ipic.vip/kyjnob.jpg)
 
@@ -114,14 +114,13 @@ generateFunc 就是接受动态数据，并生成虚拟DOM树的函数
 - 事件可以绑定在组件上，当达到触发事件，就会执行逻辑层中对应的事件处理函数。
 - 事件对象可以携带额外信息，如 id, dataset, touches 等等。
 
-
-__小程序的事件都是和 js 原生事件相互转换的，小程序的 tap 事件底层是由 web 的 mouseup 事件转换来的。小程序 tap 事件的触发分为几个过程，首先底层实现是用 web 的 mouseup 事件触发了tap事件，底层为 window 绑定捕获阶段的 mouseup 事件。__
+**小程序的事件都是和 js 原生事件相互转换的，小程序的 tap 事件底层是由 web 的 mouseup 事件转换来的。小程序 tap 事件的触发分为几个过程，首先底层实现是用 web 的 mouseup 事件触发了tap事件，底层为 window 绑定捕获阶段的 mouseup 事件。**
 
 ### 通信系统的设计
 
 内置组件中有部分组件是利用到客户端原生提供的能力，既然需要客户端原生提供的能力，那就会涉及到渲染层与客户端的交互通信。这层通信机制在 iOS 和安卓系统的实现方式并不一样，iOS 是利用了 WKWebView 的提供 messageHandlers 特性，而在安卓则是往 WebView 的 window 对象注入一个原生方法，最终会封装成 WeiXinJSBridge 这样一个兼容层。在微信开发者工具中则是使用了websocket 进行了封装。
 
-在微信小程序执行过程中，Native层，也就是客户端层分别向渲染层与逻辑层注入WeixinJSBridge以达到线程通讯的目的，WeixinJSBridge的<script>标记注入。
+在微信小程序执行过程中，Native层，也就是客户端层分别向渲染层与逻辑层注入WeixinJSBridge以达到线程通讯的目的，WeixinJSBridge的 script标记注入。
 
 WeixinJSBridge提供了如下几个方法：
 
@@ -160,13 +159,13 @@ WeixinJSBridge提供了如下几个方法：
 - Tab切换 switchTab，页面全部出栈，只留下新的Tab页面。
 - 重新加载 reLaunch，页面全部出栈，只留下新的页面。
 
-## 渲染层基础库 WAWebview 
+## 渲染层基础库 WAWebview
 
 1. core-js模块：负责初始化框架js代码，编译js，加载业务逻辑js等功能
 2. Foundation：基础模块，包含多个 API，如 EventEmitter（事件发布与订阅）、Ready 事件、基础库 Ready 事件、Bridge Ready 事件，以及环境变量（env 和 global）。
 3. WeixinJSBridge：通讯模块，包含有on、publish、invoke、subscribe、invokeCallbackHandler、subscribeHandler。只是对Native注入通讯api的封装，便于内部调用。
 4. 异常监听模块：基础库内针对promise或者js等异常事件的监听处理
-5. 日志打印模块：包含wxNativeConsole、__webviewConsole__、wxConsole、wxPerfConsole等
+5. 日志打印模块：包含wxNativeConsole、**webviewConsole**、wxConsole、wxPerfConsole等
 6. 系统函数和第三方函数模块：调用系统函数、包装系统函数、调用小程序或插件函数
 7. Report 信息上报模块：内部包含了非常多种类的上报 api 及异常监听 api
 8. Exparser组件系统模块： WXML文件经过WCC编译器编译成js文件，生成$gwx()函数, $gwx()函数接收文件路径和动态数据生成virtualDOM，Exparser组件系统就是将virtualDOM转化成HTML标记
@@ -190,7 +189,7 @@ WeixinJSBridge提供了如下几个方法：
 
 ![img](https://p.ipic.vip/bl3v5j.png)
 
-自定义元素类必须继承自window内置的 HTML 相关类， 这些类位于 window.<HTML*Element> ，他们都继承自 HTMLElement 类。
+自定义元素类必须继承自window内置的 HTML 相关类， 这些类位于 window.HTML\*Element ，他们都继承自 HTMLElement 类。
 
 ## 小程序的组件系统
 
@@ -214,6 +213,7 @@ Exparser 的主要 特点 包括以下几点：
 双线程架构相比单线程架构的最大优势在于**性能和用户体验的提升**。通过渲染层和逻辑层的分离，小程序可以在保证高性能和流畅性的前提下处理复杂的业务逻辑，同时维护较好的用户界面响应。
 
 1. **性能提升与流畅度**
+
    - **双线程：**在小程序的双线程架构中，渲染层与逻辑层分别运行在不同的线程中，渲染层通过Webview负责页面的显示，逻辑层通过JSCore引擎或V8引擎处理JavaScript业务逻辑。由于这两个线程分开执行，逻辑处理的复杂度不会影响界面渲染的流畅性，避免了UI卡顿的问题。
    - **单线程：**在传统的单线程架构中，渲染与逻辑处理共享同一线程。当业务逻辑复杂或进行耗时的操作时，容易阻塞渲染，导致界面卡顿甚至无响应，影响用户体验。
 
@@ -231,7 +231,7 @@ Exparser 的主要 特点 包括以下几点：
 
 #### 为什么要实现 wxs 页面快速计算实时性 ？
 
-如果业务场景为手势识别之类的，监听事件不断的触发，数据不断的改变。这样的业务场景中，可以想像，如果坐标值不断改变的话，在逻辑与视图分开的双线程架构中，线程与线程之间的通讯是非常频繁的，会有很大的性能问题。所以微信开放了一个标记<WXS>，可以在渲染层写部分js逻辑。这样话就可以在渲染层单独处理频繁改变的数据，这样的话就避免了线程与线程之间频繁通讯导致的性能和延时问题。
+如果业务场景为手势识别之类的，监听事件不断的触发，数据不断的改变。这样的业务场景中，可以想像，如果坐标值不断改变的话，在逻辑与视图分开的双线程架构中，线程与线程之间的通讯是非常频繁的，会有很大的性能问题。所以微信开放了一个标记 WXS，可以在渲染层写部分js逻辑。这样话就可以在渲染层单独处理频繁改变的数据，这样的话就避免了线程与线程之间频繁通讯导致的性能和延时问题。
 
 #### Native层在双线程架构中起到怎样的作用？
 
