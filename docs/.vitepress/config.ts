@@ -169,8 +169,20 @@ export default defineConfig({
             link: '/components/miniWebpack'
           },
           {
-            text: '深入理解Vue',
+            text: '手写Vue核心原理',
             link: '/components/vue'
+          },
+          {
+            text: '手写Vuex核心原理',
+            link: '/components/vuex'
+          },
+          {
+            text: '手写Vue-Router核心原理',
+            link: '/components/vue-router'
+          },
+          {
+            text: '手写Vue3核心原理',
+            link: '/components/vue3'
           },
           {
             text: '微信小程序',
