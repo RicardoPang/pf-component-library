@@ -47,48 +47,48 @@ description: JavaScript版题解仓库
 
 ```javascript
 function cal(n) {
-   let sum = 0;
-   for (let i = 0; i <= n; ++i) {
-     sum = sum + i;
-   }
-   return sum;
- }
+  let sum = 0
+  for (let i = 0; i <= n; ++i) {
+    sum = sum + i
+  }
+  return sum
+}
 ```
 
 其中第 2 行代码是常量级的执行时间，与 n 的大小无关，所以对于复杂度并没有影响。循环执行次数最多的是第 4 行代码，这行代码被执行了 n 次，所以总的时间复杂度就是 O(n)。
 
-#### （2）加法法则：__总复杂度等于量级最大的那段代码的复杂度__
+#### （2）加法法则：**总复杂度等于量级最大的那段代码的复杂度**
 
 下面来看一个例子：
 
 ```javascript
 function cal(n) {
-   let sum_1 = 0;
-   for (let p = 1; p < 100; ++p) {
-     sum_1 = sum_1 + p;
-   }
- 
-   let sum_2 = 0;
-   for (let q = 1; q < n; ++q) {
-     sum_2 = sum_2 + q;
-   }
- 
-   let sum_3 = 0;
-   for (let i = 1; i <= n; ++i) {
-     for (let j = 1; j <= n; ++j) {
-       sum_3 = sum_3 +  i * j;
-     }
-   }
- 
-   return sum_1 + sum_2 + sum_3;
- }
+  let sum_1 = 0
+  for (let p = 1; p < 100; ++p) {
+    sum_1 = sum_1 + p
+  }
+
+  let sum_2 = 0
+  for (let q = 1; q < n; ++q) {
+    sum_2 = sum_2 + q
+  }
+
+  let sum_3 = 0
+  for (let i = 1; i <= n; ++i) {
+    for (let j = 1; j <= n; ++j) {
+      sum_3 = sum_3 + i * j
+    }
+  }
+
+  return sum_1 + sum_2 + sum_3
+}
 ```
 
 这个代码分为三部分，分别是求 sum_1、sum_2、sum_3。可以分别分析每一部分的时间复杂度，然后把它们放到一起，再取一个量级最大的作为整段代码的复杂度。
 
 第一段代码循环执行了 100 次，所以是一个常量的执行时间，跟 n 的规模无关。需要说明的是循环的次数只要是一个已知的数，跟 n 无关，照样也是常量级的执行时间。从时间复杂度的概念来说，它表示的是一个算法执行效率与数据规模增长的变化趋势，所以不管常量的执行时间多大，都可以忽略掉。因为它本身对增长趋势并没有影响。
 
-第二段代码和第三段代码的时间复杂度分别是 O(n) 和 O(n2)，综合这三段代码的时间复杂度，取其中最大的量级。所以，整段代码的时间复杂度就为 O(n2)。也就是说：**总的时间复杂度**就**等于量级最大的那段代码的时间复杂度**。将这个规律抽象成公式就是：如果 T1(n)=O(f(n))，T2(n)=O(g(n))；那么 __T(n)=T1(n)+T2(n)=max(O(f(n)), O(g(n))) =O(max(f(n), g(n)))__。
+第二段代码和第三段代码的时间复杂度分别是 O(n) 和 O(n2)，综合这三段代码的时间复杂度，取其中最大的量级。所以，整段代码的时间复杂度就为 O(n2)。也就是说：**总的时间复杂度**就**等于量级最大的那段代码的时间复杂度**。将这个规律抽象成公式就是：如果 T1(n)=O(f(n))，T2(n)=O(g(n))；那么 **T(n)=T1(n)+T2(n)=max(O(f(n)), O(g(n))) =O(max(f(n), g(n)))**。
 
 #### （3）**乘法法则：嵌套代码的复杂度等于嵌套内外代码复杂度的乘积**
 
@@ -96,17 +96,17 @@ function cal(n) {
 
 ```javascript
 function cal(n) {
-   let res = 0; 
+   let res = 0;
    for (let i = 1; i < n; ++i) {
      res = res + f(i);
-   } 
- } 
- 
+   }
+ }
+
  function f(int n) {
     let sum = 0;
     for (let i = 1; i < n; ++i) {
       sum = sum + i;
-    } 
+    }
     return sum;
  }
 ```
@@ -119,7 +119,7 @@ function cal(n) {
 
 常见时间复杂度：
 
-- O(1)：基本运算 +、-、*、/、%、寻址
+- O(1)：基本运算 +、-、\*、/、%、寻址
 - O(logn)：二分查找，跟分治（Divide & Conquer）相关的基本上都是 logn
 - O(n)：线性查找
 - O(nlogn)：归并排序，快速排序的期望复杂度，基于比较排序的算法下界
@@ -135,9 +135,9 @@ function cal(n) {
 O(1) 只是常量级时间复杂度的一种表示方法，并不是指只执行了一行代码。比如下面这段代码，它的时间复杂度也是 O(1）：
 
 ```javascript
-let i = 8;
-let j = 6;
-let sum = i + j;
+let i = 8
+let j = 6
+let sum = i + j
 ```
 
 只要代码的执行时间不随 n 的增大而增长，这样代码的时间复杂度都记作 O(1)。一般**情况下**，只要算法中不存在循环语句、递归语句，即使有成千上万行的代码，其时间复杂度也是Ο(1)。
@@ -147,10 +147,10 @@ let sum = i + j;
 对数阶时间复杂度非常常见，也是最难分析的一种时间复杂度。下面来看一个例子：
 
 ```javascript
-let i=1;
- while (i <= n) {
-   i = i * 2;
- }
+let i = 1
+while (i <= n) {
+  i = i * 2
+}
 ```
 
 这里第三行代码是循环执行次数最多的。所以，只要能计算出这行代码被执行了多少次，就能知道整段代码的时间复杂度。
@@ -164,13 +164,13 @@ let i=1;
 下面把代码稍微改下：
 
 ```javascript
-let i=1;
- while (i <= n) {
-   i = i * 3;
- }
+let i = 1
+while (i <= n) {
+  i = i * 3
+}
 ```
 
-这段代码的时间复杂度为 O(log3n)。实际上，不管是以 2 为底、以 3 为底，还是以 10 为底，都可以把所有对数阶的时间复杂度都记为 O(logn)。因为对数之间是可以互相转换的，log3n 就等于 log32 * log2n，所以 O(log3n) = O(C * log2n)，其中 C=log32 是一个常量。基于前面的理论：**在采用大 O 标记复杂度的时候，可以忽略系数，即 O(Cf(n)) = O(f(n))**。所以，O(log2n) 就等于 O(log3n)。因此，在对数阶时间复杂度的表示方法里，我们忽略对数的“底”，统一表示为 O(logn)。
+这段代码的时间复杂度为 O(log3n)。实际上，不管是以 2 为底、以 3 为底，还是以 10 为底，都可以把所有对数阶的时间复杂度都记为 O(logn)。因为对数之间是可以互相转换的，log3n 就等于 log32 _ log2n，所以 O(log3n) = O(C _ log2n)，其中 C=log32 是一个常量。基于前面的理论：**在采用大 O 标记复杂度的时候，可以忽略系数，即 O(Cf(n)) = O(f(n))**。所以，O(log2n) 就等于 O(log3n)。因此，在对数阶时间复杂度的表示方法里，我们忽略对数的“底”，统一表示为 O(logn)。
 
 如果一段代码的时间复杂度是 O(logn)，循环执行 n 遍，时间复杂度就是 O(nlogn) 了。而且，O(nlogn) 也是一种常见的算法时间复杂度。比如，归并排序、快速排序的时间复杂度都是 O(nlogn)。
 
@@ -180,21 +180,21 @@ let i=1;
 
 ```javascript
 function cal(m, n) {
-  let sum_1 = 0;
+  let sum_1 = 0
   for (let i = 0; i < m; ++i) {
-    sum_1 = sum_1 + i;
+    sum_1 = sum_1 + i
   }
-  let sum_2 = 0;
+  let sum_2 = 0
   for (let j = 0; j < n; ++j) {
-    sum_2 = sum_2 + j;
+    sum_2 = sum_2 + j
   }
-  return sum_1 + sum_2;
+  return sum_1 + sum_2
 }
 ```
 
 可以看到，m 和 n 是表示两个数据规模，无法事先评估 m 和 n 谁的量级大，所以在表示复杂度时，就不能简单地利用加法法则，省略掉其中一个。所以，上面代码的时间复杂度就是 O(m+n)。
 
-针对这种情况，原来的加法法则就不正确了，需要将加法规则改为：T1(m) + T2(n) = O(f(m) + g(n))。但是乘法法则继续有效：T1(m)*T2(n) = O(f(m) * f(n))。
+针对这种情况，原来的加法法则就不正确了，需要将加法规则改为：T1(m) + T2(n) = O(f(m) + g(n))。但是乘法法则继续有效：T1(m)_T2(n) = O(f(m) _ f(n))。
 
 ### 4. 时间复杂度分析进阶
 
@@ -212,11 +212,11 @@ function cal(m, n) {
 ```javascript
 // n 表示数组 array 的长度
 function find(array, n, x) {
-  let pos = -1;
+  let pos = -1
   for (let i = 0; i < n; ++i) {
-    if (array[i] == x) pos = i;
+    if (array[i] == x) pos = i
   }
-  return pos;
+  return pos
 }
 ```
 
@@ -227,14 +227,14 @@ function find(array, n, x) {
 ```javascript
 // n 表示数组 array 的长度
 function find(array, n, x) {
-  let pos = -1;
+  let pos = -1
   for (let i = 0; i < n; ++i) {
-    if (array[i] == x){
-      pos = i;
-      break;
+    if (array[i] == x) {
+      pos = i
+      break
     }
   }
-  return pos;
+  return pos
 }
 ```
 
@@ -280,20 +280,20 @@ function find(array, n, x) {
 ```javascript
 // array 表示一个长度为 n 的数组
 // 代码中的 array.length 就等于 n
- const array = new Array(n);
- let count = 0;
- function insert(val) {
-    if (count == array.length) {
-       let sum = 0;
-       for (let i = 0; i < array.length; ++i) {
-          sum = sum + array[i];
-       }
-       array[0] = sum;
-       count = 1;
+const array = new Array(n)
+let count = 0
+function insert(val) {
+  if (count == array.length) {
+    let sum = 0
+    for (let i = 0; i < array.length; ++i) {
+      sum = sum + array[i]
     }
-    array[count] = val;
-    ++count;
- }
+    array[0] = sum
+    count = 1
+  }
+  array[count] = val
+  ++count
+}
 ```
 
 这段代码实现了一个往数组中插入数据的功能。当数组满了之后，也就是代码中的 count == array.length 时，就用 for 循环遍历数组求和，并清空数组，将求和之后的 sum 值放到数组的第一个位置，然后再将新的数据插入。但如果数组一开始就有空闲空间，则直接将数据插入数组。
@@ -390,17 +390,17 @@ function print(int n) {
 
 ```javascript
 function fn() {
-    let count = 0;
-    for (let i = 0; i <= (100 / 10); i++) {
-        for (let j = 0; j <= (100 / 2); j++) {
-            for (let k = 0; k <= (100 / 1); k++) {
-                if (i * 10 + j * 2 + k * 1 == 100) {
-                    count += 1;
-                }
-            }
+  let count = 0
+  for (let i = 0; i <= 100 / 10; i++) {
+    for (let j = 0; j <= 100 / 2; j++) {
+      for (let k = 0; k <= 100 / 1; k++) {
+        if (i * 10 + j * 2 + k * 1 == 100) {
+          count += 1
         }
+      }
     }
-    return count;
+  }
+  return count
 }
 ```
 
@@ -408,15 +408,15 @@ function fn() {
 
 ```javascript
 function fn() {
-    let count = 0;
-    for (let i = 0; i <= (100 / 10); i++) {
-        for (let j = 0; j <= (100 / 2); j++) {
-            if ((100 - i*10 - j*2 >= 0)&&((100 - i*10 - j*2) % 2 == 0)) {
-                count += 1;
-            }
-        }
+  let count = 0
+  for (let i = 0; i <= 100 / 10; i++) {
+    for (let j = 0; j <= 100 / 2; j++) {
+      if (100 - i * 10 - j * 2 >= 0 && (100 - i * 10 - j * 2) % 2 == 0) {
+        count += 1
+      }
     }
-    return count;
+  }
+  return count
 }
 ```
 
@@ -428,18 +428,18 @@ function fn() {
 
 ```javascript
 function fn() {
-    let a = [1, 2, 3, 4, 5, 5, 6];
-    let res = "";
-    for (let i = 0; i < a.length; i++) {
-        let count = 0;
-        for (let j = 0; j < a.length; j++) {
-            if (a[i] == a[j]) {
-               count += 1;
-            }
-            count > res ? res = a[i] : res = res
-        }
+  let a = [1, 2, 3, 4, 5, 5, 6]
+  let res = ''
+  for (let i = 0; i < a.length; i++) {
+    let count = 0
+    for (let j = 0; j < a.length; j++) {
+      if (a[i] == a[j]) {
+        count += 1
+      }
+      count > res ? (res = a[i]) : (res = res)
     }
-    return res;
+  }
+  return res
 }
 ```
 
@@ -451,17 +451,18 @@ function fn() {
 
 ```javascript
 function fn() {
-    let a = [1, 2, 3, 4, 5, 5, 6];
-    let map = {}, res = "";
-    
-    for (let i = 0; i < a.length; i++) {
-        map[a[i]] ? map[a[i]] += 1 : map[a[i]] = 1;
-    }
-    
-    for (let key in map) {
-        map[key] > res ? res = key : res = res
-    }
-    return res;
+  let a = [1, 2, 3, 4, 5, 5, 6]
+  let map = {},
+    res = ''
+
+  for (let i = 0; i < a.length; i++) {
+    map[a[i]] ? (map[a[i]] += 1) : (map[a[i]] = 1)
+  }
+
+  for (let key in map) {
+    map[key] > res ? (res = key) : (res = res)
+  }
+  return res
 }
 ```
 
@@ -475,7 +476,7 @@ function fn() {
 
 ## 二分查找-704
 
-给定一个 n 个元素有序的（升序）整型数组 nums 和一个目标值 target  ，写一个函数搜索 nums 中的 target，如果目标值存在返回下标，否则返回 -1。
+给定一个 n 个元素有序的（升序）整型数组 nums 和一个目标值 target ，写一个函数搜索 nums 中的 target，如果目标值存在返回下标，否则返回 -1。
 
 示例 1:
 
@@ -512,7 +513,7 @@ var search = function (nums, target) {
   // 当左指针小于等于右指针时，继续查找
   while (left <= right) {
     // 计算中间索引
-    const mid = Math.round((left+right)/2)
+    const mid = Math.round((left + right) / 2)
 
     // 检查中间元素是否是目标值
     if (nums[mid] === target) {
@@ -538,8 +539,8 @@ var search = function (nums, target) {
 示例:
 
 ```js
-输入: [0,1,0,3,12]
-输出: [1,3,12,0,0]
+输入: [0, 1, 0, 3, 12]
+输出: [1, 3, 12, 0, 0]
 ```
 
 说明:
@@ -791,7 +792,7 @@ var removeDuplicates = function (nums) {
 
 我们使用整数 `0`、 `1` 和 `2` 分别表示红色、白色和蓝色。
 
-必须在不使用库内置的 sort 函数的情况下解决这个问题。 
+必须在不使用库内置的 sort 函数的情况下解决这个问题。
 
 **示例 1：**
 
@@ -854,12 +855,12 @@ var sortColors = function (nums) {
     if (nums[i] === 0) {
       // 当前元素是0，交换到小于1的区域
       zero++
-      [nums[zero], nums[i]] = [nums[i], nums[zero]]
+      ;[nums[zero], nums[i]] = [nums[i], nums[zero]]
       i++
     } else if (nums[i] === 2) {
       // 当前元素是2，交换到大于1的区域
       two--
-      [nums[i], nums[two]] = [nums[two], nums[i]]
+      ;[nums[i], nums[two]] = [nums[two], nums[i]]
       // 注意：i不增加，因为交换后的nums[i]可能是0
     } else {
       // 当前元素时1，直接移动i
@@ -875,7 +876,7 @@ var sortColors = function (nums) {
 
 请你 **合并** `nums2` 到 `nums1` 中，使合并后的数组同样按 **非递减顺序** 排列。
 
-**注意：**最终，合并后数组不应由函数返回，而是存储在数组 `nums1` 中。为了应对这种情况，`nums1` 的初始长度为 `m + n`，其中前 `m` 个元素表示应合并的元素，后 `n` 个元素为 `0` ，应忽略。`nums2` 的长度为 `n` 。 
+**注意：**最终，合并后数组不应由函数返回，而是存储在数组 `nums1` 中。为了应对这种情况，`nums1` 的初始长度为 `m + n`，其中前 `m` 个元素表示应合并的元素，后 `n` 个元素为 `0` ，应忽略。`nums2` 的长度为 `n` 。
 
 **示例 1：**
 
@@ -967,7 +968,7 @@ var merge = function (nums1, m, nums2, n) {
 输出: 4
 ```
 
-[https://leetcode.cn/problems/kth-largest-element-in-an-array/description/]()
+[链接](https://leetcode.cn/problems/kth-largest-element-in-an-array/description/)
 
 ### 思路
 
@@ -987,34 +988,36 @@ function findKthLargest(nums, k) {
   // 快速选择的分区函数
   function partition(left, right) {
     // 随机选择一个基准点，并与右边界交换
-    const randomIndex = Math.floor(Math.random() * (right - left + 1)) + left;
-    [nums[randomIndex], nums[right]] = [nums[right], nums[randomIndex]];
+    const randomIndex = Math.floor(Math.random() * (right - left + 1)) + left
+    ;[nums[randomIndex], nums[right]] = [nums[right], nums[randomIndex]]
 
-    const pivot = nums[right]; // 基准值
-    let partitionIndex = left; // 分区点
+    const pivot = nums[right] // 基准值
+    let partitionIndex = left // 分区点
 
     for (let i = left; i < right; i++) {
-      if (nums[i] > pivot) { // 降序排列
-        [nums[i], nums[partitionIndex]] = [nums[partitionIndex], nums[i]];
-        partitionIndex++;
+      if (nums[i] > pivot) {
+        // 降序排列
+        ;[nums[i], nums[partitionIndex]] = [nums[partitionIndex], nums[i]]
+        partitionIndex++
       }
     }
     // 将基准值放到正确位置
-    [nums[partitionIndex], nums[right]] = [nums[right], nums[partitionIndex]];
-    return partitionIndex;
+    ;[nums[partitionIndex], nums[right]] = [nums[right], nums[partitionIndex]]
+    return partitionIndex
   }
 
-  let left = 0, right = nums.length - 1;
-  const targetIndex = k - 1; // 第 k 大对应的索引
+  let left = 0,
+    right = nums.length - 1
+  const targetIndex = k - 1 // 第 k 大对应的索引
 
   while (left <= right) {
-    const pivotIndex = partition(left, right);
+    const pivotIndex = partition(left, right)
     if (pivotIndex === targetIndex) {
-      return nums[pivotIndex]; // 找到目标元素
+      return nums[pivotIndex] // 找到目标元素
     } else if (pivotIndex < targetIndex) {
-      left = pivotIndex + 1; // 在右侧搜索
+      left = pivotIndex + 1 // 在右侧搜索
     } else {
-      right = pivotIndex - 1; // 在左侧搜索
+      right = pivotIndex - 1 // 在左侧搜索
     }
   }
 }
@@ -1023,32 +1026,32 @@ function findKthLargest(nums, k) {
 #### hash表，空间换时间
 
 ```js
-var findKthLargest = function(nums, k) {
+var findKthLargest = function (nums, k) {
   // 找到数组中的最大元素
-  let largest = -Infinity;
+  let largest = -Infinity
 
   for (let i = 0; i < nums.length; i++) {
-    if (nums[i] > largest) largest = nums[i];
+    if (nums[i] > largest) largest = nums[i]
   }
 
   // 构建一个哈希表，记录每个元素与最大值的差
-  const hash = {};
+  const hash = {}
 
   for (let i = 0; i < nums.length; i++) {
-    const diff = largest - nums[i];
-    hash[diff] = (hash[diff] || 0) + 1; // 记录差值出现的次数
+    const diff = largest - nums[i]
+    hash[diff] = (hash[diff] || 0) + 1 // 记录差值出现的次数
   }
 
   // 找到第 k 大的元素
-  let count = 0;
-  let diff = 0;
+  let count = 0
+  let diff = 0
   while (count < k) {
-    count += (hash[diff] || 0); // 累加当前差值的出现次数
-    diff++;
+    count += hash[diff] || 0 // 累加当前差值的出现次数
+    diff++
   }
 
-  return largest - diff + 1; // 返回第 k 大的元素
-};
+  return largest - diff + 1 // 返回第 k 大的元素
+}
 ```
 
 ## 两数之和 II - 输入有序数组-167
@@ -1161,7 +1164,7 @@ var twoSum = function (numbers, target) {
  * @return {boolean}
  */
 var isPalindrome = function (s) {
-  s = s.replace(/[^0-9a-zA-Z]/g, "").toLowerCase()
+  s = s.replace(/[^0-9a-zA-Z]/g, '').toLowerCase()
   let i = 0
   let j = s.length - 1
 
@@ -1255,8 +1258,8 @@ var reverseString = function (s) {
  * @return {string} - 反转元音后的字符串
  */
 var reverseVowels = function (s) {
-  const vowels = "aeiouAEIOU" // 定义元音字母
-  const sArray = s.split("") // 将字符串转换为字符数组
+  const vowels = 'aeiouAEIOU' // 定义元音字母
+  const sArray = s.split('') // 将字符串转换为字符数组
   let left = 0 // 左指针
   let right = sArray.length - 1 // 右指针
 
@@ -1272,13 +1275,13 @@ var reverseVowels = function (s) {
     }
     // 交换元音字母
     if (left < right) {
-      [sArray[left], sArray[right]] = [sArray[right], sArray[left]]
+      ;[sArray[left], sArray[right]] = [sArray[right], sArray[left]]
       left++ // 移动左指针
       right-- // 移动右指针
     }
   }
 
-  return sArray.join("") // 将字符数组转换回字符串并返回
+  return sArray.join('') // 将字符数组转换回字符串并返回
 }
 ```
 
@@ -1290,7 +1293,7 @@ var reverseVowels = function (s) {
 
 返回容器可以储存的最大水量。
 
-**说明：**你不能倾斜容器。 
+**说明：**你不能倾斜容器。
 
 **示例 1：**
 
@@ -1298,7 +1301,7 @@ var reverseVowels = function (s) {
 
 ```
 输入：[1,8,6,2,5,4,8,3,7]
-输出：49 
+输出：49
 解释：图中垂直线代表输入数组 [1,8,6,2,5,4,8,3,7]。在此情况下，容器能够容纳水（表示为蓝色部分）的最大值为 49。
 ```
 
@@ -1456,7 +1459,7 @@ var minSubArrayLen = function (target, nums) {
 
 ```
 输入: s = "abcabcbb"
-输出: 3 
+输出: 3
 解释: 因为无重复字符的最长子串是 "abc"，所以其长度为 3。
 ```
 
@@ -1533,7 +1536,7 @@ let lengthOfLongestSubstring = function (s) {
 起始索引等于 6 的子串是 "bac", 它是 "abc" 的异位词。
 ```
 
- **示例 2:**
+**示例 2:**
 
 ```
 输入: s = "abab", p = "ab"
@@ -1608,7 +1611,6 @@ function makeCountMap(strs) {
   }
   return map
 }
-
 ```
 
 ## 最小覆盖子串-76
@@ -1665,7 +1667,7 @@ let minWindow = function (s, t) {
   let left = 0 // 左边界
   let right = -1 // 右边界
   let countMap = {} // 当前窗口子串中 每个字符出现的次数
-  let min = "" // 当前计算出的最小子串
+  let min = '' // 当前计算出的最小子串
 
   // 循环终止条件是两者有一者超出边界
   while (left <= sl - tl && right <= sl) {
@@ -1682,7 +1684,7 @@ let minWindow = function (s, t) {
     if (isValid) {
       // 如果满足 记录当前的子串 并且左边界右移
       let currentValidLength = right - left + 1
-      if (currentValidLength < min.length || min === "") {
+      if (currentValidLength < min.length || min === '') {
         min = s.substring(left, right + 1)
       }
       // 也要把map里对应的项去掉
@@ -1718,7 +1720,7 @@ function makeCountMap(strs) {
 
 ## 两个数组的交集-349
 
-给定两个数组 `nums1` 和 `nums2` ，返回 *它们的* 交集 。输出结果中的每个元素一定是 **唯一** 的。我们可以 **不考虑输出结果的顺序** 。
+给定两个数组 `nums1` 和 `nums2` ，返回 _它们的_ 交集 。输出结果中的每个元素一定是 **唯一** 的。我们可以 **不考虑输出结果的顺序** 。
 
 **示例 1：**
 
@@ -1842,26 +1844,27 @@ function makeCountMap(nums) {
  * @return {number[]}
  */
 var intersectSorted = function (nums1, nums2) {
-  const result = [];
-  let i = 0, j = 0;
+  const result = []
+  let i = 0,
+    j = 0
 
   while (i < nums1.length && j < nums2.length) {
     if (nums1[i] < nums2[j]) {
-      i++;
+      i++
     } else if (nums1[i] > nums2[j]) {
-      j++;
+      j++
     } else {
-      result.push(nums1[i]);
-      i++;
-      j++;
+      result.push(nums1[i])
+      i++
+      j++
     }
   }
 
-  return result; // 返回交集数组
-};
+  return result // 返回交集数组
+}
 
 // 示例用法
-console.log(intersectSorted([1, 2, 2, 3], [2, 2, 3, 4])); // 输出: [2, 2, 3]
+console.log(intersectSorted([1, 2, 2, 3], [2, 2, 3, 4])) // 输出: [2, 2, 3]
 ```
 
 ## 有效的字母异位词-242
@@ -1932,7 +1935,7 @@ var isAnagram = function (s, t) {
 - 然后重复这个过程直到这个数变为 1，也可能是 **无限循环** 但始终变不到 1。
 - 如果这个过程 **结果为** 1，那么这个数就是快乐数。
 
-如果 `n` 是 *快乐数* 就返回 `true` ；不是，则返回 `false` 。
+如果 `n` 是 _快乐数_ 就返回 `true` ；不是，则返回 `false` 。
 
 **示例 1：**
 
@@ -2030,7 +2033,7 @@ function getNext(num) {
  * @return {boolean}
  */
 var wordPattern = function (pattern, s) {
-  const words = s.split(" ") // 按空格分割字符串
+  const words = s.split(' ') // 按空格分割字符串
   if (pattern.length !== words.length) return false // 长度不匹配直接返回 false
 
   const charToWord = new Map() // 存储字符到单词的映射
@@ -2136,7 +2139,7 @@ var isIsomorphic = function (s, t) {
 
 给定一个字符串 `s` ，根据字符出现的 **频率** 对其进行 **降序排序** 。一个字符出现的 **频率** 是它出现在字符串中的次数。
 
-返回 *已排序的字符串* 。如果有多个答案，返回其中任何一个。
+返回 _已排序的字符串_ 。如果有多个答案，返回其中任何一个。
 
 **示例 1:**
 
@@ -2196,7 +2199,7 @@ var frequencySort = function (s) {
   const sortedChars = Array.from(freqMap.entries()).sort((a, b) => b[1] - a[1])
 
   // 根据次数重构字符串
-  let result = ""
+  let result = ''
   for (const [char, freq] of sortedChars) {
     result += char.repeat(freq)
   }
@@ -2207,7 +2210,7 @@ var frequencySort = function (s) {
 
 ## 两数之和-1
 
-给定一个整数数组 `nums` 和一个整数目标值 `target`，请你在该数组中找出 **和为目标值** *`target`* 的那 **两个** 整数，并返回它们的数组下标。
+给定一个整数数组 `nums` 和一个整数目标值 `target`，请你在该数组中找出 **和为目标值** _`target`_ 的那 **两个** 整数，并返回它们的数组下标。
 
 你可以假设每种输入只会对应一个答案，并且你不能使用两次相同的元素。
 
@@ -2338,44 +2341,45 @@ nums[0] + nums[3] + nums[4] = (-1) + 2 + (-1) = 0 。
  * @param {number[]} nums - 输入整数数组
  * @return {number[][]} - 所有不重复的三元组
  */
-var threeSum = function(nums) {
-  const result = [];
-  const n = nums.length;
+var threeSum = function (nums) {
+  const result = []
+  const n = nums.length
 
   // 1. 排序数组
-  nums.sort((a, b) => a - b);
+  nums.sort((a, b) => a - b)
 
   // 2. 遍历数组，固定一个数
   for (let i = 0; i < n - 2; i++) {
     // 跳过重复的数字
-    if (i > 0 && nums[i] === nums[i - 1]) continue;
+    if (i > 0 && nums[i] === nums[i - 1]) continue
 
-    let left = i + 1, right = n - 1;
+    let left = i + 1,
+      right = n - 1
 
     // 3. 双指针寻找满足条件的二元组
     while (left < right) {
-      const sum = nums[i] + nums[left] + nums[right];
+      const sum = nums[i] + nums[left] + nums[right]
       if (sum === 0) {
-        result.push([nums[i], nums[left], nums[right]]);
+        result.push([nums[i], nums[left], nums[right]])
 
         // 跳过重复的左指针数字
-        while (left < right && nums[left] === nums[left + 1]) left++;
+        while (left < right && nums[left] === nums[left + 1]) left++
         // 跳过重复的右指针数字
-        while (left < right && nums[right] === nums[right - 1]) right--;
+        while (left < right && nums[right] === nums[right - 1]) right--
 
         // 移动双指针
-        left++;
-        right--;
+        left++
+        right--
       } else if (sum < 0) {
-        left++;
+        left++
       } else {
-        right--;
+        right--
       }
     }
   }
 
-  return result;
-};
+  return result
+}
 ```
 
 ## 四数之和-18
@@ -2386,7 +2390,7 @@ var threeSum = function(nums) {
 - `a`、`b`、`c` 和 `d` **互不相同**
 - `nums[a] + nums[b] + nums[c] + nums[d] == target`
 
-你可以按 **任意顺序** 返回答案 。 
+你可以按 **任意顺序** 返回答案 。
 
 **示例 1：**
 
@@ -2476,7 +2480,7 @@ var fourSum = function (nums, target) {
 
 ## 最接近的三数之和-16
 
-给定一个包括  n 个整数的数组  nums 和 一个目标值  target。找出  nums 中的三个整数，使得它们的和与  target 最接近。返回这三个数的和。假定每组输入只存在唯一答案。
+给定一个包括 n 个整数的数组 nums 和 一个目标值 target。找出 nums 中的三个整数，使得它们的和与 target 最接近。返回这三个数的和。假定每组输入只存在唯一答案。
 
 ```
 示例：
@@ -2639,7 +2643,7 @@ var fourSumCount = function (nums1, nums2, nums3, nums4) {
 }
 ```
 
-##  字母异位词分组-49
+## 字母异位词分组-49
 
 给你一个字符串数组，请你将 **字母异位词** 组合在一起。可以按任意顺序返回结果列表。
 
@@ -2686,7 +2690,7 @@ var groupAnagrams = function (strs) {
 
   for (let str of strs) {
     // 对字符串排序，作为哈希表的键
-    const sortedStr = str.split("").sort().join("")
+    const sortedStr = str.split('').sort().join('')
     if (!map.has(sortedStr)) {
       map.set(sortedStr, [])
     }
@@ -3172,7 +3176,7 @@ function reverse(head) {
 
 ## 删除排序链表中的重复元素-83
 
-给定一个已排序的链表的头 `head` ， *删除所有重复的元素，使每个元素只出现一次* 。返回 *已排序的链表* 。
+给定一个已排序的链表的头 `head` ， _删除所有重复的元素，使每个元素只出现一次_ 。返回 _已排序的链表_ 。
 
 **示例 1：**
 
@@ -3260,7 +3264,7 @@ var deleteDuplicates = function (head) {
 
    - 如果当前节点值小于 `x`，将该节点追加到 `before` 链表。
    - 如果当前节点值大于或等于 `x`，将该节点追加到 `after` 链表。
-   
+
 3. **合并两个链表**：将 `before` 链表的尾部连接到 `afterHead` 的头部，并设置 `after` 链表的尾节点为 `null`。
 
 4. 返回 `beforeHead.next` 作为新链表的头。
@@ -3315,7 +3319,7 @@ var partition = function (head, x) {
 
 请注意，偶数组和奇数组内部的相对顺序应该与输入时保持一致。
 
-你必须在 `O(1)` 的额外空间复杂度和 `O(n)` 的时间复杂度下解决这个问题。 
+你必须在 `O(1)` 的额外空间复杂度和 `O(n)` 的时间复杂度下解决这个问题。
 
 **示例 1:**
 
@@ -3519,7 +3523,7 @@ var removeElements = function (head, val) {
 
 ## 删除排序链表中的重复元素 II-82
 
-给定一个已排序的链表的头 `head` ， *删除原始链表中所有重复数字的节点，只留下不同的数字* 。返回 *已排序的链表* 。
+给定一个已排序的链表的头 `head` ， _删除原始链表中所有重复数字的节点，只留下不同的数字_ 。返回 _已排序的链表_ 。
 
 **示例 1：**
 
@@ -3595,7 +3599,7 @@ var deleteDuplicates = function (head) {
 
 ## 合并两个有序链表-21
 
-将两个升序链表合并为一个新的 **升序** 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。 
+将两个升序链表合并为一个新的 **升序** 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。
 
 **示例 1：**
 
@@ -3684,7 +3688,6 @@ var mergeTwoLists = function (l1, l2) {
 ```
 给定 1->2->3->4, 你应该返回 2->1->4->3.
 ```
-
 
 链接：[leetcode-cn.com/problems/swap-nodes-in-pairs](https://leetcode-cn.com/problems/swap-nodes-in-pairs)
 
@@ -3864,7 +3867,7 @@ function reverse(head, k) {
 
 ## 对链表进行插入排序-147
 
-给定单个链表的头 `head` ，使用 **插入排序** 对链表进行排序，并返回 *排序后链表的头* 。
+给定单个链表的头 `head` ，使用 **插入排序** 对链表进行排序，并返回 _排序后链表的头_ 。
 
 **插入排序** 算法的步骤:
 
@@ -3877,8 +3880,6 @@ function reverse(head, k) {
 对链表进行插入排序。
 
 ![img](https://p.ipic.vip/pfvmaf.gif)
-
- 
 
 **示例 1：**
 
@@ -3959,7 +3960,7 @@ var insertionSortList = function (head) {
 
 ## 排序链表-148
 
-给你链表的头结点 `head` ，请将其按 **升序** 排列并返回 **排序后的链表** 。 
+给你链表的头结点 `head` ，请将其按 **升序** 排列并返回 **排序后的链表** 。
 
 **示例 1：**
 
@@ -4262,42 +4263,42 @@ var removeNthFromEnd = function (head, n) {
  * @param {number} k
  * @return {ListNode}
  */
-var rotateRight = function(head, k) {
-    if (!head || !head.next || k === 0) {
-        return head;
-    }
+var rotateRight = function (head, k) {
+  if (!head || !head.next || k === 0) {
+    return head
+  }
 
-    // 计算链表长度
-    let length = 1;
-    let current = head;
-    while (current.next) {
-        length++;
-        current = current.next;
-    }
+  // 计算链表长度
+  let length = 1
+  let current = head
+  while (current.next) {
+    length++
+    current = current.next
+  }
 
-    // 计算有效的旋转次数
-    k = k % length;
-    if (k === 0) {
-        return head;
-    }
+  // 计算有效的旋转次数
+  k = k % length
+  if (k === 0) {
+    return head
+  }
 
-    // 将链表连接成环
-    current.next = head;
+  // 将链表连接成环
+  current.next = head
 
-    // 找到倒数第 k 个节点
-    let stepsToNewHead = length - k;
-    let newTail = head;
-    for (let i = 1; i < stepsToNewHead; i++) {
-        newTail = newTail.next;
-    }
+  // 找到倒数第 k 个节点
+  let stepsToNewHead = length - k
+  let newTail = head
+  for (let i = 1; i < stepsToNewHead; i++) {
+    newTail = newTail.next
+  }
 
-    // 新的头节点是 newTail.next
-    let newHead = newTail.next;
-    // 断开链表环
-    newTail.next = null;
+  // 新的头节点是 newTail.next
+  let newHead = newTail.next
+  // 断开链表环
+  newTail.next = null
 
-    return newHead;
-};
+  return newHead
+}
 ```
 
 ## 重排链表-143
@@ -4424,7 +4425,7 @@ function reverseList(head) {
 
 ## 回文链表234
 
-给你一个单链表的头节点 `head` ，请你判断该链表是否为回文链表。如果是，返回 `true` ；否则，返回 `false` 。 
+给你一个单链表的头节点 `head` ，请你判断该链表是否为回文链表。如果是，返回 `true` ；否则，返回 `false` 。
 
 **示例 1：**
 
@@ -4578,9 +4579,9 @@ let isValid = function (s) {
   let sl = s.length
   if (sl % 2 !== 0) return false
   let leftToRight = {
-    "{": "}",
-    "[": "]",
-    "(": ")",
+    '{': '}',
+    '[': ']',
+    '(': ')'
   }
   // 建立一个反向的 value -> key 映射表
   let rightToLeft = createReversedMap(leftToRight)
@@ -4620,7 +4621,6 @@ function createReversedMap(map) {
     return prev
   }, {})
 }
-
 ```
 
 ```js
@@ -4628,33 +4628,33 @@ function createReversedMap(map) {
  * @param {string} s
  * @return {boolean}
  */
-var isValid = function(s) {
-    // 使用栈保存左括号
-    const stack = [];
-    // 定义括号的映射关系
-    const map = {
-        ')': '(',
-        '}': '{',
-        ']': '['
-    };
+var isValid = function (s) {
+  // 使用栈保存左括号
+  const stack = []
+  // 定义括号的映射关系
+  const map = {
+    ')': '(',
+    '}': '{',
+    ']': '['
+  }
 
-    // 遍历字符串
-    for (const char of s) {
-        if (char in map) {
-            // 当前字符是右括号
-            const top = stack.length > 0 ? stack.pop() : '#'; // 栈顶字符
-            if (top !== map[char]) {
-                return false; // 不匹配则无效
-            }
-        } else {
-            // 当前字符是左括号，入栈
-            stack.push(char);
-        }
+  // 遍历字符串
+  for (const char of s) {
+    if (char in map) {
+      // 当前字符是右括号
+      const top = stack.length > 0 ? stack.pop() : '#' // 栈顶字符
+      if (top !== map[char]) {
+        return false // 不匹配则无效
+      }
+    } else {
+      // 当前字符是左括号，入栈
+      stack.push(char)
     }
+  }
 
-    // 检查栈是否为空
-    return stack.length === 0;
-};
+  // 检查栈是否为空
+  return stack.length === 0
+}
 ```
 
 ## 逆波兰表达式求值-150
@@ -4662,7 +4662,7 @@ var isValid = function(s) {
 150.逆波兰表达式求值
 根据逆波兰表示法，求表达式的值。
 
-有效的运算符包括 +, -, *, / 。每个运算对象可以是整数，也可以是另一个逆波兰表达式。
+有效的运算符包括 +, -, \*, / 。每个运算对象可以是整数，也可以是另一个逆波兰表达式。
 
 说明：
 
@@ -4697,38 +4697,38 @@ var isValid = function(s) {
  * @param {string[]} tokens
  * @return {number}
  */
-var evalRPN = function(tokens) {
-    const stack = [];
-    
-    for (const token of tokens) {
-        if (["+", "-", "*", "/"].includes(token)) {
-            // 遇到运算符，取出栈顶两个元素
-            const b = stack.pop();
-            const a = stack.pop();
-            let result;
-            switch (token) {
-                case "+":
-                    result = a + b;
-                    break;
-                case "-":
-                    result = a - b;
-                    break;
-                case "*":
-                    result = a * b;
-                    break;
-                case "/":
-                    result = Math.trunc(a / b); // 使用 Math.trunc 保留整数部分
-                    break;
-            }
-            stack.push(result); // 将结果入栈
-        } else {
-            // 遇到数字，转换为整数后入栈
-            stack.push(parseInt(token, 10));
-        }
-    }
+var evalRPN = function (tokens) {
+  const stack = []
 
-    return stack[0]; // 栈中最后剩下的就是结果
-};
+  for (const token of tokens) {
+    if (['+', '-', '*', '/'].includes(token)) {
+      // 遇到运算符，取出栈顶两个元素
+      const b = stack.pop()
+      const a = stack.pop()
+      let result
+      switch (token) {
+        case '+':
+          result = a + b
+          break
+        case '-':
+          result = a - b
+          break
+        case '*':
+          result = a * b
+          break
+        case '/':
+          result = Math.trunc(a / b) // 使用 Math.trunc 保留整数部分
+          break
+      }
+      stack.push(result) // 将结果入栈
+    } else {
+      // 遇到数字，转换为整数后入栈
+      stack.push(parseInt(token, 10))
+    }
+  }
+
+  return stack[0] // 栈中最后剩下的就是结果
+}
 ```
 
 ## 简化路径-71
@@ -4789,25 +4789,25 @@ var evalRPN = function(tokens) {
  * @return {string}
  */
 var simplifyPath = function (path) {
-  let tokens = path.split("/")
+  let tokens = path.split('/')
   let stack = []
 
   for (let index = 0; index < tokens.length; index++) {
     let token = tokens[index]
-    if (token === "..") {
+    if (token === '..') {
       if (stack.length > 0) {
         stack.pop()
       }
-    } else if (!(token === "") && !(token === ".")) {
+    } else if (!(token === '') && !(token === '.')) {
       stack.push(token)
     }
   }
 
-  let res = "/"
+  let res = '/'
   for (let token of stack) {
     res += `${token}/`
   }
-  if (res !== "/") {
+  if (res !== '/') {
     res = res.substr(0, res.length - 1)
   }
   return res
@@ -4961,7 +4961,6 @@ NestedIterator.prototype.next = function () {
 ]
 ```
 
-
 链接：[leetcode-cn.com/problems/binary-tree-level-order-traversal](https://leetcode-cn.com/problems/binary-tree-level-order-traversal)
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 
@@ -5039,7 +5038,7 @@ let levelOrder = function (root) {
 
 ## 二叉树的层序遍历 II-107
 
-给你二叉树的根节点 `root` ，返回其节点值 **自底向上的层序遍历** 。 （即按从叶子节点所在层到根节点所在的层，逐层从左向右遍历） 
+给你二叉树的根节点 `root` ，返回其节点值 **自底向上的层序遍历** 。 （即按从叶子节点所在层到根节点所在的层，逐层从左向右遍历）
 
 **示例 1：**
 
@@ -5179,9 +5178,9 @@ var rightSideView = function (root) {
 
 ## 完全平方数-279
 
-给定正整数  n，找到若干个完全平方数（比如  1, 4, 9, 16, ...）使得它们的和等于n。你需要让组成和的完全平方数的个数最少。
+给定正整数 n，找到若干个完全平方数（比如 1, 4, 9, 16, ...）使得它们的和等于n。你需要让组成和的完全平方数的个数最少。
 
-示例  1:
+示例 1:
 
 输入: n = 12 输出: 3 解释: 12 = 4 + 4 + 4. 示例 2:
 
@@ -5258,21 +5257,22 @@ var numSquares = function (n) {
 
 ```js
 var topKFrequent = function (nums, k) {
-  let res = [], map = new Map();
+  let res = [],
+    map = new Map()
 
   // 统计频率
-  nums.forEach(n => map.set(n, map.get(n) + 1 || 1));
+  nums.forEach((n) => map.set(n, map.get(n) + 1 || 1))
 
   // 按照频率排序
-  let sortedArray = [...map.entries()].sort((a, b) => b[1] - a[1]);
+  let sortedArray = [...map.entries()].sort((a, b) => b[1] - a[1])
 
   // 返回前 k 个频率最高的元素
   for (let i = 0; i < k; i++) {
-    res.push(sortedArray[i][0]);
+    res.push(sortedArray[i][0])
   }
 
-  return res;
-};
+  return res
+}
 ```
 
 ## 二叉树的最大深度-104
@@ -5504,8 +5504,6 @@ var minDepth = function (root) {
 
 给你一棵二叉树的根节点 `root` ，翻转这棵二叉树，并返回其根节点。
 
- 
-
 **示例 1：**
 
 ![img](https://assets.leetcode.com/uploads/2021/03/14/invert1-tree.jpg)
@@ -5611,7 +5609,6 @@ var invertTree = function (root) {
 输出: false
 ```
 
-
 链接：[leetcode-cn.com/problems/same-tree](https://leetcode-cn.com/problems/same-tree)
 
 ### 思路
@@ -5706,7 +5703,7 @@ var isSameTree = function (p, q) {
   2   2
  / \ / \
 3  4 4  3
- 
+
 
 但是下面这个 [1,2,2,null,3,null,3] 则不是镜像对称的:
 
@@ -5761,7 +5758,7 @@ var isSymmetric = function (root) {
 
 给你一棵 **完全二叉树** 的根节点 `root` ，求出该树的节点个数。
 
-[完全二叉树](https://baike.baidu.com/item/完全二叉树/7773232?fr=aladdin) 的定义如下：在完全二叉树中，除了最底层节点可能没填满外，其余每层节点数都达到最大值，并且最下面一层的节点都集中在该层最左边的若干位置。若最底层为第 `h` 层，则该层包含 `1~ 2h` 个节点 
+[完全二叉树](https://baike.baidu.com/item/完全二叉树/7773232?fr=aladdin) 的定义如下：在完全二叉树中，除了最底层节点可能没填满外，其余每层节点数都达到最大值，并且最下面一层的节点都集中在该层最左边的若干位置。若最底层为第 `h` 层，则该层包含 `1~ 2h` 个节点
 
 **示例 1：**
 
@@ -5854,7 +5851,6 @@ var countNodes = function (root) {
  4   4
 返回 false 。
 ```
-
 
 链接：[leetcode-cn.com/problems/balanced-binary-tree](https://leetcode-cn.com/problems/balanced-binary-tree)
 
@@ -6051,7 +6047,7 @@ function isLeaf(node) {
  */
 var binaryTreePaths = function (root) {
   let res = []
-  let dfs = (node, path = "") => {
+  let dfs = (node, path = '') => {
     if (!node) {
       return
     }
@@ -6227,7 +6223,7 @@ var sumNumbers = function (root) {
     dfs(node.left, newPath)
     dfs(node.right, newPath)
   }
-  dfs(root, "")
+  dfs(root, '')
   return paths.reduce((total, val) => {
     return total + Number(val)
   }, 0)
@@ -6329,13 +6325,11 @@ let countSum = (node, sum) => {
 
 ![img](https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/14/binarysearchtree_improved.png)
 
- 
-
 **示例 1:**
 
 ```
 输入: root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 8
-输出: 6 
+输出: 6
 解释: 节点 2 和节点 8 的最近公共祖先是 6。
 ```
 
@@ -6403,7 +6397,7 @@ var lowestCommonAncestor = function (root, p, q) {
 
   只包含
 
-   小于 
+  小于
 
   当前节点的数。
 
@@ -6474,13 +6468,13 @@ var isValidBST = function (root) {
 
 ## 删除二叉搜索树中的节点-450
 
-给定一个二叉搜索树的根节点 root 和一个值 key，删除二叉搜索树中的  key 对应的节点，并保证二叉搜索树的性质不变。返回二叉搜索树（有可能被更新）的根节点的引用。
+给定一个二叉搜索树的根节点 root 和一个值 key，删除二叉搜索树中的 key 对应的节点，并保证二叉搜索树的性质不变。返回二叉搜索树（有可能被更新）的根节点的引用。
 
 一般来说，删除节点可分为两个步骤：
 
 首先找到需要删除的节点；
 如果找到了，删除它。
-说明： 要求算法时间复杂度为  O(h)，h 为树的高度。
+说明： 要求算法时间复杂度为 O(h)，h 为树的高度。
 
 示例:
 
@@ -6547,12 +6541,12 @@ var deleteNode = function (root, key) {
     if (node.left && node.left.val === key) {
       return {
         parent: node,
-        pos: "left",
+        pos: 'left'
       }
     } else if (node.right && node.right.val === key) {
       return {
         parent: node,
-        pos: "right",
+        pos: 'right'
       }
     } else {
       return findNodePos(node.left, key) || findNodePos(node.right, key)
@@ -6723,14 +6717,12 @@ var kthSmallest = function (root, k) {
 
 ![image](https://user-images.githubusercontent.com/23615778/84223508-a9814500-ab0c-11ea-993a-061b0cdedf29.png)
 
-
-
 示例 1:
 
 输入: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 1
 输出: 3
 解释: 节点 5 和节点 1 的最近公共祖先是节点 3。
-示例  2:
+示例 2:
 
 输入: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 4
 输出: 5
@@ -6785,7 +6777,7 @@ var lowestCommonAncestor = function (root, p, q) {
     } else {
       return {
         depth,
-        node,
+        node
       }
     }
   }
@@ -6843,18 +6835,18 @@ function isAncestor(node, target) {
  */
 var lowestCommonAncestor = function (root, p, q) {
   // 如果当前节点为空，或等于 p 或 q，则返回当前节点
-  if (!root || root === p || root === q) return root;
+  if (!root || root === p || root === q) return root
 
   // 递归查找左子树和右子树
-  let left = lowestCommonAncestor(root.left, p, q);
-  let right = lowestCommonAncestor(root.right, p, q);
+  let left = lowestCommonAncestor(root.left, p, q)
+  let right = lowestCommonAncestor(root.right, p, q)
 
   // 如果左右子树都不为空，说明当前节点是最近公共祖先
-  if (left && right) return root;
+  if (left && right) return root
 
   // 否则返回非空的那个
-  return left || right;
-};
+  return left || right
+}
 ```
 
 ## 电话号码的字母组合-17
@@ -6864,8 +6856,6 @@ var lowestCommonAncestor = function (root, p, q) {
 给出数字到字母的映射如下（与电话按键相同）。注意 1 不对应任何字母。
 
 ![img](https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2021/11/09/200px-telephone-keypad2svg.png)
-
- 
 
 **示例 1：**
 
@@ -6890,7 +6880,7 @@ var lowestCommonAncestor = function (root, p, q) {
 
 ## 思路
 
-每次递归中都对当前数字所代表的的字母全部列出来，拼在已完成的字符后面，再交给下一次递归。通过 index 下标来判断是否完成，一旦长度符合，就放入结果数组中。 
+每次递归中都对当前数字所代表的的字母全部列出来，拼在已完成的字符后面，再交给下一次递归。通过 index 下标来判断是否完成，一旦长度符合，就放入结果数组中。
 
 ```js
 /**
@@ -6900,7 +6890,7 @@ var lowestCommonAncestor = function (root, p, q) {
 var letterCombinations = function (digits) {
   let res = []
 
-  if (digits === "") {
+  if (digits === '') {
     return res
   }
 
@@ -6919,22 +6909,22 @@ var letterCombinations = function (digits) {
     }
   }
 
-  findCombinations(0, "")
+  findCombinations(0, '')
 
   return res
 }
 
 let letterMap = [
-  " ", //0
-  "", //1
-  "abc", //2
-  "def", //3
-  "ghi", //4
-  "jkl", //5
-  "mno", //6
-  "pqrs", //7
-  "tuv", //8
-  "wxyz", //9
+  ' ', //0
+  '', //1
+  'abc', //2
+  'def', //3
+  'ghi', //4
+  'jkl', //5
+  'mno', //6
+  'pqrs', //7
+  'tuv', //8
+  'wxyz' //9
 ]
 ```
 
@@ -6943,7 +6933,6 @@ let letterMap = [
 给定一个只包含数字的字符串，复原它并返回所有可能的 IP 地址格式。
 
 有效的 IP 地址正好由四个整数（每个整数位于 0 到 255 之间组成），整数之间用 '.' 分隔。
-
 
 示例:
 
@@ -6977,7 +6966,7 @@ let restoreIpAddresses = function (s) {
       // 点全部用光后 剩余字符依然是一个合格的ip chunk
       // 就视为一个答案 放入数组
       if (isValidChunk(rest)) {
-        res.push(prev.concat(rest).join("."))
+        res.push(prev.concat(rest).join('.'))
       }
       return
     }
@@ -7002,7 +6991,7 @@ function isValidChunk(str) {
     return false
   }
   // 开头是0的话 只能整个字符串只有一位0才行
-  if (str[0] === "0") {
+  if (str[0] === '0') {
     return strLen === 1
   }
   let num = Number(str)
@@ -7175,7 +7164,7 @@ var permute = function (nums) {
  * @param {number[]} nums
  * @return {number[][]}
  */
-let uniqSymbol = "X"
+let uniqSymbol = 'X'
 
 let permuteUnique = function (nums) {
   let n = nums.length
@@ -7315,13 +7304,13 @@ var combine = function (n, k) {
 
 ## 组合总和-39
 
-给定一个无重复元素的数组  candidates 和一个目标数  target ，找出  candidates 中所有可以使数字和为  target 的组合。
+给定一个无重复元素的数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。
 
 candidates 中的数字可以无限制重复被选取。
 
 说明：
 
-所有数字（包括  target）都是正整数。
+所有数字（包括 target）都是正整数。
 解集不能包含重复的组合。
 
 ```
@@ -7397,7 +7386,7 @@ candidates 中的每个数字在每个组合中只能使用一次。
 说明：
 
 所有数字（包括目标数）都是正整数。
-解集不能包含重复的组合。 
+解集不能包含重复的组合。
 
 ```
 示例 1:
@@ -7470,12 +7459,12 @@ var combinationSum2 = function (candidates, target) {
 
 ## 组合总和 III-216
 
-找出所有相加之和为  n 的  k 个数的组合。组合中只允许含有 1 - 9 的正整数，并且每种组合中不存在重复的数字。
+找出所有相加之和为 n 的 k 个数的组合。组合中只允许含有 1 - 9 的正整数，并且每种组合中不存在重复的数字。
 
 说明：
 
 所有数字都是正整数。
-解集不能包含重复的组合。 
+解集不能包含重复的组合。
 示例 1:
 
 ```
@@ -7667,7 +7656,7 @@ var subsetsWithDup = function (nums) {
 }
 
 function getKey(arr) {
-  return arr.join("~")
+  return arr.join('~')
 }
 ```
 
@@ -7826,7 +7815,7 @@ let directions = [
   [-1, 0],
   [1, 0],
   [0, -1],
-  [0, 1],
+  [0, 1]
 ] // 左右上下
 var exist = function (board, word) {
   let maxY = board.length
@@ -7919,7 +7908,7 @@ var exist = function (board, word) {
 输出：3
 ```
 
- [链接](https://leetcode.cn/problems/number-of-islands/description/)
+[链接](https://leetcode.cn/problems/number-of-islands/description/)
 
 ### **思路**
 
@@ -7946,10 +7935,10 @@ var numIslands = function (grid) {
 
   const dfs = (i, j) => {
     // 边界条件：超出网格范围或遇到水
-    if (i < 0 || i >= rows || j < 0 || j >= cols || grid[i][j] === "0") return
+    if (i < 0 || i >= rows || j < 0 || j >= cols || grid[i][j] === '0') return
 
     // 标记当前陆地为访问过
-    grid[i][j] = "0"
+    grid[i][j] = '0'
 
     // 递归访问上下左右
     dfs(i - 1, j)
@@ -7961,7 +7950,7 @@ var numIslands = function (grid) {
   // 遍历整个网格
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < cols; j++) {
-      if (grid[i][j] === "1") {
+      if (grid[i][j] === '1') {
         count++ // 每发现一个新的岛屿，计数+1
         dfs(i, j) // 淹没整个岛屿
       }
@@ -8004,7 +7993,7 @@ var numIslands = function (grid) {
 
 ### **思路**
 
->只需要遍历四个边界上的节点，遇到 O 的边界点才开始蔓延遍历，并且把遍历到的节点都标记为 #（防止重复遍历）.。最后再一次性遍历整个二维数组，遇到 # 标记的格子都转为 O（因为是从边界蔓延的，一定是不符合 X 的条件的）。
+> 只需要遍历四个边界上的节点，遇到 O 的边界点才开始蔓延遍历，并且把遍历到的节点都标记为 #（防止重复遍历）.。最后再一次性遍历整个二维数组，遇到 # 标记的格子都转为 O（因为是从边界蔓延的，一定是不符合 X 的条件的）。
 
 1. **边缘扩展的标记法**：
    - 从矩阵边界的 `'O'` 开始，进行深度优先搜索（DFS）或广度优先搜索（BFS），将与边界相连的所有 `'O'` 标记为特殊字符（如 `'#'`）。
@@ -8028,8 +8017,8 @@ var solve = function (board) {
 
   // 深度优先搜索，标记未被围绕的区域
   const dfs = (i, j) => {
-    if (i < 0 || i >= rows || j < 0 || j >= cols || board[i][j] !== "O") return
-    board[i][j] = "#" // 标记为未被围绕
+    if (i < 0 || i >= rows || j < 0 || j >= cols || board[i][j] !== 'O') return
+    board[i][j] = '#' // 标记为未被围绕
     dfs(i - 1, j)
     dfs(i + 1, j)
     dfs(i, j - 1)
@@ -8049,10 +8038,10 @@ var solve = function (board) {
   // 遍历整个矩阵，修改内容
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < cols; j++) {
-      if (board[i][j] === "O") {
-        board[i][j] = "X" // 被围绕的区域
-      } else if (board[i][j] === "#") {
-        board[i][j] = "O" // 恢复未被围绕的区域
+      if (board[i][j] === 'O') {
+        board[i][j] = 'X' // 被围绕的区域
+      } else if (board[i][j] === '#') {
+        board[i][j] = 'O' // 恢复未被围绕的区域
       }
     }
   }
@@ -8113,7 +8102,7 @@ var pacificAtlantic = function (heights) {
       [-1, 0],
       [1, 0],
       [0, -1],
-      [0, 1], // 上下左右
+      [0, 1] // 上下左右
     ]
     for (const [dr, dc] of directions) {
       const newRow = row + dr
@@ -8162,9 +8151,9 @@ n 皇后问题研究的是如何将 n 个皇后放置在 n×n 的棋盘上，并
 
 上图为 8 皇后问题的一种解法。
 
-给定一个整数 n，返回所有不同的  n 皇后问题的解决方案。
+给定一个整数 n，返回所有不同的 n 皇后问题的解决方案。
 
-每一种解法包含一个明确的  n 皇后问题的棋子放置方案，该方案中 'Q' 和 '.' 分别代表了皇后和空位。
+每一种解法包含一个明确的 n 皇后问题的棋子放置方案，该方案中 'Q' 和 '.' 分别代表了皇后和空位。
 
 示例:
 
@@ -8284,12 +8273,12 @@ function generateBoard(row) {
   let n = row.length
   let res = []
   for (let y = 0; y < n; y++) {
-    let cur = ""
+    let cur = ''
     for (let x = 0; x < n; x++) {
       if (x === row[y]) {
-        cur += "Q"
+        cur += 'Q'
       } else {
-        cur += "."
+        cur += '.'
       }
     }
     res.push(cur)
@@ -8379,15 +8368,13 @@ var totalNQueens = function (n) {
 
 一个数独的解法需遵循如下规则：
 
-1. 数字  1-9 在每一行只能出现一次。
-2. 数字  1-9 在每一列只能出现一次。
-3. 数字  1-9 在每一个以粗实线分隔的  3x3 宫内只能出现一次。
+1. 数字 1-9 在每一行只能出现一次。
+2. 数字 1-9 在每一列只能出现一次。
+3. 数字 1-9 在每一个以粗实线分隔的 3x3 宫内只能出现一次。
 
-空白格用  '.' 表示。
+空白格用 '.' 表示。
 
 ![image](https://user-images.githubusercontent.com/23615778/84681803-44dc4500-af67-11ea-8fcd-c42efc91b56f.png)
-
-
 
 一个数独。
 
@@ -8397,9 +8384,9 @@ var totalNQueens = function (n) {
 
 Note:
 
-给定的数独序列只包含数字  1-9 和字符  '.' 。
+给定的数独序列只包含数字 1-9 和字符 '.' 。
 你可以假设给定的数独只有唯一解。
-给定数独永远是  9x9 形式的。
+给定数独永远是 9x9 形式的。
 
 来源：力扣（LeetCode）
 链接：[leetcode-cn.com/problems/sudoku-solver](https://leetcode-cn.com/problems/sudoku-solver)
@@ -8455,7 +8442,7 @@ let solveSudoku = function (board) {
   for (let y = 0; y < 9; y++) {
     for (let x = 0; x < 9; x++) {
       let cell = board[y][x]
-      if (cell === ".") {
+      if (cell === '.') {
         // 待填充的数独格子 记录在队列中
         pending.push([x, y])
         continue
@@ -8480,7 +8467,7 @@ let solveSudoku = function (board) {
         if (helper(startPendingIndex + 1)) {
           return true
         } else {
-          board[y][x] = "."
+          board[y][x] = '.'
           restoreCell(x, y, cur)
         }
       }
@@ -8612,7 +8599,7 @@ var climbStairs = function (n) {
 
 ```
 
-自顶向下的最小路径和为  11（即，2 + 3 + 5 + 1 = 11）。
+自顶向下的最小路径和为 11（即，2 + 3 + 5 + 1 = 11）。
 
 说明：如果你可以只使用 O(n) 的额外空间（n 为三角形的总行数）来解决这个问题，那么你的算法会很加分。
 
@@ -8631,7 +8618,7 @@ var climbStairs = function (n) {
    从底向上递推：
 
    ```js
-   dp[i][j]=triangle[i][j]+min(dp[i+1][j],dp[i+1][j+1])
+   dp[i][j] = triangle[i][j] + min(dp[i + 1][j], dp[i + 1][j + 1])
    ```
 
 3. 优化空间复杂度
@@ -8693,13 +8680,13 @@ var minimumTotal = function (triangle) {
 
 2. **递推公式**:
 
-   - 如果在第一行或第一列： 
+   - 如果在第一行或第一列：
 
      ```js
-     dp[i][j]=grid[i][j]+(左边或上边的路径和)
+     dp[i][j] = grid[i][j] + 左边或上边的路径和
      ```
 
-   - 一般位置： 
+   - 一般位置：
 
      ```js
      dp[i][j]=grid[i][j]+min(dp[i−1][j],dp[i][j−1])
@@ -8796,7 +8783,7 @@ var integerBreak = function (n) {
 }
 ```
 
-## 解码方法-91 
+## 解码方法-91
 
 一条包含字母 A-Z 的消息通过以下方式进行了编码：
 
@@ -8998,16 +8985,16 @@ var rob = function (nums) {
 
      - 定义 dp[i]dp[i]dp[i] 为从第 1 个房屋到第 iii 个房屋可以偷窃的最大金额。
 
-     - 状态转移方程为： 
+     - 状态转移方程为：
 
        ```js
        dp[i]=max(dp[i−1],dp[i−2]+nums[i])
        ```
 
-     - 初始化： 
+     - 初始化：
 
        ```js
-       dp[0]=nums[0], dp[1]=max(nums[0],nums[1])
+       ;(dp[0] = nums[0]), (dp[1] = max(nums[0], nums[1]))
        ```
 
 3. **取两种情况的最大值**：
@@ -9064,8 +9051,6 @@ function rob(nums) {
      3   1
 ```
 
-
-
 输出: 7
 解释: 小偷一晚能够盗取的最高金额 = 3 + 3 + 1 = 7.
 示例 2:
@@ -9081,7 +9066,7 @@ function rob(nums) {
 ```
 
 输出: 9
-解释: 小偷一晚能够盗取的最高金额  = 4 + 5 = 9.
+解释: 小偷一晚能够盗取的最高金额 = 4 + 5 = 9.
 
 来源：力扣（LeetCode）
 链接：[leetcode-cn.com/problems/house-robber-iii](https://leetcode-cn.com/problems/house-robber-iii)
@@ -9233,7 +9218,7 @@ var rob = function (root) {
 
 ```
 输入: prices = [1,2,3,0,2]
-输出: 3 
+输出: 3
 解释: 对应的交易状态为: [买入, 卖出, 冷冻期, 买入, 卖出]
 ```
 
@@ -9464,7 +9449,7 @@ var lengthOfLIS = function (nums) {
 
 如果连续数字之间的差严格地在正数和负数之间交替，则数字序列称为摆动序列。第一个差（如果存在的话）可能是正数或负数。少于两个元素的序列也是摆动序列。
 
-例如， [1,7,4,9,2,5] 是一个摆动序列，因为差值 (6,-3,5,-7,3) 是正负交替出现的。相反, [1,4,7,2,5] 和  [1,7,4,5,5] 不是摆动序列，第一个序列是因为它的前两个差值都是正数，第二个序列是因为它的最后一个差值为零。
+例如， [1,7,4,9,2,5] 是一个摆动序列，因为差值 (6,-3,5,-7,3) 是正负交替出现的。相反, [1,4,7,2,5] 和 [1,7,4,5,5] 不是摆动序列，第一个序列是因为它的前两个差值都是正数，第二个序列是因为它的最后一个差值为零。
 
 给定一个整数序列，返回作为摆动序列的最长子序列的长度。 通过从原始序列中删除一些（也可以不删除）元素来获得子序列，剩下的元素保持其原始顺序。
 
@@ -9513,7 +9498,7 @@ var wiggleMaxLength = function (nums) {
 
   dp[0] = {
     less: 1,
-    more: 1,
+    more: 1
   }
 
   let res = 1
@@ -9522,7 +9507,7 @@ var wiggleMaxLength = function (nums) {
     let num = nums[i]
     dp[i] = {
       less: 1,
-      more: 1,
+      more: 1
     }
     for (let j = 0; j < i; j++) {
       let prevNum = nums[j]
@@ -9541,7 +9526,7 @@ var wiggleMaxLength = function (nums) {
 
 ## 最长公共子序列-1143
 
-给定两个字符串  text1 和  text2，返回这两个字符串的最长公共子序列的长度。
+给定两个字符串 text1 和 text2，返回这两个字符串的最长公共子序列的长度。
 
 一个字符串的**子序列**是指这样一个新的字符串：它是由原字符串在不改变字符的相对顺序的情况下删除某些字符（也可以不删除任何字符）后组成的新字符串。
 例如，"ace" 是 "abcde" 的子序列，但 "aec" 不是 "abcde" 的子序列。两个字符串的「公共子序列」是这两个字符串所共同拥有的子序列。
@@ -9564,7 +9549,7 @@ var wiggleMaxLength = function (nums) {
 输入：text1 = "abc", text2 = "def"
 输出：0
 解释：两个字符串没有公共子序列，返回 0。
- 
+
 
 提示:
 
@@ -9643,7 +9628,7 @@ var longestCommonSubsequence = function (text1, text2) {
 
 解释: 数组可以分割成 [1, 5, 5] 和 [11].
 
-示例  2:
+示例 2:
 
 输入: [1, 2, 3, 5]
 
@@ -9669,7 +9654,7 @@ var longestCommonSubsequence = function (text1, text2) {
 
 每一步也分为「拿当前的元素」和「不拿当前的元素」。
 
-1. 拿的话，结果就变为 dp[i - 1][j - nums[i]] （看看用前几个数能不能凑成「目标值 - 当前的值」）。
+1. 拿的话，结果就变为 dp[i - 1]j - nums[i]] （看看用前几个数能不能凑成「目标值 - 当前的值」）。
 2. 不拿的话，结果就变为 dp[i - 1][j] （不用这个数，前几个数能不能凑成当前的值）
 3. 特殊情况，当前的值可以直接凑成目标值，也算 true。
 
@@ -9747,7 +9732,7 @@ let canPartition = function (nums) {
 
 ```
 输入：coins = [1, 2, 5], amount = 11
-输出：3 
+输出：3
 解释：11 = 5 + 5 + 1
 ```
 
@@ -9864,9 +9849,9 @@ var coinChange = (coins, amount) => {
 ```
 dp[i][j][k]= max(
   // 不选择当前字符串
-  dp[i][j][k - 1], 
+  dp[i][j][k - 1],
   // 选择了当前字符串，用减掉可用个数后并且不能选择当前字符时的最优解
-  dp[i - 当前字符使用 0 的个数][j - 当前字符使用 1 的个数][k - 1] 
+  dp[i - 当前字符使用 0 的个数][j - 当前字符使用 1 的个数][k - 1]
 )
 ```
 
@@ -9931,7 +9916,7 @@ function countMAndN(str) {
 
 ## 单词拆分-139
 
-给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，判定  s 是否可以被空格拆分为一个或多个在字典中出现的单词。
+给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，判定 s 是否可以被空格拆分为一个或多个在字典中出现的单词。
 
 说明：
 
@@ -10009,7 +9994,7 @@ let wordBreak = function (s, wordDict) {
 
 ## 目标和-494
 
-给定一个非负整数数组，a1, a2, ..., an, 和一个目标数，S。现在你有两个符号  + 和  -。对于数组中的任意一个整数，你都可以从  + 或  -中选择一个符号添加在前面。
+给定一个非负整数数组，a1, a2, ..., an, 和一个目标数，S。现在你有两个符号 + 和 -。对于数组中的任意一个整数，你都可以从 + 或 -中选择一个符号添加在前面。
 
 返回可以使最终数组和为目标数 S 的所有添加符号的方法数。
 
@@ -10066,7 +10051,7 @@ let wordBreak = function (s, wordDict) {
 所以状态转移方程是：
 
 ```js
-dp[n][s] = dp[n - 1][s - num] + dp[n- 1][s + num]
+dp[n][s] = dp[n - 1][s - num] + dp[n - 1][s + num]
 ```
 
 ```js
@@ -10127,7 +10112,7 @@ let findTargetSumWays = function (nums, S) {
 
 输出: 1
 
-解释: 
+解释:
 你有三个孩子和两块小饼干，3个孩子的胃口值分别是：1,2,3。
 虽然你有两块小饼干，由于他们的尺寸都是1，你只能让胃口值是1的孩子满足。
 所以你应该输出1。
@@ -10137,7 +10122,7 @@ let findTargetSumWays = function (nums, S) {
 
 输出: 2
 
-解释: 
+解释:
 你有两个孩子和三块小饼干，2个孩子的胃口值分别是1,2。
 你拥有的饼干数量和尺寸都足以让所有孩子满足。
 所以你应该输出2.
@@ -10213,7 +10198,7 @@ s = "axc", t = "ahbgdc"
 
 致谢:
 
-特别感谢  @pbrother](https://github.com/pbrother) 添加此问题并且创建所有测试用例。
+特别感谢 @pbrother](https://github.com/pbrother) 添加此问题并且创建所有测试用例。
 
 来源：力扣（LeetCode）
 链接：[leetcode-cn.com/problems/is-subsequence](https://leetcode-cn.com/problems/is-subsequence)
@@ -10251,7 +10236,7 @@ let isSubsequence = function (s, t) {
   }
 
   return false
-};
+}
 ```
 
 ## 无重叠区间-435
@@ -10333,8 +10318,6 @@ let eraseOverlapIntervals = function (intervals) {
 }
 ```
 
-
-
 ## [字节面试算法题](https://leetcode.cn/explore/featured/card/bytedance/242/string/)
 
 ### 一.字符串
@@ -10347,7 +10330,7 @@ let eraseOverlapIntervals = function (intervals) {
 
 ```
 输入: s = "abcabcbb"
-输出: 3 
+输出: 3
 解释: 因为无重复字符的最长子串是 "abc"，所以其长度为 3。
 ```
 
@@ -10440,7 +10423,7 @@ var lengthOfLongestSubstring = function (s) {
  * @return {string}
  */
 var longestCommonPrefix = function (strs) {
-  if (!strs.length) return ""
+  if (!strs.length) return ''
 
   // 初始化公共前缀为第一个字符串
   let prefix = strs[0]
@@ -10450,7 +10433,7 @@ var longestCommonPrefix = function (strs) {
     // 不断缩短prefix 直到成为当前字符串的前缀
     while (strs[i].indexOf(prefix) !== 0) {
       prefix = prefix.slice(0, -1)
-      if (prefix === "") return ""
+      if (prefix === '') return ''
     }
   }
 
@@ -10505,17 +10488,17 @@ var checkInclusion = function (s1, s2) {
   const need = new Array(26).fill(0)
   const window = new Array(26).fill(0)
   for (const char of s1) {
-    need[char.charCodeAt(0) - "a".charCodeAt(0)]++
+    need[char.charCodeAt(0) - 'a'.charCodeAt(0)]++
   }
 
   // 滑动窗口遍历 s2
   for (let i = 0; i < m; i++) {
     // 添加当前字符到窗口
-    window[s2[i].charCodeAt(0) - "a".charCodeAt(0)]++
+    window[s2[i].charCodeAt(0) - 'a'.charCodeAt(0)]++
 
     // 如果窗口大小超过 s1 的长度，缩小窗口
     if (i >= n) {
-      window[s2[i - n].charCodeAt(0) - "a".charCodeAt(0)]--
+      window[s2[i - n].charCodeAt(0) - 'a'.charCodeAt(0)]--
     }
 
     // 判断窗口内的字符频率是否匹配
@@ -10574,7 +10557,7 @@ var checkInclusion = function (s1, s2) {
  * @return {string}
  */
 var multiply = function (num1, num2) {
-  if (num1 === "0" || num2 === "0") return "0"
+  if (num1 === '0' || num2 === '0') return '0'
 
   const m = num1.length
   const n = num2.length
@@ -10583,7 +10566,7 @@ var multiply = function (num1, num2) {
   // 从低位到高位逐位相乘
   for (let i = m - 1; i >= 0; i--) {
     for (let j = n - 1; j >= 0; j--) {
-      const mul = (num1[i] - "0") * (num2[j] - "0")
+      const mul = (num1[i] - '0') * (num2[j] - '0')
       const p1 = i + j
       const p2 = i + j + 1
 
@@ -10595,8 +10578,8 @@ var multiply = function (num1, num2) {
   }
 
   // 去除前导零
-  let result = res.join("")
-  while (result[0] === "0") {
+  let result = res.join('')
+  while (result[0] === '0') {
     result = result.slice(1)
   }
 
@@ -10666,7 +10649,7 @@ var reverseWords = function (s) {
   // 去除多余空格并分割单词
   const words = s.trim().split(/\s+/)
   // 反转单词列表并拼接成结果字符串
-  return words.reverse().join(" ")
+  return words.reverse().join(' ')
 }
 ```
 
@@ -10770,19 +10753,19 @@ var reverseWords = function (s) {
  */
 var simplifyPath = function (path) {
   const stack = []
-  const components = path.split("/")
+  const components = path.split('/')
 
   for (const component of components) {
-    if (component === "..") {
+    if (component === '..') {
       if (stack.length > 0) {
         stack.pop()
       }
-    } else if (component !== "" && component !== ".") {
+    } else if (component !== '' && component !== '.') {
       stack.push(component)
     }
   }
 
-  return "/" + stack.join("/")
+  return '/' + stack.join('/')
 }
 ```
 
@@ -10846,7 +10829,7 @@ var restoreIpAddresses = function (s) {
 
   // 检查每段是否合法
   function isValid(segment) {
-    if (segment.length > 1 && segment[0] === "0") return false // 前导0
+    if (segment.length > 1 && segment[0] === '0') return false // 前导0
     const num = parseInt(segment, 10)
     return num >= 0 && num <= 255
   }
@@ -10856,7 +10839,7 @@ var restoreIpAddresses = function (s) {
     if (path.length === 4) {
       // 如果刚好用完所有字符，添加到结果集
       if (start === s.length) {
-        result.push(path.join("."))
+        result.push(path.join('.'))
       }
       return
     }
@@ -10929,7 +10912,7 @@ nums[0] + nums[3] + nums[4] = (-1) + 2 + (-1) = 0 。
    - 对于剩下的部分，使用双指针法寻找两数之和为 −nums[i]。
 3. **双指针法**：
    - 使用两个指针 left 和 right，分别指向当前区间的头尾。
-   - 根据三数之和  nums[i]+nums[left]+nums[right]
+   - 根据三数之和 nums[i]+nums[left]+nums[right]
      - 如果和小于 0，则 left++ 以增加总和。
      - 如果和大于 0，则 right−− 以减少总和。
      - 如果等于 0，则记录结果，同时跳过重复元素。
@@ -10981,7 +10964,7 @@ var threeSum = function (nums) {
 
 岛屿的面积是岛上值为 `1` 的单元格的数目。
 
-计算并返回 `grid` 中最大的岛屿面积。如果没有岛屿，则返回面积为 `0` 。 
+计算并返回 `grid` 中最大的岛屿面积。如果没有岛屿，则返回面积为 `0` 。
 
 **示例 1：**
 
@@ -10997,7 +10980,7 @@ var threeSum = function (nums) {
 
 ```
 输入：grid = [[0,0,0,0,0,0,0,0]]
-输出：0 
+输出：0
 ```
 
 **提示：**
@@ -11201,7 +11184,7 @@ var search = function (nums, target) {
 输入：nums = [1,3,5,4,7]
 输出：3
 解释：最长连续递增序列是 [1,3,5], 长度为3。
-尽管 [1,3,5,7] 也是升序的子序列, 但它不是连续的，因为 5 和 7 在原数组里被 4 隔开。 
+尽管 [1,3,5,7] 也是升序的子序列, 但它不是连续的，因为 5 和 7 在原数组里被 4 隔开。
 ```
 
 **示例 2：**
@@ -11256,7 +11239,7 @@ var findLengthOfLCIS = function (nums) {
 
 ### 2.5.数组中的第K个最大元素
 
-给定整数数组 `nums` 和整数 `k`，请返回数组中第  `k` 个最大的元素。
+给定整数数组 `nums` 和整数 `k`，请返回数组中第 `k` 个最大的元素。
 
 请注意，你需要找的是数组排序后的第 `k` 个最大的元素，而不是第 `k` 个不同的元素。
 
@@ -11343,32 +11326,32 @@ var findKthLargest = function (nums, k) {
 ##### hash 空间换时间
 
 ```js
-var findKthLargest = function(nums, k) {
+var findKthLargest = function (nums, k) {
   // 找到数组中的最大元素
-  let largest = -Infinity;
+  let largest = -Infinity
 
   for (let i = 0; i < nums.length; i++) {
-    if (nums[i] > largest) largest = nums[i];
+    if (nums[i] > largest) largest = nums[i]
   }
 
   // 构建一个哈希表，记录每个元素与最大值的差
-  const hash = {};
+  const hash = {}
 
   for (let i = 0; i < nums.length; i++) {
-    const diff = largest - nums[i];
-    hash[diff] = (hash[diff] || 0) + 1; // 记录差值出现的次数
+    const diff = largest - nums[i]
+    hash[diff] = (hash[diff] || 0) + 1 // 记录差值出现的次数
   }
 
   // 找到第 k 大的元素
-  let count = 0;
-  let diff = 0;
+  let count = 0
+  let diff = 0
   while (count < k) {
-    count += (hash[diff] || 0); // 累加当前差值的出现次数
-    diff++;
+    count += hash[diff] || 0 // 累加当前差值的出现次数
+    diff++
   }
 
-  return largest - diff + 1; // 返回第 k 大的元素
-};
+  return largest - diff + 1 // 返回第 k 大的元素
+}
 ```
 
 ### 2.6.最长连续序列
@@ -11507,7 +11490,7 @@ var getPermutation = function (n, k) {
   const nums = Array.from({ length: n }, (_, i) => i + 1)
   k-- // 将 k 转换为 0 索引
 
-  let result = ""
+  let result = ''
 
   for (let i = 1; i <= n; i++) {
     // 计算当前位数字的索引
@@ -11601,7 +11584,7 @@ var findCircleNum = function (isConnected) {
 
 ### 2.9.合并区间
 
-以数组 `intervals` 表示若干个区间的集合，其中单个区间为 `intervals[i] = [starti, endi]` 。请你合并所有重叠的区间，并返回 *一个不重叠的区间数组，该数组需恰好覆盖输入中的所有区间* 。 
+以数组 `intervals` 表示若干个区间的集合，其中单个区间为 `intervals[i] = [starti, endi]` 。请你合并所有重叠的区间，并返回 _一个不重叠的区间数组，该数组需恰好覆盖输入中的所有区间_ 。
 
 **示例 1：**
 
@@ -11673,7 +11656,7 @@ var merge = function (intervals) {
 ```
 输入：height = [0,1,0,2,1,0,1,3,2,1,2,1]
 输出：6
-解释：上面是由数组 [0,1,0,2,1,0,1,3,2,1,2,1] 表示的高度图，在这种情况下，可以接 6 个单位的雨水（蓝色部分表示雨水）。 
+解释：上面是由数组 [0,1,0,2,1,0,1,3,2,1,2,1] 表示的高度图，在这种情况下，可以接 6 个单位的雨水（蓝色部分表示雨水）。
 ```
 
 **示例 2：**
@@ -11737,7 +11720,7 @@ var trap = function (height) {
 
 #### 3.1.合并两个有序链表
 
-将两个升序链表合并为一个新的 **升序** 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。 
+将两个升序链表合并为一个新的 **升序** 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。
 
 **示例 1：**
 
@@ -11975,7 +11958,7 @@ var addTwoNumbers = function (l1, l2) {
 
 #### 3.4.排序链表
 
-给你链表的头结点 `head` ，请将其按 **升序** 排列并返回 **排序后的链表** 。 
+给你链表的头结点 `head` ，请将其按 **升序** 排列并返回 **排序后的链表** 。
 
 **示例 1：**
 
@@ -12069,11 +12052,11 @@ var mergeTwoLists = function (l1, l2) {
 
 #### 3.5.环形链表 II
 
-给定一个链表的头节点  `head` ，返回链表开始入环的第一个节点。 *如果链表无环，则返回 `null`。*
+给定一个链表的头节点 `head` ，返回链表开始入环的第一个节点。 _如果链表无环，则返回 `null`。_
 
 如果链表中有某个节点，可以通过连续跟踪 `next` 指针再次到达，则链表中存在环。 为了表示给定链表中的环，评测系统内部使用整数 `pos` 来表示链表尾连接到链表中的位置（**索引从 0 开始**）。如果 `pos` 是 `-1`，则在该链表中没有环。**注意：`pos` 不作为参数进行传递**，仅仅是为了标识链表的实际情况。
 
-**不允许修改** 链表。 
+**不允许修改** 链表。
 
 **示例 1：**
 
@@ -12105,7 +12088,7 @@ var mergeTwoLists = function (l1, l2) {
 解释：链表中没有环。
 ```
 
-####  思路
+#### 思路
 
 1. 使用快慢指针判断链表是否有环：
    - 快指针每次走两步，慢指针每次走一步。
@@ -12181,8 +12164,6 @@ var detectCycle = function (head) {
 
 ![img](https://assets.leetcode.com/uploads/2021/03/05/160_example_1_1.png)
 
-
-
 ```
 输入：intersectVal = 8, listA = [4,1,8,4,5], listB = [5,6,1,8,4,5], skipA = 2, skipB = 3
 输出：Intersected at '8'
@@ -12192,13 +12173,9 @@ var detectCycle = function (head) {
 — 请注意相交节点的值不为 1，因为在链表 A 和链表 B 之中值为 1 的节点 (A 中第二个节点和 B 中第三个节点) 是不同的节点。换句话说，它们在内存中指向两个不同的位置，而链表 A 和链表 B 中值为 8 的节点 (A 中第三个节点，B 中第四个节点) 在内存中指向相同的位置。
 ```
 
- 
-
 **示例 2：**
 
 ![img](https://assets.leetcode.com/uploads/2021/03/05/160_example_2.png)
-
-
 
 ```
 输入：intersectVal = 2, listA = [1,9,1,2,4], listB = [3,2,4], skipA = 3, skipB = 1
@@ -12211,8 +12188,6 @@ var detectCycle = function (head) {
 **示例 3：**
 
 ![img](https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/14/160_example_3.png)
-
-
 
 ```
 输入：intersectVal = 0, listA = [2,6,4], listB = [1,5], skipA = 3, skipB = 2
@@ -12326,7 +12301,7 @@ var getIntersectionNode = function (headA, headB) {
 输出：[]
 ```
 
- #### 思路
+#### 思路
 
 1. **分治法**：
    - 两两合并链表，直到只剩一个链表。
@@ -12418,7 +12393,7 @@ var mergeKLists = function (lists) {
 
 1. 如果当前节点是 `null`，返回 `null`。
 2. 如果当前节点是 `p` 或 `q`，返回当前节点。
-3. 递归地在左右子树中查找 p 和  q
+3. 递归地在左右子树中查找 p 和 q
    - 如果 `p` 和 `q` 分别出现在左右子树中，当前节点就是最近公共祖先。
    - 如果 `p` 和 `q` 都在左子树或都在右子树，则继续递归查找。
 
@@ -12599,7 +12574,7 @@ var maxProfit = function (prices) {
 
 在每一天，你可以决定是否购买和/或出售股票。你在任何时候 **最多** 只能持有 **一股** 股票。你也可以先购买，然后在 **同一天** 出售。
 
-返回 *你能获得的 **最大** 利润* 。
+返回 _你能获得的 **最大** 利润_ 。
 
 **示例 1：**
 
@@ -12733,7 +12708,7 @@ var maximalSquare = function (matrix) {
 
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < cols; j++) {
-      if (matrix[i][j] === "1") {
+      if (matrix[i][j] === '1') {
         if (i === 0 || j === 0) {
           dp[i][j] = 1 // 边界情况
         } else {
@@ -12877,7 +12852,7 @@ var minimumTotal = function (triangle) {
 输出：1
 ```
 
- #### 思路：动态规划 + 最长上升子序列（LIS）
+#### 思路：动态规划 + 最长上升子序列（LIS）
 
 1. **排序：** 首先，我们需要对 `envelopes` 进行排序。我们按以下规则对信封进行排序：
 
@@ -13244,21 +13219,21 @@ AllOne.prototype.dec = function (key) {
 }
 
 AllOne.prototype.getMaxKey = function () {
-  if (this.countToKeys.size === 0) return ""
+  if (this.countToKeys.size === 0) return ''
   const maxCount = Math.max(...this.countToKeys.keys())
   return Array.from(this.countToKeys.get(maxCount))[0]
 }
 
 AllOne.prototype.getMinKey = function () {
-  if (this.countToKeys.size === 0) return ""
+  if (this.countToKeys.size === 0) return ''
   const minCount = Math.min(...this.countToKeys.keys())
   return Array.from(this.countToKeys.get(minCount))[0]
 }
 
 const obj = new AllOne()
-obj.inc("a")
-obj.inc("b")
-obj.inc("c")
+obj.inc('a')
+obj.inc('b')
+obj.inc('c')
 console.log(obj.getMaxKey()) // 输出 "c"
 console.log(obj.getMinKey()) // 输出 "a"
 ```
@@ -13271,7 +13246,7 @@ console.log(obj.getMinKey()) // 输出 "a"
 
 由于返回类型是整数，结果只保留 **整数部分** ，小数部分将被 **舍去 。**
 
-**注意：**不允许使用任何内置指数函数和算符，例如 `pow(x, 0.5)` 或者 `x ** 0.5` 。 
+**注意：**不允许使用任何内置指数函数和算符，例如 `pow(x, 0.5)` 或者 `x ** 0.5` 。
 
 **示例 1：**
 
@@ -13290,18 +13265,18 @@ console.log(obj.getMinKey()) // 输出 "a"
 
 #### 思路
 
-本题利用二分查找来求解，一开始把右边界粗略的设定为目标值 x，左右边界的中间值设为 mid，然后在二分过程中每次发现 mid * mid < x 的情况，就把这个 mid 值记录为 ans。
+本题利用二分查找来求解，一开始把右边界粗略的设定为目标值 x，左右边界的中间值设为 mid，然后在二分过程中每次发现 mid \* mid < x 的情况，就把这个 mid 值记录为 ans。
 
 如果计算出的乘积正好等于 x，就直接返回这个 mid 值。
 
- 如果二分查找超出边界了，无论最后的边界是停留在小于 x 的位置还是大于 x 的位置，都返回 ans 即可，因为它是最后一个乘积小于 x 的值，一定是正确答案。
+如果二分查找超出边界了，无论最后的边界是停留在小于 x 的位置还是大于 x 的位置，都返回 ans 即可，因为它是最后一个乘积小于 x 的值，一定是正确答案。
 
 ```js
 /**
  * @param {number} x
  * @return {number}
  */
-var mySqrt = function(x) {
+var mySqrt = function (x) {
   let left = 0
   let right = x
 
@@ -13368,7 +13343,7 @@ var mySqrt = function(x) {
 但第二个延续字节不以 10 开头，所以是不符合规则的。
 ```
 
- **思路：**
+**思路：**
 
 1. 遍历数组中的字节。
 2. 对每个字节：
@@ -13385,53 +13360,53 @@ var mySqrt = function(x) {
  * @param {number[]} data
  * @return {boolean}
  */
-var validUtf8 = function(data) {
-    let i = 0;
-    const n = data.length;
+var validUtf8 = function (data) {
+  let i = 0
+  const n = data.length
 
-    while (i < n) {
-        let num = data[i];
-        let bytesCount = 0;
+  while (i < n) {
+    let num = data[i]
+    let bytesCount = 0
 
-        // Determine the number of bytes in the current character
-        if ((num >> 7) === 0) {
-            // 1-byte character (starting with 0)
-            bytesCount = 1;
-        } else if ((num >> 5) === 0b110) {
-            // 2-byte character (starting with 110)
-            bytesCount = 2;
-        } else if ((num >> 4) === 0b1110) {
-            // 3-byte character (starting with 1110)
-            bytesCount = 3;
-        } else if ((num >> 3) === 0b11110) {
-            // 4-byte character (starting with 11110)
-            bytesCount = 4;
-        } else {
-            return false;  // Invalid first byte
-        }
-
-        // Check if we have enough remaining bytes
-        if (i + bytesCount - 1 >= n) {
-            return false;
-        }
-
-        // Verify the continuation bytes
-        for (let j = 1; j < bytesCount; j++) {
-            if ((data[i + j] >> 6) !== 0b10) {
-                return false;
-            }
-        }
-
-        // Move to the next character
-        i += bytesCount;
+    // Determine the number of bytes in the current character
+    if (num >> 7 === 0) {
+      // 1-byte character (starting with 0)
+      bytesCount = 1
+    } else if (num >> 5 === 0b110) {
+      // 2-byte character (starting with 110)
+      bytesCount = 2
+    } else if (num >> 4 === 0b1110) {
+      // 3-byte character (starting with 1110)
+      bytesCount = 3
+    } else if (num >> 3 === 0b11110) {
+      // 4-byte character (starting with 11110)
+      bytesCount = 4
+    } else {
+      return false // Invalid first byte
     }
 
-    return true;
-};
+    // Check if we have enough remaining bytes
+    if (i + bytesCount - 1 >= n) {
+      return false
+    }
+
+    // Verify the continuation bytes
+    for (let j = 1; j < bytesCount; j++) {
+      if (data[i + j] >> 6 !== 0b10) {
+        return false
+      }
+    }
+
+    // Move to the next character
+    i += bytesCount
+  }
+
+  return true
+}
 
 // Test examples
-console.log(validUtf8([197, 130, 1]));  // Output: true
-console.log(validUtf8([235, 140, 4]));  // Output: false
+console.log(validUtf8([197, 130, 1])) // Output: true
+console.log(validUtf8([235, 140, 4])) // Output: false
 ```
 
 #### 第二高的薪水
@@ -13499,10 +13474,9 @@ Employee 表：
 4. 使用 `LIMIT` 和 `OFFSET` 选择第二高的薪水。
 
 ```mysql
-SELECT 
-    (SELECT DISTINCT salary 
-     FROM Employee 
-     ORDER BY salary DESC 
+SELECT
+    (SELECT DISTINCT salary
+     FROM Employee
+     ORDER BY salary DESC
      LIMIT 1 OFFSET 1) AS SecondHighestSalary;
 ```
-
