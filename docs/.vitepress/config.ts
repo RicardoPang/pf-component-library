@@ -227,6 +227,10 @@ export default defineConfig({
           {
             text: 'Typescript 安全编码的秘密武器',
             link: '/components/typescript'
+          },
+          {
+            text: '算法',
+            link: '/components/algorithm'
           }
         ]
       }

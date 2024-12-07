@@ -1619,6 +1619,8 @@ createApp(App).mount('#app');
 
 1. sync from start
 
+   ![image-20241121173216894](https://p.ipic.vip/c2lr52.png)
+
    ```tsx
    const patchKeyedChildren = (c1, c2, el) => {
      // 比较两个儿子的差异
@@ -1643,6 +1645,8 @@ createApp(App).mount('#app');
 
 2. sync from end
 
+   ![image-20241121173243054](https://p.ipic.vip/hxpgp0.png)
+
    ```tsx
    // syan from end
    while (i <= e1 && i <= e2) {
@@ -1659,6 +1663,8 @@ createApp(App).mount('#app');
    ```
 
 3. common sequence + mount
+
+   ![image-20241121173310023](https://p.ipic.vip/zai0ck.png)
 
    ```tsx
    // common sequence + mount
@@ -1679,6 +1685,8 @@ createApp(App).mount('#app');
 
 4. common sequence + unmount
 
+   ![image-20241121173333046](https://p.ipic.vip/3yeo7k.png)
+
    ```tsx
    else if (i > e2) {
      // common sequence + unmount
@@ -1695,6 +1703,8 @@ createApp(App).mount('#app');
 
    1. `build key:index map for newChildren`
 
+      ![image-20241121173356189](https://p.ipic.vip/1fy5jp.png)
+   
       ```tsx
       // 乱序比对
       let s1 = i;
@@ -1706,7 +1716,7 @@ createApp(App).mount('#app');
       ```
 
    2. `loop through old children left to be patched and try to patch`
-
+   
       ```tsx
       // 循环老的元素，看一下新的里面有没有 如果有说明要比较差异，没有要添加到列表中，老的有新的没有要删除
       const toBePatched = e2 - s2 + 1; // 新的总个数
@@ -1725,7 +1735,9 @@ createApp(App).mount('#app');
       ```
 
    3. move and mount
-
+   
+      ![image-20241121173413654](https://p.ipic.vip/y0mqpt.png)
+      
       ```tsx
       // 获取最长递增子序列
       let increasingNewIndexSequence = getSequence(newIndexToOldIndexMap);
@@ -1828,6 +1840,8 @@ console.log(getSequence([2, 3, 1, 5, 6, 8, 7, 9, 4]));
 // 3.最优的情况，就是默认递增
 // 我们可以通过标记索引的方式，最终通过最后一项将结果还原
 ```
+
+![image-20241121173506168](https://p.ipic.vip/rznrjv.png)
 
 ## 五.Vue3异步更新策略
 
