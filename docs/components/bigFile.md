@@ -9,18 +9,14 @@ description: 大文件上传
 
 项目采用了以下技术栈：
 
-- 前端
-
-  ：Vue 3 + TypeScript + Vue Router + Pinia + Element Plus + Axios + Normalize.css
+- 前端：Vue 3 + TypeScript + Vue Router + Pinia + Element Plus + Axios + Normalize.css
 
   - 使用 Vue 3 Composition API 和 Pinia 管理全局状态，确保代码结构清晰，状态管理便捷。
   - TypeScript 提供了强大的类型检查机制，减少了运行时错误，增强了代码的可维护性。
   - Vue Router 4 负责管理应用路由，Element Plus 提供了丰富的 UI 组件，而 Axios 则用于处理网络请求。
   - 使用 Vite 作为开发和构建工具，提升了开发效率。
 
-- 后端
-
-  ：Node.js + Koa.js + TypeScript + Koa Router
+- 后端：Node.js + Koa.js + TypeScript + Koa Router
 
   - 通过 Koa.js 与 TypeScript 的结合，使用 Koa Router 加强服务端路由管理，优化开发体验，并集成了全局异常拦截与日志功能。
 
